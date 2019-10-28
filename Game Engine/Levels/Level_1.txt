@@ -1,0 +1,35 @@
+{
+	"Background": {
+		"Type": "image",
+		"Components": {
+			"Sprite":"background.bmp"
+		}
+	},
+	"Player": {
+		"Type": "player",
+		"Components": {
+			"Sprite": "bird.bmp"
+		}	
+	},
+	"Enemy1": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": "300, 100"
+		}
+	},
+	"Enemy2": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": "500, 100",
+			"Patrol": "Speed:-4.0, 4.0/Time:500.0"
+		}
+	},
+	"Enemy3": {
+		"Type": "enemy",
+		"Components": {
+			"Sprite": "black_bird.bmp",
+			"Transform": "100, 400",
+			"Patrol": "Speed:0.0, -1.0/Time:2000.0"
+		}
+	}
+}

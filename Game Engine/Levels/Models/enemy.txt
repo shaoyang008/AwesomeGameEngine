@@ -1,0 +1,5 @@
+{
+	"Transform": "100.0, 100.0",
+	"Sprite": "plane.bmp",
+	"Patrol": "Speed:2.0, 2.0/Time:1000.0"
+}
