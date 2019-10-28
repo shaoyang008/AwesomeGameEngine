@@ -23,11 +23,13 @@ InputManager::~InputManager() { }
 
 void InputManager::update_state()
 {
-	const Uint8* new_keyboard_states = SDL_GetKeyboardState(NULL);
-	if (!new_keyboard_states) return;
+	int fetchedNum = 0;
+	const Uint8* new_keyboard_states = SDL_GetKeyboardState(&fetchedNum);
+
+	if (fetchedNum > 512) fetchedNum = 512;
 	
-	std::memcpy(previous_keyboard_states, current_keyboard_states, MAX_STATE_LENGTH);
-	std::memcpy(current_keyboard_states, new_keyboard_states, MAX_STATE_LENGTH);
+	std::memcpy(previous_keyboard_states, current_keyboard_states, MAX_STATE_LENGTH * sizeof(Uint8));
+	std::memcpy(current_keyboard_states, new_keyboard_states, fetchedNum * sizeof(Uint8));
 }
 
 bool InputManager::key_pressed(int input_key) // get key scan from sdl

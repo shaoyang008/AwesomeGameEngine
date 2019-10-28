@@ -23,10 +23,12 @@ public:
 
 	void FrameStart();
 	void FrameEnd();
+
+	float frame_time;
+
 private:
 	const int max_framerate;
 	float tick_per_frame;
 	float tick_start;
 	float tick_end;
-	float frame_time;
 };

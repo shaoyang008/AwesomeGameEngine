@@ -16,14 +16,14 @@ Creation date: 10/14/2019
 
 #include <SDL.h>
 #include "stdio.h"
-#include "InputManager.h"
-#include "ResourceManager.h"
-#include "FramerateManager.h"
+#include "GameStateManager.h"
 #include <string>
+#include <GLFW/glfw3.h>
 
 #define MOVEMENT_SPEED 5
 #define MAX_FRAME_RATE 60
 
+GameStateManager *pMgr = new GameStateManager;
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
 extern "C" FILE * __cdecl __iob_func(void)
@@ -38,10 +38,6 @@ int main(int argc, char* args[])
 	SDL_Window *pWindow;
 	int error = 0;
 	bool appIsRunning = true;
-	InputManager *pIM = new InputManager;
-	ResourceManager *pRM = new ResourceManager;
-	FramerateManager *pFM = new FramerateManager(MAX_FRAME_RATE);
-	SDL_Surface *pCharacter, *pImage, *pWindowSurface;
 
 	// Initialize SDL
 	if((error = SDL_Init( SDL_INIT_VIDEO )) < 0 )
@@ -67,37 +63,17 @@ int main(int argc, char* args[])
 	}
 
 	// Read background BMP
-	pWindowSurface = SDL_GetWindowSurface(pWindow);
-	std::string path = "Resources/background.bmp";
-	if (!pRM->RegisterSurface(path)) {
-		printf("Could not load resource: %s\n", path);
+	pMgr->SetWindow(pWindow);
+	if (!pMgr->Init()) {
+		std::cout << "Something wrong." << std::endl;
 		return 1;
 	}
-	pImage = pRM->GetSurfaceByPath(path);
 
-	// Get character BMP for controlling
-	std::string character_path = "Resources/bird.bmp";
-	if (!pRM->RegisterSurface(character_path)) {
-		std::string s = SDL_GetError();
-		printf("Could not load resource: %s\nReason: %s", character_path, s);
-		return 1;
-	}
-	pCharacter = pRM->GetSurfaceByPath(character_path);
-
-	SDL_Rect * character_offset = new SDL_Rect;
-	character_offset->x = 0;
-	character_offset->y = 0;
 	
 	// Game loop
 	while(true == appIsRunning)
 	{
-		// Record frame start time
-		pFM->FrameStart();
-
-		// Draw
-		SDL_BlitSurface(pImage, NULL, pWindowSurface, NULL);
-		SDL_BlitSurface(pCharacter, NULL, pWindowSurface, character_offset);
-		SDL_UpdateWindowSurface(pWindow);
+		appIsRunning = pMgr->Loop();
 
 		SDL_Event e;
 		while( SDL_PollEvent( &e ) != 0 )
@@ -108,28 +84,9 @@ int main(int argc, char* args[])
 				appIsRunning = false;
 			}
 		}
-
-		// Input events
-		pIM->update_state();
-		if (pIM->key_pressed(SDL_SCANCODE_UP)) {
-			character_offset->y -= MOVEMENT_SPEED;
-		}
-		else if (pIM->key_pressed(SDL_SCANCODE_DOWN)) {
-			character_offset->y += MOVEMENT_SPEED;
-		}
-		else if (pIM->key_pressed(SDL_SCANCODE_LEFT)) {
-			character_offset->x -= MOVEMENT_SPEED;
-		}
-		else if (pIM->key_pressed(SDL_SCANCODE_RIGHT)) {
-			character_offset->x += MOVEMENT_SPEED;
-		}
-
-		// update frame end time
-		pFM->FrameEnd();
 	}
 
-	// Free all registered surface
-	pRM->FreeAll();
+	delete pMgr;
 
 	// Close and destroy the window
 	SDL_DestroyWindow(pWindow);
