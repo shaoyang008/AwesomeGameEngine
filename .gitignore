@@ -34,3 +34,4 @@
 # VS things
 **/.vs
 **/Debug
+**/Release
