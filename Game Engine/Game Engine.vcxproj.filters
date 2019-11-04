@@ -26,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="glad.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Components\RigidBody.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -63,6 +66,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Components\RigidBody.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
