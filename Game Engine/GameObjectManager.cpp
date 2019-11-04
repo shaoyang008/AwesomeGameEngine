@@ -1,6 +1,20 @@
+/*-------------------------------------------------------
+
+Copyright (C) 2019 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+
+File Name: GameObjectManager.cpp
+Purpose: Creates and manages all game objects
+Language: C
+Platform: VS2017, Windows
+Project: CS529_shaoyanghuang_Final
+Author: Shao-Yang Huang, shaoyang.huang, 60000619
+Creation date: 10/19/2019
+
+---------------------------------------------------------*/
+
 #include "GameObjectManager.h"
-
-
 
 GameObjectManager::GameObjectManager(): _tagObjects(BinaryTree<std::string, GameObject*>()), _factory(new ObjectFactory)
 {
@@ -22,47 +36,39 @@ void GameObjectManager::Update()
 	}
 }
 
-void GameObjectManager::LoadObject(std::string model)
+void GameObjectManager::LoadLevel(std::string level)
 {
-	std::string model_path = "./Models/" + model + ".txt";
-	std::ifstream model_file;
-	model_file.open(model_path);
+	std::string level_path = "./Levels/" + level + ".txt";
+	json level_data = ReadFile(level_path);
 
-	json model_data;
-	model_file >> model_data;
+	for (json::iterator it = level_data.begin(); it != level_data.end(); ++it) {
+		std::string model_type = it.value()["Type"];
+		std::cout << "Creating " << model_type << std::endl;
+		GameObject *new_object = CreateObject(model_type, it.value()["Components"]);
 
-	GameObject * pObject = _factory->CreateObject(model_data);
-	_objects.push_back(pObject);
-	
-	// TODO: clean method
-	if (model_data.find("Tag") != model_data.end()) {	_tagObjects.InsertNode(model_data["Tag"], pObject); }
-
-	model_file.close();
+		_objects.push_back(new_object);
+		_tagObjects.InsertNode(it.key(), new_object);
+	}
 }
 
-GameObject * GameObjectManager::CreateObject(OBJECT_TYPE type, std::string tag)
+// Creates an object with level parameters
+GameObject * GameObjectManager::CreateObject(std::string model, json level_data)
 {
-	GameObject *pObject = new GameObject(tag);
-	Sprite *pSprite = new Sprite;
-	pObject->AddComponent(pSprite);
+	std::string model_path = "./Levels/Models/" + model + ".txt";
+	json model_data = ReadFile(model_path);
+	model_data.merge_patch(level_data);
 
-	if (type == OBJECT_TYPE::IMAGE) {
-		Transform *pTransform = new Transform;
-		pObject->AddComponent(pTransform);
-	}
-	else if (type == OBJECT_TYPE::PLAYER) {
-		Transform *pTransform = new Transform;
-		pObject->AddComponent(pTransform);
+	return _factory->CreateObject(model_data);
+}
 
-		Controller *pController = new Controller;
-		pObject->AddComponent(pController);
-	}
-	else if (type == OBJECT_TYPE::ENEMY_1) {
-		Transform *pTransform = new Transform;
-		pObject->AddComponent(pTransform);
-	}
+json GameObjectManager::ReadFile(std::string file_path)
+{
+	std::ifstream file;
+	file.open(file_path);
 
-	_objects.push_back(pObject);
-	_tagObjects.InsertNode(tag, pObject);
-	return _objects.back();
+	json file_data;
+	file >> file_data;
+
+	file.close();
+	return file_data;
 }

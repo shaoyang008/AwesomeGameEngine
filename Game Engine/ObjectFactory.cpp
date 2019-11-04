@@ -1,11 +1,24 @@
+/*-------------------------------------------------------
+
+Copyright (C) 2019 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+
+File Name: ObjectFactory.h
+Purpose: Creates objects depend on input data
+Language: C
+Platform: VS2017, Windows
+Project: CS529_shaoyanghuang_Final
+Author: Shao-Yang Huang, shaoyang.huang, 60000619
+Creation date: 10/26/2019
+
+---------------------------------------------------------*/
+
 #include "ObjectFactory.h"
-
-
 
 ObjectFactory::ObjectFactory()
 {
 }
-
 
 ObjectFactory::~ObjectFactory()
 {
@@ -14,10 +27,8 @@ ObjectFactory::~ObjectFactory()
 GameObject * ObjectFactory::CreateObject(json data)
 {
 	GameObject * newObj = new GameObject;
-	std::cout << data << std::endl;
-	json components = data["Components"];
-	std::cout << components << std::endl;
-	for (json::iterator it = components.begin(); it != components.end(); ++it) {
+
+	for (json::iterator it = data.begin(); it != data.end(); ++it) {
 		Component * component = 0;
 		if (it.key() == "Transform") {
 			std::cout << "Adding " << it.key() << std::endl;

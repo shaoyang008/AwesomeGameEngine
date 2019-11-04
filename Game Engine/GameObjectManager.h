@@ -1,3 +1,19 @@
+/*-------------------------------------------------------
+
+Copyright (C) 2019 DigiPen Institute of Technology.
+Reproduction or disclosure of this file or its contents without the prior
+written consent of DigiPen Institute of Technology is prohibited.
+
+File Name: GameObjectManager.h
+Purpose: Creates and manages all game objects
+Language: C
+Platform: VS2017, Windows
+Project: CS529_shaoyanghuang_Final
+Author: Shao-Yang Huang, shaoyang.huang, 60000619
+Creation date: 10/19/2019
+
+---------------------------------------------------------*/
+
 #pragma once
 #include <vector>
 #include <fstream>
@@ -15,9 +31,10 @@ public:
 	~GameObjectManager();
 
 	void Update();
-	void LoadObject(std::string);
+	void LoadLevel(std::string);
+	GameObject *  CreateObject(std::string, json);
 	
-	GameObject *  CreateObject(OBJECT_TYPE, std::string);
+	json ReadFile(std::string);
 
 	std::vector<GameObject*> _objects;
 	BinaryTree<std::string, GameObject*> _tagObjects;

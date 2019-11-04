@@ -30,5 +30,5 @@ public:
 	void FreeAll();
 
 private:
-	std::unordered_map<std::string, SDL_Surface*> resources;
+	std::unordered_map<std::string, SDL_Surface*> _resources;
 };

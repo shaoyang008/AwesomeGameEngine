@@ -21,31 +21,31 @@ InputManager::InputManager() { }
 
 InputManager::~InputManager() { }
 
-void InputManager::update_state()
+void InputManager::UpdateStates()
 {
 	int fetchedNum = 0;
 	const Uint8* new_keyboard_states = SDL_GetKeyboardState(&fetchedNum);
 
 	if (fetchedNum > 512) fetchedNum = 512;
 	
-	std::memcpy(previous_keyboard_states, current_keyboard_states, MAX_STATE_LENGTH * sizeof(Uint8));
-	std::memcpy(current_keyboard_states, new_keyboard_states, fetchedNum * sizeof(Uint8));
+	std::memcpy(_previousKeyboardStates, _currentKeyboardStates, MAX_STATE_LENGTH * sizeof(Uint8));
+	std::memcpy(_currentKeyboardStates, new_keyboard_states, fetchedNum * sizeof(Uint8));
 }
 
-bool InputManager::key_pressed(int input_key) // get key scan from sdl
+bool InputManager::KeyPressed(int input_key) // get key scan from sdl
 {
 	// check key dowm
-	return current_keyboard_states[input_key];
+	return _currentKeyboardStates[input_key];
 }
-bool InputManager::key_triggered(int input_key)
+bool InputManager::KeyTriggered(int input_key)
 {
-	if (!previous_keyboard_states) return false;
+	if (!_previousKeyboardStates) return false;
 	// check previous up and current down
-	else return (current_keyboard_states[input_key] && !previous_keyboard_states[input_key]);
+	else return (_currentKeyboardStates[input_key] && !_previousKeyboardStates[input_key]);
 }
-bool InputManager::key_released(int input_key)
+bool InputManager::KeyReleased(int input_key)
 {
-	if (!previous_keyboard_states) return false;
+	if (!_previousKeyboardStates) return false;
 	// check previous down and current up
-	else return (!current_keyboard_states[input_key] && previous_keyboard_states[input_key]);
+	else return (!_currentKeyboardStates[input_key] && _previousKeyboardStates[input_key]);
 }

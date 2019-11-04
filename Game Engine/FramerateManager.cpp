@@ -17,21 +17,21 @@ Creation date: 10/14/2019
 #include "FramerateManager.h"
 #include <time.h>
 
-FramerateManager::FramerateManager(int framerate) : max_framerate(framerate), tick_start(0), tick_end(0), frame_time(0), tick_per_frame(1000.0/framerate) {}
+FramerateManager::FramerateManager(int framerate) : _maxFramerate(framerate), _tickStart(0), _tickEnd(0), _frameTime(0), _tickPerFrame(1000.0/framerate) {}
 
 FramerateManager::~FramerateManager() {}
 
 void FramerateManager::FrameStart()
 {
-	tick_start = clock();
+	_tickStart = clock();
 }
 
 void FramerateManager::FrameEnd()
 {
-	tick_end = clock();
-	frame_time = tick_end - tick_start;
-	while (frame_time < tick_per_frame) {
-		tick_end = clock();
-		frame_time = tick_end - tick_start;
+	_tickEnd = clock();
+	_frameTime = _tickEnd - _tickStart;
+	while (_frameTime < _tickPerFrame) {
+		_tickEnd = clock();
+		_frameTime = _tickEnd - _tickStart;
 	}
 }

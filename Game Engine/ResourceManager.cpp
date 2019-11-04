@@ -18,16 +18,19 @@ Creation date: 10/14/2019
 #include "SDL_surface.h"
 
 ResourceManager::ResourceManager() {}
-ResourceManager::~ResourceManager() {}
+ResourceManager::~ResourceManager()
+{
+	FreeAll();
+}
 
 bool ResourceManager::RegisterSurface(std::string path)
 {
-	if (resources[path]) return true;
+	if (_resources[path]) return true;
 	else {
 		SDL_Surface * new_surface = SDL_LoadBMP(path.c_str());
 		if (!new_surface) return false;
 		else {
-			resources[path] = new_surface;
+			_resources[path] = new_surface;
 			return true;
 		}
 	}
@@ -35,13 +38,13 @@ bool ResourceManager::RegisterSurface(std::string path)
 
 SDL_Surface * ResourceManager::GetSurfaceByPath(std::string path)
 {
-	return resources[path];
+	return _resources[path];
 }
 
 void ResourceManager::FreeAll()
 {
 	std::unordered_map<std::string, SDL_Surface*>::iterator it;
-	for (it = resources.begin(); it != resources.end(); ++it) {
+	for (it = _resources.begin(); it != _resources.end(); ++it) {
 		SDL_FreeSurface(it->second);
 	}
 }

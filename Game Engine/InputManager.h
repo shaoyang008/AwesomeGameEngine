@@ -25,13 +25,13 @@ public:
 	InputManager();
 	~InputManager();
 
-	void update_state();
+	void UpdateStates();
 
-	bool key_pressed(int);
-	bool key_triggered(int);
-	bool key_released(int);
+	bool KeyPressed(int);
+	bool KeyTriggered(int);
+	bool KeyReleased(int);
 
 private:
-	char current_keyboard_states[MAX_STATE_LENGTH];
-	char previous_keyboard_states[MAX_STATE_LENGTH]; // compare to detect trigger and release
+	char _currentKeyboardStates[MAX_STATE_LENGTH];
+	char _previousKeyboardStates[MAX_STATE_LENGTH]; // compare to detect trigger and release
 };
