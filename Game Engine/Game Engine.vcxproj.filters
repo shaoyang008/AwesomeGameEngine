@@ -24,6 +24,8 @@
     <ClCompile Include="Components\Patrol.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="glad.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -60,6 +62,7 @@
     <ClInclude Include="Components\Patrol.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
