@@ -40,7 +40,7 @@ void Controller::Serialize(std::string data)
 
 void Controller::TriggerEvent()
 {
-	Transform * t = dynamic_cast<Transform*>(pOwner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	Transform * t = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (!t) return;
 
 	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_UP)) {

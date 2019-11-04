@@ -30,7 +30,7 @@ Patrol::~Patrol()
 
 void Patrol::Update()
 {
-	Transform * t = dynamic_cast<Transform*>(pOwner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	Transform * t = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (_time > _maxTime) {
 		_direction = !_direction;
 		_time = 0;

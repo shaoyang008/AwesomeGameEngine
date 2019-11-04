@@ -25,6 +25,7 @@ enum class COMPONENT_TYPE {
 	TRANSFORM,
 	CONTROLLER,
 	PATROL,
+	RIGID_BODY,
 	Count // Used to track number of types
 };
 
@@ -38,7 +39,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Serialize(std::string data) = 0;
 
-	GameObject * pOwner;
+	GameObject * _owner;
 	COMPONENT_TYPE GetType() { return _type; }
 private:
 	COMPONENT_TYPE _type;

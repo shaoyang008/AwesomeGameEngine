@@ -50,7 +50,7 @@ bool GameObject::AddComponent(Component * c) {
 	for (int i = 0; i < _components.size(); ++i) {
 		if (_components[i]->GetType() == c->GetType()) return false;
 	}
-	c->pOwner = this;
+	c->_owner = this;
 	_components.push_back(c);
 	return true;
 }
