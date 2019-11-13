@@ -17,7 +17,7 @@ Creation date: 10/18/2019
 #include "GameStateManager.h"
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
-_gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _level(1), _state(STATE::INIT), _gameStates()
+_gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _level(1), _state(STATE::INIT), _gameStates()
 {
 	_gameStates[STATE::INIT] = &GameStateManager::Init;
 	_gameStates[STATE::LOOP] = &GameStateManager::Loop;
@@ -88,6 +88,9 @@ bool GameStateManager::Loop()
 
 	// Update all game objects
 	_gameObjectManager->Update();
+
+	// Collision detect
+	_collisionManager->PlayerCollision("Player");
 
 	_inputManager->UpdateStates();
 	if (_inputManager->KeyPressed(SDL_SCANCODE_Q)) {

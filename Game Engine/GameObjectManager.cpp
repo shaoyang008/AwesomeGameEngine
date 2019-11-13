@@ -46,6 +46,7 @@ void GameObjectManager::LoadLevel(std::string level)
 		GameObject *new_object = GetObject(it.value()["Type"].get<std::string>());
 		_factory->SetObject(new_object, it.value()["Components"]);
 
+		new_object->SetTag(it.key());
 		_tagObjects.InsertNode(it.key(), new_object);
 	}
 }

@@ -73,6 +73,12 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 			rComponent->Serialize(it.value());
 			component = rComponent;
 		}
+		else if (it.key() == "Collider") {
+			std::cout << "Adding " << it.key() << std::endl;
+			Collider * rComponent = new Collider;
+			rComponent->Serialize(it.value());
+			component = rComponent;
+		}
 		if (component) { object->AddComponent(component); }
 	}
 }

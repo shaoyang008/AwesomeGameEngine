@@ -23,6 +23,7 @@ Creation date: 10/18/2019
 #include "ResourceManager.h"
 #include "GameObjectManager.h"
 #include "PhysicsManager.h"
+#include "CollisionManager.h"
 
 enum STATE {
 	INIT,
@@ -48,6 +49,7 @@ public:
 	ResourceManager		*_resourceManager;
 	GameObjectManager	* _gameObjectManager;
 	PhysicsManager		* _physicsManager;
+	CollisionManager	* _collisionManager;
 
 private:
 	SDL_Window *_window;

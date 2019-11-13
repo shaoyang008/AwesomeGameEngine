@@ -29,6 +29,7 @@ enum class COMPONENT_TYPE {
 	CONTROLLER,
 	PATROL,
 	RIGID_BODY,
+	COLLIDER,
 	Count // Used to track number of types
 };
 
@@ -38,7 +39,6 @@ public:
 	Component();
 	Component(COMPONENT_TYPE);
 	virtual ~Component();
-	// virtual Component * clone() = 0;
 
 	virtual void Update() = 0;
 	virtual void Serialize(json data) = 0;
