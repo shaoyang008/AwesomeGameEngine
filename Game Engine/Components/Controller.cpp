@@ -20,6 +20,7 @@ Creation date: 10/19/2019
 extern GameStateManager *pMgr;
 
 #define MOVEMENT_SPEED 5
+#define ACCELRATE_FORCE 5000.0f
 
 Controller::Controller(): Component(COMPONENT_TYPE::CONTROLLER)
 {
@@ -43,13 +44,14 @@ void Controller::TriggerEvent()
 	Transform * t = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (!t) return;
 
+	RigidBody * r = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
+	if (!t) return;
+
 	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_UP)) {
-		// t->_posY -= MOVEMENT_SPEED;
-		RigidBody * r = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
-		r->_forceY -= 1.0f;
+		r->_forceY -= ACCELRATE_FORCE;
 	}
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
-		t->_posY += MOVEMENT_SPEED;
+		r->_forceY += ACCELRATE_FORCE;
 	}
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_LEFT)) {
 		t->_posX -= MOVEMENT_SPEED;
