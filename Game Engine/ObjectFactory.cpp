@@ -67,7 +67,13 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 			pComponent->Serialize(it.value());
 			component = pComponent;
 		}
-		if (component) { newObj->AddComponent(component); }
+		else if (it.key() == "RigidBody") {
+			std::cout << "Adding " << it.key() << std::endl;
+			RigidBody * rComponent = new RigidBody;
+			rComponent->Serialize(it.value());
+			component = rComponent;
+		}
+		if (component) { object->AddComponent(component); }
 	}
 }
 

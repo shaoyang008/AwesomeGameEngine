@@ -22,6 +22,7 @@ Creation date: 10/18/2019
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "GameObjectManager.h"
+#include "PhysicsManager.h"
 
 enum STATE {
 	INIT,
@@ -42,10 +43,11 @@ public:
 	void RunGame();
 
 	// Add managers here to do different tasks
-	FramerateManager *_framerateManager;
-	InputManager *_inputManager;
-	ResourceManager *_resourceManager;
-	GameObjectManager * _gameObjectManager;
+	FramerateManager	*_framerateManager;
+	InputManager		*_inputManager;
+	ResourceManager		*_resourceManager;
+	GameObjectManager	* _gameObjectManager;
+	PhysicsManager		* _physicsManager;
 
 private:
 	SDL_Window *_window;

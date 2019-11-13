@@ -24,11 +24,12 @@ Creation date: 10/14/2019
 #define MOVEMENT_SPEED 5
 #define MAX_FRAME_RATE 60
 
-#define USING_OPENGL 1
+#define USING_OPENGL 0
 
 GameStateManager *pMgr = new GameStateManager;
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
+#if USING_OPENGL
 float vertices[6][4] = {
 	{ -0.6f, -0.4f, 0.0f, 1.0f },
 	{  0.6f, -0.4f, 0.0f, 1.0f },
@@ -57,6 +58,7 @@ void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error: %s\n", description);
 }
+#endif
 
 extern "C" FILE * __cdecl __iob_func(void)
 {

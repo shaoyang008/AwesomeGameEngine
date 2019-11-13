@@ -17,7 +17,7 @@ Creation date: 10/18/2019
 #include "GameStateManager.h"
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
-_gameObjectManager(new GameObjectManager), _level(1), _state(STATE::INIT), _gameStates()
+_gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _level(1), _state(STATE::INIT), _gameStates()
 {
 	_gameStates[STATE::INIT] = &GameStateManager::Init;
 	_gameStates[STATE::LOOP] = &GameStateManager::Loop;
@@ -82,6 +82,9 @@ bool GameStateManager::Loop()
 		Controller * ctrl = dynamic_cast<Controller*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::CONTROLLER));
 		if(ctrl) ctrl->TriggerEvent();
 	}
+
+	// Update physics
+	_physicsManager->PhysicsUpdate();
 
 	// Update all game objects
 	_gameObjectManager->Update();
