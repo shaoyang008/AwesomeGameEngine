@@ -28,15 +28,20 @@ public:
 
 	void Update();
 
-	Component * GetComponent(COMPONENT_TYPE type);
-	bool AddComponent(Component * c);
+	Component * GetComponent(COMPONENT_TYPE);
+	bool AddComponent(Component*);
+	void ClearComponents();
 
-	std::string GetTag() { return _tag; }
+	std::string GetTag() const { return _tag; }
 	void SetTag(std::string tag) { _tag = tag; }
 
+	std::string GetType() const { return _type; }
+	void SetType(std::string type) { _type = type; }
+
 	std::vector<Component*> _components;
+	bool _active;
 
 private:
 	std::string _tag;
-	bool _active;
+	std::string _type;
 };

@@ -31,9 +31,9 @@ void Sprite::Update() {
 
 }
 
-void Sprite::Serialize(std::string data)
+void Sprite::Serialize(json data)
 {
-	std::string path = "Resources/" + data;
+	std::string path = "Resources/" + data["Filename"].get<std::string>();
 	if (!pMgr->_resourceManager->RegisterSurface(path)) {
 		std::cout << "Could not load resource: " << path << ", Reason: " << SDL_GetError() << std::endl;
 		return;

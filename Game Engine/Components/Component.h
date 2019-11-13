@@ -18,6 +18,9 @@ Creation date: 10/19/2019
 #include <iostream>
 #include <string> 
 
+#include <json.hpp>
+using json = nlohmann::json;
+
 class GameObject;
 
 enum class COMPONENT_TYPE {
@@ -35,9 +38,10 @@ public:
 	Component();
 	Component(COMPONENT_TYPE);
 	virtual ~Component();
+	// virtual Component * clone() = 0;
 
 	virtual void Update() = 0;
-	virtual void Serialize(std::string data) = 0;
+	virtual void Serialize(json data) = 0;
 
 	GameObject * _owner;
 	COMPONENT_TYPE GetType() { return _type; }

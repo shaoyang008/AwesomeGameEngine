@@ -29,6 +29,11 @@ GameStateManager::~GameStateManager()
 	delete _inputManager;
 	delete _framerateManager;
 	delete _resourceManager;
+
+	std::cout << _gameObjectManager->_objects.size() << " objects." << std::endl;
+	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
+		std::cout << _gameObjectManager->_objects[i]->_components.size() << std::endl;
+	}
 	delete _gameObjectManager;
 
 	// Destroy SDL window
@@ -53,12 +58,13 @@ bool GameStateManager::Init()
 	_gameObjectManager->LoadLevel(lv);
 
 	_state = STATE::LOOP;
+	std::cout << "Init finished. Object count: " << _gameObjectManager->_objects.size() << std::endl;
+	*(_gameObjectManager->_objects[0]);
 	return true;
 }
 
 bool GameStateManager::Loop()
 {
-
 	// Record frame start time
 	_framerateManager->FrameStart();
 
@@ -68,9 +74,10 @@ bool GameStateManager::Loop()
 		Transform * t = dynamic_cast<Transform*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::TRANSFORM));
 		if (s && t) { SDL_BlitSurface(s->pSurface, NULL, _windowSurface, t->offset); }
 	}
-
 	SDL_UpdateWindowSurface(_window);
 	
+
+	// Controller event
 	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
 		Controller * ctrl = dynamic_cast<Controller*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::CONTROLLER));
 		if(ctrl) ctrl->TriggerEvent();

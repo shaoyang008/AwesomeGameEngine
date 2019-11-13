@@ -32,7 +32,9 @@ public:
 
 	void Update();
 	void LoadLevel(std::string);
-	GameObject *  CreateObject(std::string, json);
+	// void ResetLevel(std::string);
+	void SetObject(std::string, json);
+	GameObject * GetObject(std::string);
 	
 	json ReadFile(std::string);
 

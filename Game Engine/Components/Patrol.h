@@ -26,7 +26,7 @@ public:
 	~Patrol();
 
 	void Update();
-	void Serialize(std::string);
+	void Serialize(json data);
 
 private:
 	bool _direction;

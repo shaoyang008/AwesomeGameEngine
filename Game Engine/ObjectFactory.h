@@ -15,6 +15,9 @@ Creation date: 10/26/2019
 ---------------------------------------------------------*/
 
 #pragma once
+
+#include <fstream>
+#include <map>
 #include "Components/Base.h"
 #include "GameObject.h"
 #include "json.hpp"
@@ -27,6 +30,13 @@ public:
 	ObjectFactory();
 	~ObjectFactory();
 
-	GameObject * CreateObject(json);
+	GameObject * CreateObject(std::string);
+	void SetObject(GameObject*, json);
+
+	json GetDefaultObjectModel(std::string);
+	json ReadFile(std::string);
+
+private:
+	std::map<std::string, json> _objectModels;
 };
 

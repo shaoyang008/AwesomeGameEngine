@@ -27,7 +27,7 @@ public:
 	~Controller();
 
 	void Update();
-	void Serialize(std::string);
+	void Serialize(json data);
 
 	void TriggerEvent();
 };

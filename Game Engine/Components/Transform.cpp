@@ -40,12 +40,17 @@ void Transform::Update()
 	offset->y = _posY;
 }
 
-void Transform::Serialize(std::string data)
+void Transform::Serialize(json data)
 {
+	
+	_posX = std::stof(data["PosX"].get<std::string>());
+	_posY = std::stof(data["PosY"].get<std::string>());
+	/*
 	size_t xpos = data.find_first_of(',');
 	size_t ypos = data.find_first_not_of(' ', xpos + 1);
 
 	_posX = std::stof(data.substr(0, xpos));
 	_posY = std::stof(data.substr(ypos));
 	std::cout << "Transform is " << _posX << ", " << _posY << std::endl;
+	*/
 }

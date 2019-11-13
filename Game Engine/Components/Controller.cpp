@@ -34,7 +34,7 @@ void Controller::Update()
 {
 }
 
-void Controller::Serialize(std::string data)
+void Controller::Serialize(json data)
 {
 }
 
@@ -44,7 +44,9 @@ void Controller::TriggerEvent()
 	if (!t) return;
 
 	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_UP)) {
-		t->_posY -= MOVEMENT_SPEED;
+		// t->_posY -= MOVEMENT_SPEED;
+		RigidBody * r = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
+		r->_forceY -= 1.0f;
 	}
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
 		t->_posY += MOVEMENT_SPEED;

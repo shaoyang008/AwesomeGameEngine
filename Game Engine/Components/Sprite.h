@@ -26,7 +26,7 @@ public:
 	~Sprite();
 
 	void Update();
-	void Serialize(std::string);
+	void Serialize(json data);
 
 	SDL_Surface *pSurface;
 private:

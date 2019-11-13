@@ -16,21 +16,19 @@ Creation date: 10/19/2019
 
 #include "GameObject.h"
 
-GameObject::GameObject(): _tag(""), _active(false)
+GameObject::GameObject(): _tag(""), _active(true), _type("")
 {
 
 }
 
-GameObject::GameObject(std::string tag): _tag(tag),  _active(false)
+GameObject::GameObject(std::string type): _tag(""),  _active(true), _type(type)
 {
 
 }
 
 GameObject::~GameObject()
 {
-	for (int i = 0; i < _components.size(); ++i) {
-		delete _components[i];
-	}
+	ClearComponents();
 }
 
 void GameObject::Update() {
@@ -53,4 +51,11 @@ bool GameObject::AddComponent(Component * c) {
 	c->_owner = this;
 	_components.push_back(c);
 	return true;
+}
+
+void GameObject::ClearComponents() {
+	std::cout << _type << " deleting " << _components.size() << " components" << std::endl;
+	for (int i = 0; i < _components.size(); ++i) {
+		delete _components[i];
+	}
 }

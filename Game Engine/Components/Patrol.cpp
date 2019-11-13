@@ -48,8 +48,12 @@ void Patrol::Update()
 	}
 }
 
-void Patrol::Serialize(std::string data)
+void Patrol::Serialize(json data)
 {
+	_speedX = std::stof(data["SpeedX"].get<std::string>());
+	_speedY = std::stof(data["SpeedY"].get<std::string>());
+	_time = std::stof(data["Time"].get<std::string>());
+	/*
 	size_t speed_pos = data.find_first_of(':');
 	size_t split_pos = data.find_first_of('/', speed_pos);
 
@@ -63,4 +67,5 @@ void Patrol::Serialize(std::string data)
 
 	size_t time_pos = data.find_first_of(':', split_pos);
 	_maxTime = std::stof(data.substr(time_pos + 1));
+	*/
 }

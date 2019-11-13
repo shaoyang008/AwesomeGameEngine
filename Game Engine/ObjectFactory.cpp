@@ -24,9 +24,22 @@ ObjectFactory::~ObjectFactory()
 {
 }
 
-GameObject * ObjectFactory::CreateObject(json data)
+GameObject * ObjectFactory::CreateObject(std::string type)
 {
-	GameObject * newObj = new GameObject;
+	GameObject * object = new GameObject(type);
+	SetObject(object, json());
+	return object;
+}
+
+void ObjectFactory::SetObject(GameObject* object, json level_data)
+{
+	object->ClearComponents();
+	json data = GetDefaultObjectModel(object->GetType());
+	
+	std::cout << level_data << std::endl;
+	std::cout << data << std::endl;
+	data.merge_patch(level_data);
+	std::cout << data << std::endl;
 
 	for (json::iterator it = data.begin(); it != data.end(); ++it) {
 		Component * component = 0;
@@ -56,5 +69,26 @@ GameObject * ObjectFactory::CreateObject(json data)
 		}
 		if (component) { newObj->AddComponent(component); }
 	}
-	return newObj;
+}
+
+json ObjectFactory::GetDefaultObjectModel(std::string type)
+{
+	if (_objectModels.find(type) == _objectModels.end()) {
+		_objectModels[type] = ReadFile(type);
+	}
+	return _objectModels[type];
+}
+
+json ObjectFactory::ReadFile(std::string type)
+{
+	std::string file_path = "./Levels/Types/" + type + ".txt";
+
+	std::ifstream file;
+	file.open(file_path);
+
+	json file_data;
+	file >> file_data;
+
+	file.close();
+	return file_data;
 }

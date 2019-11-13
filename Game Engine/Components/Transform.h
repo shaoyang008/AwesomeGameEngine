@@ -27,7 +27,7 @@ public:
 	~Transform();
 
 	void Update();
-	void Serialize(std::string);
+	void Serialize(json data);
 
 	float _posX;
 	float _posY;
