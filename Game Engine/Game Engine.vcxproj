@@ -98,6 +98,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Utilities\BinaryNode.h" />

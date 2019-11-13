@@ -29,6 +29,7 @@
     <ClCompile Include="Components\RigidBody.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="Components\RigidBody.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
