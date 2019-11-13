@@ -30,6 +30,10 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="Components\Collider.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -71,6 +75,10 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Components\Collider.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -78,6 +86,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{18098c72-9f39-4bad-9739-30d38eb9df2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{4da01787-85d4-4303-97af-e454d1c9421d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
