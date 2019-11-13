@@ -1,0 +1,11 @@
+{
+	"Transform": {
+		"PosX": "100.0", 
+		"PosY": "100.0"
+	},
+	"Sprite": {
+		"Filename": "bird.bmp"
+	},
+	"Controller": {
+	}
+}

@@ -1,4 +1,0 @@
-{
-	"Transform": "0.0, 0.0",
-	"Sprite": "default.bmp"
-}

@@ -1,5 +1,0 @@
-{
-	"Transform": "100.0, 100.0",
-	"Sprite": "bird.bmp",
-	"Controller": ""
-}

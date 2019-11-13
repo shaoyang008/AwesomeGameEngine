@@ -1,0 +1,14 @@
+{
+	"Transform": {
+		"PosX": "100.0", 
+		"PosY": "100.0"
+	},
+	"Sprite": {
+		"Filename": "plane.bmp"
+	},
+	"Patrol": {
+		"SpeedX": "2.0",
+		"SpeedY": "2.0",
+		"Time": "1000.0"
+	}
+}
