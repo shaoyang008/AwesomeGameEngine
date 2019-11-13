@@ -14,8 +14,8 @@
 				"Filename": "bird.bmp"
 			},
 			"RigidBody": {
-				"Mass": "1000.0",
-				"Scale": "0.0001"
+				"Mass": "10.0",
+				"Scale": "0.0"
 			}
 		}	
 	},

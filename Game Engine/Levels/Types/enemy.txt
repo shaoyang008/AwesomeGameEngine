@@ -10,5 +10,9 @@
 		"SpeedX": "2.0",
 		"SpeedY": "2.0",
 		"Time": "1000.0"
+	},
+	"Collider": {
+		"Width": "10.0",
+		"Height": "10.0"
 	}
 }
