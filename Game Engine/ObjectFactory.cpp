@@ -33,74 +33,66 @@ GameObject * ObjectFactory::CreateObject(std::string type)
 
 void ObjectFactory::SetObject(GameObject* object, json level_data)
 {
-	object->ClearComponents();
 	json data = GetDefaultObjectModel(object->GetType());
-	
-	std::cout << level_data << std::endl;
-	std::cout << data << std::endl;
 	data.merge_patch(level_data);
-	std::cout << data << std::endl;
 
 	for (json::iterator it = data.begin(); it != data.end(); ++it) {
 		Component * component = 0;
 		if (it.key() == "Transform") {
-			std::cout << "Adding " << it.key() << std::endl;
-			Transform * tComponent = new Transform;
-			tComponent->Serialize(it.value());
-			component = tComponent;
+			component = object->GetComponent(COMPONENT_TYPE::TRANSFORM);
+			if (!component) {
+				component = new Transform;
+			}
 		}
 		else if (it.key() == "Sprite") {
-			std::cout << "Adding " << it.key() << std::endl;
-			Sprite * sComponent = new Sprite;
-			sComponent->Serialize(it.value());
-			component = sComponent;
+			component = object->GetComponent(COMPONENT_TYPE::SPRITE);
+			if (!component) {
+				component = new Sprite;
+			}
 		}
 		else if (it.key() == "Controller") {
-			std::cout << "Adding " << it.key() << std::endl;
-			Controller * cComponent = new Controller;
-			cComponent->Serialize(it.value());
-			component = cComponent;
+			component = object->GetComponent(COMPONENT_TYPE::CONTROLLER);
+			if (!component) {
+				component = new Controller;
+			}
 		}
 		else if (it.key() == "Patrol") {
-			std::cout << "Adding " << it.key() << std::endl;
-			Patrol * pComponent = new Patrol;
-			pComponent->Serialize(it.value());
-			component = pComponent;
+			component = object->GetComponent(COMPONENT_TYPE::PATROL);
+			if (!component) {
+				component = new Patrol;
+			}
 		}
 		else if (it.key() == "RigidBody") {
-			std::cout << "Adding " << it.key() << std::endl;
-			RigidBody * rComponent = new RigidBody;
-			rComponent->Serialize(it.value());
-			component = rComponent;
+			component = object->GetComponent(COMPONENT_TYPE::RIGID_BODY);
+			if (!component) {
+				component = new RigidBody;
+			}
 		}
 		else if (it.key() == "Collider") {
-			std::cout << "Adding " << it.key() << std::endl;
-			Collider * rComponent = new Collider;
-			rComponent->Serialize(it.value());
-			component = rComponent;
+			component = object->GetComponent(COMPONENT_TYPE::COLLIDER);
+			if (!component) {
+				component = new Collider;
+			}
 		}
-		if (component) { object->AddComponent(component); }
+		else if (it.key() == "ResetPlayer") {
+			component = object->GetComponent(COMPONENT_TYPE::RESET_PLAYER);
+			if (!component) {
+				component = new ResetPlayer;
+			}
+		}
+		else {
+			continue;
+		}
+		component->Serialize(it.value());
+		object->AddComponent(component);
 	}
 }
 
 json ObjectFactory::GetDefaultObjectModel(std::string type)
 {
 	if (_objectModels.find(type) == _objectModels.end()) {
-		_objectModels[type] = ReadFile(type);
+		std::string file_path = "./Levels/Types/" + type + ".txt";
+		_objectModels[type] = JsonHandle::ReadFile(file_path);
 	}
 	return _objectModels[type];
-}
-
-json ObjectFactory::ReadFile(std::string type)
-{
-	std::string file_path = "./Levels/Types/" + type + ".txt";
-
-	std::ifstream file;
-	file.open(file_path);
-
-	json file_data;
-	file >> file_data;
-
-	file.close();
-	return file_data;
 }

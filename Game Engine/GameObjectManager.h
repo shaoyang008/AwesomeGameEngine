@@ -22,22 +22,18 @@ Creation date: 10/19/2019
 #include "ObjectFactory.h"
 #include "Utilities/Base.h"
 
-using json = nlohmann::json;
-
 class GameObjectManager
 {
 public:
 	GameObjectManager();
 	~GameObjectManager();
 
+	void Initialize();
 	void Update();
 	void LoadLevel(std::string);
-	// void ResetLevel(std::string);
-	void SetObject(std::string, json);
+
 	GameObject * GetObject(std::string);
 	
-	json ReadFile(std::string);
-
 	std::vector<GameObject*> _objects;
 	BinaryTree<std::string, GameObject*> _tagObjects;
 

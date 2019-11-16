@@ -20,9 +20,7 @@ Creation date: 10/26/2019
 #include <map>
 #include "Components/Base.h"
 #include "GameObject.h"
-#include "json.hpp"
-
-using json = nlohmann::json;
+#include "Utilities/JsonHandle.h"
 
 class ObjectFactory
 {
@@ -34,7 +32,6 @@ public:
 	void SetObject(GameObject*, json);
 
 	json GetDefaultObjectModel(std::string);
-	json ReadFile(std::string);
 
 private:
 	std::map<std::string, json> _objectModels;

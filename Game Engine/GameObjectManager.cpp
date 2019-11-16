@@ -30,6 +30,13 @@ GameObjectManager::~GameObjectManager()
 	delete _factory;
 }
 
+void GameObjectManager::Initialize()
+{
+	for (int i = 0; i < _objects.size(); ++i) {
+		_objects[i]->InitComponents();
+	}
+}
+
 void GameObjectManager::Update()
 {
 	for (int i = 0; i < _objects.size(); ++i) {
@@ -40,7 +47,7 @@ void GameObjectManager::Update()
 void GameObjectManager::LoadLevel(std::string level)
 {
 	std::string level_path = "./Levels/" + level + ".txt";
-	json level_data = ReadFile(level_path);
+	json level_data = JsonHandle::ReadFile(level_path);
 
 	for (json::iterator it = level_data.begin(); it != level_data.end(); ++it) {
 		GameObject *new_object = GetObject(it.value()["Type"].get<std::string>());
@@ -62,16 +69,4 @@ GameObject * GameObjectManager::GetObject(std::string type)
 	GameObject * object = _factory->CreateObject(type);
 	_objects.push_back(object);
 	return object;
-}
-
-json GameObjectManager::ReadFile(std::string file_path)
-{
-	std::ifstream file;
-	file.open(file_path);
-
-	json file_data;
-	file >> file_data;
-
-	file.close();
-	return file_data;
 }
