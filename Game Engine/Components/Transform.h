@@ -18,6 +18,7 @@ Creation date: 10/19/2019
 #include <SDL_rect.h>
 #include "Component.h"
 #include "../GameObject.h"
+#include "../Events/DelayMove.h"
 
 class Transform : public Component
 {
@@ -28,6 +29,7 @@ public:
 
 	void Update();
 	void Serialize(json data);
+	void HandleEvent(Event *);
 
 	float _posX;
 	float _posY;

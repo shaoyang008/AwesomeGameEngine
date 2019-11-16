@@ -28,6 +28,7 @@ public:
 
 	void Update();
 	void Serialize(json data);
+	void HandleEvent(Event *e);
 
 	void TriggerEvent();
 };

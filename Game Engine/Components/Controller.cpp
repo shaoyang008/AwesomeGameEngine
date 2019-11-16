@@ -53,10 +53,18 @@ void Controller::TriggerEvent()
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
 		r->_forceY += ACCELRATE_FORCE;
 	}
-	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_LEFT)) {
+	
+	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_LEFT)) {
 		t->_posX -= MOVEMENT_SPEED;
 	}
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_RIGHT)) {
 		t->_posX += MOVEMENT_SPEED;
+	}
+}
+
+void Controller::HandleEvent(Event *e)
+{
+	if (e->GetType() == EVENT_TYPE::PAUSE_RESUME) {
+		_active = !_active;
 	}
 }

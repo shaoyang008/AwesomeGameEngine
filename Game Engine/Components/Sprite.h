@@ -28,7 +28,7 @@ public:
 	void Update();
 	void Serialize(json data);
 
-	SDL_Surface *pSurface;
+	SDL_Surface *_surface;
 private:
 };
 

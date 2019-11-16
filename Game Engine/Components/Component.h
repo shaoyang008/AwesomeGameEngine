@@ -17,8 +17,9 @@ Creation date: 10/19/2019
 #pragma once
 #include <iostream>
 #include <string> 
-
 #include <json.hpp>
+#include "../Events/Event.h"
+
 using json = nlohmann::json;
 
 class GameObject;
@@ -30,21 +31,27 @@ enum class COMPONENT_TYPE {
 	PATROL,
 	RIGID_BODY,
 	COLLIDER,
+	RESET_PLAYER,
 	Count // Used to track number of types
 };
 
 class Component
 {
 public:
-	Component();
-	Component(COMPONENT_TYPE);
-	virtual ~Component();
+	Component() {}
+	Component(COMPONENT_TYPE type) : _type(type), _active(true) {}
+	virtual ~Component() {}
 
 	virtual void Update() = 0;
 	virtual void Serialize(json data) = 0;
+	virtual void Initialize() {}
+	virtual void HandleEvent(Event * e) {}
+
+	COMPONENT_TYPE GetType() { return _type; }
 
 	GameObject * _owner;
-	COMPONENT_TYPE GetType() { return _type; }
+	bool _active;
+
 private:
 	COMPONENT_TYPE _type;
 };

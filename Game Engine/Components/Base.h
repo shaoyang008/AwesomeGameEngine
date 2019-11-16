@@ -21,3 +21,4 @@ Creation date: 10/19/2019
 #include "Patrol.h"
 #include "RigidBody.h"
 #include "Collider.h"
+#include "ResetPlayer.h"

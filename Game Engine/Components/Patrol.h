@@ -27,6 +27,7 @@ public:
 
 	void Update();
 	void Serialize(json data);
+	void HandleEvent(Event*);
 
 private:
 	bool _direction;

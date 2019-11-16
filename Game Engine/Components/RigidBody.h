@@ -15,6 +15,7 @@ public:
 	void Initialize();
 	// Add up all forces in dt and apply to objects
 	void Integrate(float, float);
+	void Stop();
 
 	float _forceX, _forceY;
 

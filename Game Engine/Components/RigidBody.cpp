@@ -22,6 +22,10 @@ void RigidBody::Initialize()
 
 void RigidBody::Integrate(float gravity, float deltaTime)
 {
+	Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	_posX = transform->_posX;
+	_posY = transform->_posY;
+
 	_accX = _forceX / _mass;
 	_accY = _forceY / _mass + gravity * _gravityScale;
 
@@ -34,15 +38,27 @@ void RigidBody::Integrate(float gravity, float deltaTime)
 
 	_posX += _velX * deltaTime;
 	_posY += _velY * deltaTime;
+
+	transform->_posX = _posX;
+	transform->_posY = _posY;
+}
+
+void RigidBody::Stop()
+{
+	_accX = 0.0f;
+	_accY = 0.0f;
+
+	_velX = 0.0f;
+	_velY = 0.0f;
+
+	_forceX = 0.0f;
+	_forceY = 0.0f;
 }
 
 void RigidBody::Update()
 {
 	// Do nothing. Physic updates should be in another stage
 	// done by physic manager
-	Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	transform->_posX = _posX;
-	transform->_posY = _posY;
 }
 
 void RigidBody::Serialize(json data)
