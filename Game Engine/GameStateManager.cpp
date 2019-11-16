@@ -15,9 +15,11 @@ Creation date: 10/18/2019
 ---------------------------------------------------------*/
 
 #include "GameStateManager.h"
+#include "Events/PauseResume.h"
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
-_gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _level(1), _state(STATE::INIT), _gameStates()
+_gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),
+_level(1), _state(STATE::INIT), _gameStates()
 {
 	_gameStates[STATE::INIT] = &GameStateManager::Init;
 	_gameStates[STATE::LOOP] = &GameStateManager::Loop;
@@ -29,12 +31,10 @@ GameStateManager::~GameStateManager()
 	delete _inputManager;
 	delete _framerateManager;
 	delete _resourceManager;
-
-	std::cout << _gameObjectManager->_objects.size() << " objects." << std::endl;
-	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
-		std::cout << _gameObjectManager->_objects[i]->_components.size() << std::endl;
-	}
 	delete _gameObjectManager;
+	delete _physicsManager;
+	delete _collisionManager;
+	delete _eventManager;
 
 	// Destroy SDL window
 	SDL_FreeSurface(_windowSurface);
@@ -55,11 +55,15 @@ bool GameStateManager::Init()
 {
 	std::string lv = "Level_";
 	lv += ('0' + _level);
+	
 	_gameObjectManager->LoadLevel(lv);
+	_gameObjectManager->Initialize();
+
+	// Event subscribtion
+	_eventManager->SubscribeEvent(EVENT_TYPE::DELAY_MOVE, *(_gameObjectManager->_tagObjects.FindValueByKey("Enemy1")));
+	_eventManager->SubscribeEvent(EVENT_TYPE::DELAY_MOVE, *(_gameObjectManager->_tagObjects.FindValueByKey("Enemy2")));
 
 	_state = STATE::LOOP;
-	std::cout << "Init finished. Object count: " << _gameObjectManager->_objects.size() << std::endl;
-	*(_gameObjectManager->_objects[0]);
 	return true;
 }
 
@@ -72,30 +76,39 @@ bool GameStateManager::Loop()
 	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
 		Sprite    * s = dynamic_cast<Sprite*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::SPRITE));
 		Transform * t = dynamic_cast<Transform*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		if (s && t) { SDL_BlitSurface(s->pSurface, NULL, _windowSurface, t->offset); }
+		if (s && t) { SDL_BlitSurface(s->_surface, NULL, _windowSurface, t->offset); }
 	}
 	SDL_UpdateWindowSurface(_window);
 	
 
-	// Controller event
-	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
-		Controller * ctrl = dynamic_cast<Controller*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::CONTROLLER));
-		if(ctrl) ctrl->TriggerEvent();
-	}
-
 	// Update physics
 	_physicsManager->PhysicsUpdate();
 
-	// Update all game objects
-	_gameObjectManager->Update();
+	// Controller event
+	_inputManager->UpdateStates();
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_P)) {
+		Event * e = new PauseResume;
+		_eventManager->Enque(e);
+	}
+	else if (_inputManager->KeyTriggered(SDL_SCANCODE_M)) {
+		Event * e = new DelayMove;
+		_eventManager->Enque(e);
+	}
+
+	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
+		Controller * ctrl = dynamic_cast<Controller*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::CONTROLLER));
+		if (ctrl) ctrl->TriggerEvent();
+	}
 
 	// Collision detect
 	_collisionManager->PlayerCollision("Player");
+	_collisionManager->ResolveCollisions();
 
-	_inputManager->UpdateStates();
-	if (_inputManager->KeyPressed(SDL_SCANCODE_Q)) {
-		return false;
-	}
+	// Event queue
+	_eventManager->ResolveEvents();
+
+	// Update all game objects
+	_gameObjectManager->Update();
 	
 	// update frame end time
 	_framerateManager->FrameEnd();

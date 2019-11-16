@@ -33,7 +33,7 @@ GameObject::~GameObject()
 
 void GameObject::Update() {
 	for (int i = 0; i < _components.size(); ++i) {
-		if (_components[i]) _components[i]->Update();
+		if (_components[i]->_active) _components[i]->Update();
 	}
 }
 
@@ -53,9 +53,20 @@ bool GameObject::AddComponent(Component * c) {
 	return true;
 }
 
+void GameObject::InitComponents() {
+	for (int i = 0; i < _components.size(); ++i) {
+		_components[i]->Initialize();
+	}
+}
+
 void GameObject::ClearComponents() {
-	std::cout << _type << " deleting " << _components.size() << " components" << std::endl;
 	for (int i = 0; i < _components.size(); ++i) {
 		delete _components[i];
+	}
+}
+
+void GameObject::ReceiveEvent(Event * e) {
+	for (int i = 0; i < _components.size(); ++i) {
+		_components[i]->HandleEvent(e);
 	}
 }

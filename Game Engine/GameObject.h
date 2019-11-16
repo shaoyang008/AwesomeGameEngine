@@ -19,6 +19,7 @@ Creation date: 10/19/2019
 #include <vector>
 #include <string>
 #include "Components/Component.h"
+#include "Events/Event.h"
 
 class GameObject {
 public:
@@ -30,7 +31,9 @@ public:
 
 	Component * GetComponent(COMPONENT_TYPE);
 	bool AddComponent(Component*);
+	void InitComponents();
 	void ClearComponents();
+	void ReceiveEvent(Event *);
 
 	std::string GetTag() const { return _tag; }
 	void SetTag(std::string tag) { _tag = tag; }

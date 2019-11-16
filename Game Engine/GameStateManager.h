@@ -24,6 +24,9 @@ Creation date: 10/18/2019
 #include "GameObjectManager.h"
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
+#include "Events/PauseResume.h"
+#include "Events/DelayMove.h"
 
 enum STATE {
 	INIT,
@@ -50,6 +53,7 @@ public:
 	GameObjectManager	* _gameObjectManager;
 	PhysicsManager		* _physicsManager;
 	CollisionManager	* _collisionManager;
+	EventManager		* _eventManager;
 
 private:
 	SDL_Window *_window;
