@@ -87,23 +87,29 @@
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Components\Collider.cpp" />
-    <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
     <ClCompile Include="Components\Patrol.cpp" />
+    <ClCompile Include="Components\ResetPlayer.cpp" />
     <ClCompile Include="Components\RigidBody.cpp" />
     <ClCompile Include="Components\Sprite.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="Events\DelayMove.cpp" />
+    <ClCompile Include="Events\OnCollision.cpp" />
+    <ClCompile Include="Events\PauseResume.cpp" />
     <ClCompile Include="FramerateManager.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="glad.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Library\glad.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Utilities\JsonHandle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionManager.h" />
@@ -112,14 +118,21 @@
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
     <ClInclude Include="Components\Patrol.h" />
+    <ClInclude Include="Components\ResetPlayer.h" />
     <ClInclude Include="Components\RigidBody.h" />
     <ClInclude Include="Components\Sprite.h" />
     <ClInclude Include="Components\Transform.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Events\DelayMove.h" />
+    <ClInclude Include="Events\Event.h" />
+    <ClInclude Include="Events\OnCollision.h" />
+    <ClInclude Include="Events\PauseResume.h" />
     <ClInclude Include="FramerateManager.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -127,6 +140,7 @@
     <ClInclude Include="Utilities\BinaryNode.h" />
     <ClInclude Include="Utilities\BinaryTree.h" />
     <ClInclude Include="Utilities\Base.h" />
+    <ClInclude Include="Utilities\JsonHandle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

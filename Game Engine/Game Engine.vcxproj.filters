@@ -12,9 +12,6 @@
     <ClCompile Include="Components\Transform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Component.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Components\Controller.cpp">
       <Filter>Components</Filter>
@@ -24,7 +21,6 @@
     <ClCompile Include="Components\Patrol.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="glad.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Components\RigidBody.cpp">
       <Filter>Components</Filter>
@@ -34,6 +30,26 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="Components\ResetPlayer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\DelayMove.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\OnCollision.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\PauseResume.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\JsonHandle.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\glad.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -79,6 +95,26 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Components\ResetPlayer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\DelayMove.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\OnCollision.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\PauseResume.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\JsonHandle.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -88,7 +124,10 @@
       <UniqueIdentifier>{18098c72-9f39-4bad-9739-30d38eb9df2c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Events">
-      <UniqueIdentifier>{4da01787-85d4-4303-97af-e454d1c9421d}</UniqueIdentifier>
+      <UniqueIdentifier>{65b6200e-3dc6-4de5-b274-0fda2a2441b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{19ea8777-aa6e-4414-b75f-4c07e8a9835a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
