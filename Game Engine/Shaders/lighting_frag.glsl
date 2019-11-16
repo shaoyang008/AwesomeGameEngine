@@ -1,8 +1,8 @@
 #version 330
 
-in vec3 color;
+in vec3 position;
 
 void main()
 {
-   gl_FragColor.xyz = color;
+   gl_FragColor.xyz = normalize(position);
 }

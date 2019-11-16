@@ -20,40 +20,17 @@ Creation date: 10/14/2019
 #include "GameStateManager.h"
 #include "ShaderProgram.h"
 
+#include "Model.h"
 
 #define MOVEMENT_SPEED 5
 #define MAX_FRAME_RATE 60
 
-#define USING_OPENGL 0
+#define USING_OPENGL 1
 
 GameStateManager *pMgr = new GameStateManager;
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
 #if USING_OPENGL
-float vertices[6][4] = {
-	{ -0.6f, -0.4f, 0.0f, 1.0f },
-	{  0.6f, -0.4f, 0.0f, 1.0f },
-	{  0.0f,  0.6f, 0.0f, 1.0f },
-	{  0.0f, -0.75f, 0.0f, 1.0f },
-	{ -0.45f, 0.35f, 0.0f, 1.0f },
-	{  0.45f, 0.35f, 0.0f, 1.0f },
-};
-float colors[6][3] = {
-	{ 1.0f, 0.0f, 0.0f },
-	{ 0.0f, 1.0f, 0.0f },
-	{ 0.0f, 0.0f, 1.0f },
-	{ 1.0f, 1.0f, 0.0f },
-	{ 1.0f, 0.0f, 1.0f },
-	{ 0.0f, 1.0f, 1.0f }
-};
-
-int triangles[4][3] = {
-	{ 0, 1, 2 },
-	{ 0, 1, 3 },
-	{ 0, 2, 4 },
-	{ 1, 2, 5 }
-};
-
 void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error: %s\n", description);
@@ -125,37 +102,10 @@ int main(int argc, char* args[])
 	shader->CompileShader("Shaders/lighting_frag.glsl", GL_FRAGMENT_SHADER);
 
 	glBindAttribLocation(shader->_programId, 0, "vertex");
-	glBindAttribLocation(shader->_programId, 1, "color");
+	glBindAttribLocation(shader->_programId, 1, "texcoord");
+	glBindAttribLocation(shader->_programId, 2, "normal");
 	shader->LinkShader();
 	
-	// Create buffers
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
-	GLuint vertex_buffer;
-	glGenBuffers(1, &vertex_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, &vertices[0][0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	GLuint color_buffer;
-	glGenBuffers(1, &color_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 3, &colors[0][0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	GLuint triangle_buffer;
-	glGenBuffers(1, &triangle_buffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangle_buffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * 4 * 3, &triangles[0][0], GL_STATIC_DRAW);
-
-	glBindVertexArray(0);
-
 	glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 #else
 	// Setup Manager
@@ -166,7 +116,10 @@ int main(int argc, char* args[])
 	}
 #endif
 
-	
+	// ReadModel("Resources/box.obj");
+	Model *m = new Model;
+	m->Initialize();
+
 	// Game loop
 	while(true == appIsRunning)
 	{
@@ -178,9 +131,9 @@ int main(int argc, char* args[])
 
 		glUseProgram(shader->_programId);
 
-		glBindVertexArray(VertexArrayID);
-		glDrawElements(GL_TRIANGLES, 3 * 4, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+		m->Draw();
+
+		glUseProgram(0);
 
 		// Swap buffers
 		SDL_GL_SwapWindow(window);
@@ -198,8 +151,6 @@ int main(int argc, char* args[])
 	}
 	
 #if USING_OPENGL
-	glUseProgram(0);
-
 	SDL_GL_DeleteContext(gl_context);
 	SDL_DestroyRenderer(renderer);
 #else
