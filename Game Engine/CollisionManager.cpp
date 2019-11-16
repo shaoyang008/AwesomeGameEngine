@@ -20,7 +20,9 @@ void CollisionManager::PlayerCollision(std::string player_tag)
 		GameObject * target = pMgr->_gameObjectManager->_objects[i];
 		if (target->GetTag() == player_tag) continue;
 		else {
-			StaticAABBtoAABB(player, target);
+			if (StaticAABBtoAABB(player, target)) {
+				Enqueue(player, target);
+			}
 		}
 	}
 }
@@ -41,4 +43,26 @@ bool CollisionManager::StaticAABBtoAABB(GameObject * g1, GameObject * g2)
 		return true;
 	}
 	else return false;
+}
+
+void CollisionManager::Enqueue(GameObject * go1, GameObject * go2)
+{
+	Collision * c = new Collision(go1, go2);
+	_collisions.push(c);
+}
+
+void CollisionManager::ResolveCollisions()
+{
+	while (!_collisions.empty()) {
+		// Pass collisions to each object
+		Collision *c = _collisions.front();
+		Event* e = new OnCollision();
+
+		c->_go1->ReceiveEvent(e);
+		c->_go2->ReceiveEvent(e);
+
+		_collisions.pop();
+		delete c;
+		delete e;
+	}
 }

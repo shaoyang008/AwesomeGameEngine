@@ -25,6 +25,10 @@
 			"Transform": {
 				"PosX": "300",
 				"PosY": "100"
+			},
+			"Collider": {
+				"Width": "88.0",
+				"Height": "59.0"
 			}
 		}
 	},
@@ -39,6 +43,10 @@
 				"SpeedX": "-4.0",
 				"SpeedY": "4.0",
 				"Time": "500.0"
+			},
+			"Collider": {
+				"Width": "88.0",
+				"Height": "59.0"
 			}
 		}
 	},
