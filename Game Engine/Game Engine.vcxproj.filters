@@ -6,34 +6,13 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="Components\Sprite.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Transform.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Components\Controller.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
-    <ClCompile Include="Components\Patrol.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Components\RigidBody.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="Components\Collider.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="Components\ResetPlayer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Events\DelayMove.cpp">
       <Filter>Events</Filter>
     </ClCompile>
@@ -49,26 +28,45 @@
     <ClCompile Include="Library\glad.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="Components\RigidBody.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Sprite.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Model.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Collider.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Controller.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Patrol.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ResetPlayer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectModel.cpp" />
+    <ClCompile Include="Utilities\Matrix4.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Camera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="Components\Sprite.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Transform.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Component.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Components\Controller.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\BinaryTree.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -79,26 +77,11 @@
     <ClInclude Include="Utilities\Base.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Base.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectFactory.h" />
-    <ClInclude Include="Components\Patrol.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Components\RigidBody.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsManager.h" />
-    <ClInclude Include="Components\Collider.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="EventManager.h" />
-    <ClInclude Include="Components\ResetPlayer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Events\DelayMove.h">
       <Filter>Events</Filter>
     </ClInclude>
@@ -114,12 +97,46 @@
     <ClInclude Include="Utilities\JsonHandle.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="Components\ResetPlayer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RigidBody.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Sprite.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Transform.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Model.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Base.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Collider.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Controller.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Patrol.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectModel.h" />
+    <ClInclude Include="Utilities\Matrix4.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Camera.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Components">
-      <UniqueIdentifier>{a0fe0173-e7fd-49f4-bdef-ca5e4a788714}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{18098c72-9f39-4bad-9739-30d38eb9df2c}</UniqueIdentifier>
     </Filter>
@@ -128,6 +145,9 @@
     </Filter>
     <Filter Include="Library">
       <UniqueIdentifier>{19ea8777-aa6e-4414-b75f-4c07e8a9835a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{82a18776-24d7-4b7a-80bf-87cf52d26c7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
