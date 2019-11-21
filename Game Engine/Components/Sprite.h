@@ -15,9 +15,9 @@ Creation date: 10/19/2019
 ---------------------------------------------------------*/
 
 #pragma once
-#include <SDL_surface.h>
 #include "Component.h"
 #include "../GameObject.h"
+#include "../ObjectModel.h"
 
 class Sprite : public Component
 {
@@ -28,7 +28,7 @@ public:
 	void Update();
 	void Serialize(json data);
 
-	SDL_Surface *_surface;
+	ObjectModel *_model;
 private:
 };
 

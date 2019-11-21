@@ -19,46 +19,38 @@ Creation date: 10/19/2019
 
 extern GameStateManager *pMgr;
 
-Transform::Transform(): Component(COMPONENT_TYPE::TRANSFORM), _posX(0.0), _posY(0.0)
+Transform::Transform(): Component(COMPONENT_TYPE::TRANSFORM), _translateX(0.0f), _translateY(0.0f), _translateZ(0.0f),
+_scaleX(0.0f), _scaleY(0.0f), _scaleZ(0.0f), _rotateX(0.0f), _rotateY(0.0f), _rotateZ(0.0f)
 {
-	offset = new SDL_Rect;
-	Update();
+   
 }
-
-Transform::Transform(float x, float y): Component(COMPONENT_TYPE::TRANSFORM), _posX(x), _posY(y)
-{
-	offset = new SDL_Rect;
-	Update();
-}
-
 
 Transform::~Transform()
 {
-	delete offset;
 }
 
 void Transform::Update() 
 {
-	offset->x = _posX;
-	offset->y = _posY;
+
 }
 
 void Transform::Serialize(json data)
 {
 	
-	_posX = std::stof(data["PosX"].get<std::string>());
-	_posY = std::stof(data["PosY"].get<std::string>());
+	_translateX = data["TranslateX"].get<float>();
+	_translateY = data["TranslateY"].get<float>();
+	_translateZ = data["TranslateZ"].get<float>();
+
+	_scaleX = data["ScaleX"].get<float>();
+	_scaleY = data["ScaleY"].get<float>();
+	_scaleZ = data["ScaleZ"].get<float>();
+
+	_rotateX = data["RotateX"].get<float>();
+	_rotateY = data["RotateY"].get<float>();
+	_rotateZ = data["RotateZ"].get<float>();
 }
 
 void Transform::HandleEvent(Event *e) 
 {
-	if (e->GetType() == EVENT_TYPE::DELAY_MOVE) {
-		DelayMove *d = dynamic_cast<DelayMove*>(e);
-		if (d->IsTimeUp()) _posX += 20.0f;
-		else if(!d->_queued) {
-			d->_queued = true;
-			DelayMove *d2 = new DelayMove(d->_elapsedTime + pMgr->_framerateManager->_frameTime / 1000.0f);
-			pMgr->_eventManager->Enque(d2);
-		}
-	}
+
 }
