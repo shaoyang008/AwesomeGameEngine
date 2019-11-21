@@ -15,6 +15,7 @@ public:
 	Event(EVENT_TYPE type): _type(type) {}
 	virtual ~Event() {}
 
+	virtual bool ShouldTrigger() { return true;  }
 	EVENT_TYPE GetType() { return _type; }
 
 private:

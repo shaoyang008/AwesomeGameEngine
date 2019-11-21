@@ -22,8 +22,9 @@ public:
 	CollisionManager();
 	~CollisionManager();
 
-	void PlayerCollision(std::string);
+	void CheckCollisions();
 	bool StaticAABBtoAABB(GameObject*, GameObject*);
+	bool StaticAABBtoGround(GameObject *);
 
 	void Enqueue(GameObject *, GameObject *);
 	void ResolveCollisions();

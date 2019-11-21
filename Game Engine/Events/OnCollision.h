@@ -4,7 +4,9 @@
 class OnCollision : public Event
 {
 public:
-	OnCollision();
+	OnCollision(bool ground_collision = false);
 	~OnCollision();
+
+	bool _groundCollision;
 };
 
