@@ -39,12 +39,12 @@ public:
 		}
 	}
 
-	T2 * FindValueByKey(T1 key) {
+	T2 FindValueByKey(T1 key) {
 		BinaryNode<T1, T2> *pCurr = _head;
 
 		while (pCurr) {
 			if (pCurr->_key == key) {
-				return &(pCurr->_value);
+				return pCurr->_value;
 			}
 			else {
 				if (key > pCurr->_key) {

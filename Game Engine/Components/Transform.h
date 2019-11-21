@@ -15,26 +15,23 @@ Creation date: 10/19/2019
 ---------------------------------------------------------*/
 
 #pragma once
-#include <SDL_rect.h>
 #include "Component.h"
 #include "../GameObject.h"
-#include "../Events/DelayMove.h"
 
 class Transform : public Component
 {
 public:
 	Transform();
-	Transform(float, float);
 	~Transform();
 
 	void Update();
 	void Serialize(json data);
 	void HandleEvent(Event *);
 
-	float _posX;
-	float _posY;
+	float _translateX, _translateY, _translateZ;
+	float _scaleX, _scaleY, _scaleZ;
+	float _rotateX, _rotateY, _rotateZ;
 
-	SDL_Rect * offset;
 private:
 };
 

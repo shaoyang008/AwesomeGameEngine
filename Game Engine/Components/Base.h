@@ -22,3 +22,5 @@ Creation date: 10/19/2019
 #include "RigidBody.h"
 #include "Collider.h"
 #include "ResetPlayer.h"
+#include "Model.h"
+#include "Camera.h"

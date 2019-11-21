@@ -37,12 +37,12 @@ void Patrol::Update()
 	}
 	else {
 		if (_direction) {
-			t->_posX += _speedX;
-			t->_posY += _speedY;
+			t->_translateX += _speedX;
+			t->_translateY += _speedY;
 		}
 		else {
-			t->_posX -= _speedX;
-			t->_posY -= _speedY;
+			t->_translateX -= _speedX;
+			t->_translateY -= _speedY;
 		}
 		_time += pMgr->_framerateManager->_frameTime;
 	}

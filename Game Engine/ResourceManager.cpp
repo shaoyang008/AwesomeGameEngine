@@ -23,28 +23,29 @@ ResourceManager::~ResourceManager()
 	FreeAll();
 }
 
-bool ResourceManager::RegisterSurface(std::string path)
+bool ResourceManager::RegisterModel(std::string path)
 {
 	if (_resources[path]) return true;
 	else {
-		SDL_Surface * new_surface = SDL_LoadBMP(path.c_str());
-		if (!new_surface) return false;
+		ObjectModel * model = new ObjectModel;
+		model->Initialize(path);
+		if (!model) return false;
 		else {
-			_resources[path] = new_surface;
+			_resources[path] = model;
 			return true;
 		}
 	}
 }
 
-SDL_Surface * ResourceManager::GetSurfaceByPath(std::string path)
+ObjectModel * ResourceManager::GetModelByPath(std::string path)
 {
 	return _resources[path];
 }
 
 void ResourceManager::FreeAll()
 {
-	std::unordered_map<std::string, SDL_Surface*>::iterator it;
+	std::unordered_map<std::string, ObjectModel*>::iterator it;
 	for (it = _resources.begin(); it != _resources.end(); ++it) {
-		SDL_FreeSurface(it->second);
+		delete it->second;
 	}
 }

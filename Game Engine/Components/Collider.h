@@ -12,7 +12,7 @@ public:
 	void Serialize(json data);
 
 	// Box colliders
-	float _posX, _posY;
-	float _width, _height;
+	float _posX, _posY, _posZ;
+	float _width, _length, _height;
 };
 

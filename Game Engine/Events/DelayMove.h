@@ -7,10 +7,9 @@ class DelayMove : public Event
 {
 public:
 	DelayMove();
-	DelayMove(float);
 	~DelayMove();
 
-	bool IsTimeUp() { return (_elapsedTime > DELAY_TIME);  }
+	bool ShouldTrigger();
 
 	float _elapsedTime;
 	bool  _queued;

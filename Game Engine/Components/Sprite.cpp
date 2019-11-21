@@ -19,7 +19,7 @@ Creation date: 10/19/2019
 
 extern GameStateManager *pMgr;
 
-Sprite::Sprite(): Component(COMPONENT_TYPE::SPRITE), _surface(NULL)
+Sprite::Sprite(): Component(COMPONENT_TYPE::SPRITE), _model(NULL)
 {
 }
 
@@ -34,10 +34,9 @@ void Sprite::Update() {
 void Sprite::Serialize(json data)
 {
 	std::string path = "Resources/" + data["Filename"].get<std::string>();
-	if (!pMgr->_resourceManager->RegisterSurface(path)) {
-		std::cout << "Could not load resource: " << path << ", Reason: " << SDL_GetError() << std::endl;
+	if (!pMgr->_resourceManager->RegisterModel(path)) {
+		std::cout << "Could not load resource: " << path <<  std::endl;
 		return;
 	}
-	_surface = pMgr->_resourceManager->GetSurfaceByPath(path);
-	std::cout << "Width: " << _surface->w << ", Height: " << _surface->h << std::endl;
+	_model = pMgr->_resourceManager->GetModelByPath(path);
 }

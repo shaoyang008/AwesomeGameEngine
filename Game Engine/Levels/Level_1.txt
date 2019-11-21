@@ -1,70 +1,116 @@
 {
-	"Background": {
-		"Type": "image",
+	"Camera": {
+		"Type": "camera",
 		"Components": {
-			"Sprite": {
-				"Filename": "background.bmp"
+			"Camera": {
+				"Target": "Player",
+				"Position": [
+					0,
+					-50,
+					30
+				]
 			}
 		}
 	},
 	"Player": {
 		"Type": "player",
 		"Components": {
-			"Sprite": {
-				"Filename": "bird.bmp"
+			"Transform": {
+				"ScaleX": 0.5,
+				"ScaleY": 0.5,
+				"ScaleZ": 0.5,
+				"RotateZ": 180.0,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "knight_s.obj",
+				"Diffuse": [
+					0.5,
+					0.8,
+					0.9
+				]
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
 			},
 			"RigidBody": {
-				"Mass": "10.0",
-				"Scale": "0.0"
+				"Mass": 10,
+				"Scale": 1.0
 			}
 		}	
 	},
-	"Enemy1": {
-		"Type": "enemy",
+	"Light": {
+		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"PosX": "300",
-				"PosY": "100"
+				"TranslateX": 0.0, 
+				"TranslateY": 0.0,
+				"TranslateZ": 20.0,
+				"ScaleX": 0.005,
+				"ScaleY": 0.005,
+				"ScaleZ": 0.005
+			},
+			"Model": {
+				"Filename": "sphere.obj",
+				"Diffuse": [
+					10,
+					10,
+					10
+				]
+			}
+		}	
+	},
+	"Teapot": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateY": 20.0,
+				"TranslateZ": 10.0,
+				"ScaleX": 5,
+				"ScaleY": 5,
+				"ScaleZ": 5
+			},
+			"Model": {
+				"Filename": "teapot2.obj",
+				"Shininess": 120
 			},
 			"Collider": {
-				"Width": "88.0",
-				"Height": "59.0"
+				"Height": 5,
+				"Width": 5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
 			}
-		}
+		}	
 	},
-	"Enemy2": {
-		"Type": "enemy",
+	"Ground": {
+		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"PosX": "500",
-				"PosY": "100"
+				"TranslateX": 0.0, 
+				"TranslateZ": -1.5,
+				"ScaleX": 40,
+				"ScaleY": 100,
+				"ScaleZ": 1.0,
+				"RotateX": 0.0,
+				"RotateY": 0.0,
+				"RotateZ": 0.0
+
 			},
-			"Patrol": {
-				"SpeedX": "-4.0",
-				"SpeedY": "4.0",
-				"Time": "500.0"
-			},
-			"Collider": {
-				"Width": "88.0",
-				"Height": "59.0"
+			"Model": {
+				"Filename": "box2.obj",
+				"Diffuse": [
+					0.5,
+					0.5,
+					2.0
+				],
+				"Shininess": 1
 			}
-		}
-	},
-	"Enemy3": {
-		"Type": "enemy",
-		"Components": {
-			"Sprite": {
-				"Filename": "black_bird.bmp"
-			},
-			"Transform": {
-				"PosX": "100",
-				"PosY": "400"
-			},
-			"Patrol": {
-				"SpeedX": "0.0",
-				"SpeedY": "-1.0",
-				"Time": "2000.0"
-			}
-		}
+		}	
 	}
 }

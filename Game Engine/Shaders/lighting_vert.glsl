@@ -1,14 +1,25 @@
 #version 330
 
-// uniform mat4 WorldView, WorldInverse, WorldProj, ModelTr, NormalTr;
+in vec3 vertex;
+in vec2 texcoord;
+in vec3 normal;
 
-in vec4 vertex;
-in vec3 lighting;
+uniform mat4 WorldView, WorldProj, WorldInverse;
+uniform mat4 ModelTr, NormalTr;
 
-out vec3 color;
+out vec3 normalVec, lightVec, eyeVec;
+
+uniform vec3 lightPos;
 
 void main()
 {
-	color = lighting;
-    gl_Position = vertex;
+	vec3 worldPos = (ModelTr * vec4(vertex, 1.0)).xyz;
+	vec3 eyePos = (WorldInverse * vec4(0, 0, 0, 1)).xyz;
+
+	normalVec = normal * mat3(NormalTr); 
+
+	eyeVec = eyePos - worldPos;
+	lightVec = lightPos - worldPos;
+
+	gl_Position = WorldProj * WorldView * ModelTr * vec4(vertex, 1.0);
 }

@@ -17,18 +17,17 @@ Creation date: 10/14/2019
 #pragma once
 #include <unordered_map>
 #include <string>
-
-struct SDL_Surface;
+#include "ObjectModel.h"
 
 class ResourceManager {
 public:
 	ResourceManager();
 	~ResourceManager();
 
-	bool RegisterSurface(std::string);
-	SDL_Surface * GetSurfaceByPath(std::string);
+	bool RegisterModel(std::string);
+	ObjectModel * GetModelByPath(std::string);
 	void FreeAll();
 
 private:
-	std::unordered_map<std::string, SDL_Surface*> _resources;
+	std::unordered_map<std::string, ObjectModel*> _resources;
 };

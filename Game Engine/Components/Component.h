@@ -27,11 +27,13 @@ class GameObject;
 enum class COMPONENT_TYPE {
 	SPRITE,
 	TRANSFORM,
+	MODEL,
 	CONTROLLER,
 	PATROL,
 	RIGID_BODY,
 	COLLIDER,
 	RESET_PLAYER,
+	CAMERA,
 	Count // Used to track number of types
 };
 

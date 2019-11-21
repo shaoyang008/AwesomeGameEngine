@@ -33,3 +33,7 @@
 **/.vs
 **/Debug
 **/Release
+
+# Exceptions
+## Resources
+!**/Resources/*.obj

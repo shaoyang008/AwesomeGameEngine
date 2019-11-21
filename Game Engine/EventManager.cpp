@@ -22,21 +22,26 @@ void EventManager::ResolveEvents()
 {
 	while (!_eventQueues[_queueIndex].empty()) {
 		Event * e = _eventQueues[_queueIndex].front();
-		if (_subscribers.find(e->GetType()) == _subscribers.end()) {
-			// Not registered as subscription event
-			// broadcast to all game objects
-			for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
-				pMgr->_gameObjectManager->_objects[i]->ReceiveEvent(e);
+		if (e->ShouldTrigger()) {
+			if (_subscribers.find(e->GetType()) == _subscribers.end()) {
+				// Not registered as subscription event
+				// broadcast to all game objects
+				for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+					pMgr->_gameObjectManager->_objects[i]->ReceiveEvent(e);
+				}
 			}
+			else {
+				// Only pass event to subscribers
+				for (int i = 0; i < _subscribers[e->GetType()].size(); ++i) {
+					_subscribers[e->GetType()][i]->ReceiveEvent(e);
+				}
+			}
+			delete e;
 		}
 		else {
-			// Only pass event to subscribers
-			for (int i = 0; i < _subscribers[e->GetType()].size(); ++i) {
-				_subscribers[e->GetType()][i]->ReceiveEvent(e);
-			}
+			Enque(e);
 		}
 		_eventQueues[_queueIndex].pop();
-		delete e;
 	}
 	_queueIndex = _nextQueueIndex;
 	_nextQueueIndex = (_nextQueueIndex + 1) % 2;

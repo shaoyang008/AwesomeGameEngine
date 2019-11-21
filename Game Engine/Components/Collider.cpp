@@ -14,12 +14,14 @@ Collider::~Collider()
 void Collider::Update()
 {
 	Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	_posX = transform->_posX;
-	_posY = transform->_posY;
+	_posX = transform->_translateX;
+	_posY = transform->_translateY;
+	_posZ = transform->_translateZ;
 }
 
 void Collider::Serialize(json data)
 {
-	_height  = std::stof(data["Height"].get<std::string>());
-	_width   = std::stof(data["Width"].get<std::string>());
+	_height = data["Height"].get<float>();
+	_width  = data["Width"].get<float>();
+	_length = data["Length"].get<float>();
 }

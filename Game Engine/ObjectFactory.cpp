@@ -80,6 +80,18 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 				component = new ResetPlayer;
 			}
 		}
+		else if (it.key() == "Model") {
+			component = object->GetComponent(COMPONENT_TYPE::MODEL);
+			if (!component) {
+				component = new Model;
+			}
+		}
+		else if (it.key() == "Camera") {
+			component = object->GetComponent(COMPONENT_TYPE::CAMERA);
+			if (!component) {
+				component = new Camera;
+			}
+		}
 		else {
 			continue;
 		}

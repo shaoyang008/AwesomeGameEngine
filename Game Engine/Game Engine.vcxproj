@@ -86,8 +86,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Collider.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
+    <ClCompile Include="Components\Model.cpp" />
     <ClCompile Include="Components\Patrol.cpp" />
     <ClCompile Include="Components\ResetPlayer.cpp" />
     <ClCompile Include="Components\RigidBody.cpp" />
@@ -103,20 +105,24 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Library\glad.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Utilities\JsonHandle.cpp" />
+    <ClCompile Include="Utilities\Matrix4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Components\Base.h" />
+    <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Collider.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
+    <ClInclude Include="Components\Model.h" />
     <ClInclude Include="Components\Patrol.h" />
     <ClInclude Include="Components\ResetPlayer.h" />
     <ClInclude Include="Components\RigidBody.h" />
@@ -132,15 +138,17 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Utilities\BinaryNode.h" />
     <ClInclude Include="Utilities\BinaryTree.h" />
     <ClInclude Include="Utilities\Base.h" />
     <ClInclude Include="Utilities\JsonHandle.h" />
+    <ClInclude Include="Utilities\Matrix4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

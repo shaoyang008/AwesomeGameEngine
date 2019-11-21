@@ -19,8 +19,9 @@ Creation date: 10/19/2019
 
 extern GameStateManager *pMgr;
 
-#define MOVEMENT_SPEED 5
+#define MOVEMENT_SPEED 0.5f
 #define ACCELRATE_FORCE 5000.0f
+#define PI 3.14159f
 
 Controller::Controller(): Component(COMPONENT_TYPE::CONTROLLER)
 {
@@ -41,24 +42,22 @@ void Controller::Serialize(json data)
 
 void Controller::TriggerEvent()
 {
-	Transform * t = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (!t) return;
-
-	RigidBody * r = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
-	if (!t) return;
-
-	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_UP)) {
-		r->_forceY -= ACCELRATE_FORCE;
-	}
-	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
-		r->_forceY += ACCELRATE_FORCE;
-	}
+	Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (!transform) return;
 	
-	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_LEFT)) {
-		t->_posX -= MOVEMENT_SPEED;
+	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_W)) {
+		transform->_translateX += MOVEMENT_SPEED * sin(transform->_rotateZ * PI / 180.0f);
+		transform->_translateY -= MOVEMENT_SPEED * cos(transform->_rotateZ * PI / 180.0f);
 	}
-	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_RIGHT)) {
-		t->_posX += MOVEMENT_SPEED;
+	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_S)) {
+		transform->_translateX -= MOVEMENT_SPEED * sin(transform->_rotateZ * PI / 180.0f);
+		transform->_translateY += MOVEMENT_SPEED * cos(transform->_rotateZ * PI / 180.0f);
+	}
+	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_A)) {
+		transform->_rotateZ += 5;
+	}
+	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_D)) {
+		transform->_rotateZ -= 5;
 	}
 }
 

@@ -1,17 +1,30 @@
 {
 	"Transform": {
-		"PosX": "100.0", 
-		"PosY": "100.0"
-	},
-	"Sprite": {
-		"Filename": "bird.bmp"
+		"TranslateX": 0.0, 
+		"TranslateY": 0.0,
+		"TranslateZ": 0.0,
+		"ScaleX": 1.0,
+		"ScaleY": 1.0,
+		"ScaleZ": 1.0,
+		"RotateX": 0.0,
+		"RotateY": 0.0,
+		"RotateZ": 0.0
+
 	},
 	"Controller": {
 	},
-	"Collider": {
-		"Width": "100.0",
-		"Height": "100.0"
-	},
-	"ResetPlayer": {
+	"Model": {
+		"Filename": "teapot.obj",
+		"Diffuse": [
+			0.8,
+			0.2,
+			0.2
+		],
+		"Specular": [
+			0.6,
+			0.6,
+			0.6
+		],
+		"Shininess": 30
 	}
 }
