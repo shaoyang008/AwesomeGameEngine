@@ -1,9 +1,0 @@
-{
-	"Transform": {
-		"PosX": "0.0", 
-		"PosY": "0.0"
-	},
-	"Sprite": {
-		"Filename": "default.bmp"
-	}
-}

@@ -11,20 +11,18 @@
 		"RotateZ": 0.0
 
 	},
-	"Controller": {
-	},
 	"Model": {
 		"Filename": "teapot.obj",
 		"Diffuse": [
 			0.8,
-			0.2,
-			0.2
+			0.8,
+			0.8
 		],
 		"Specular": [
 			0.6,
 			0.6,
 			0.6
 		],
-		"Shininess": 30
+		"Shininess": 10
 	}
 }
