@@ -21,6 +21,7 @@ Creation date: 10/18/2019
 #include "FramerateManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 #include "GameObjectManager.h"
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
@@ -29,6 +30,7 @@ Creation date: 10/18/2019
 #include "Events/DelayMove.h"
 
 enum STATE {
+	LOAD,
 	INIT,
 	LOOP,
 	count
@@ -50,10 +52,11 @@ public:
 	FramerateManager	*_framerateManager;
 	InputManager		*_inputManager;
 	ResourceManager		*_resourceManager;
-	GameObjectManager	* _gameObjectManager;
-	PhysicsManager		* _physicsManager;
-	CollisionManager	* _collisionManager;
-	EventManager		* _eventManager;
+	GameObjectManager	*_gameObjectManager;
+	PhysicsManager		*_physicsManager;
+	CollisionManager	*_collisionManager;
+	EventManager		*_eventManager;
+	RenderManager		*_renderManager;
 
 private:
 	SDL_Window *_window;

@@ -1,24 +1,24 @@
-#include "Model.h"
+#include "ObjectModel.h"
 
-Model::Model()
+ObjectModel::ObjectModel()
 {
 }
 
 
-Model::~Model()
+ObjectModel::~ObjectModel()
 {
 }
 
-void Model::Draw()
+void ObjectModel::Draw()
 {
 	glBindVertexArray(_VAOid);
 	glDrawElements(GL_TRIANGLES, _vertexIndex.size() * 3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
-void Model::Initialize()
+void ObjectModel::Initialize(std::string path)
 {
-	ReadModel("Resources/box.obj");
+	ReadModel(path);
 
 	glGenVertexArrays(1, &_VAOid);
 	glBindVertexArray(_VAOid);
@@ -61,7 +61,7 @@ void Model::Initialize()
 
 
 // Read Model data from obj file
-void Model::ReadModel(std::string path)
+void ObjectModel::ReadModel(std::string path)
 {
 	std::ifstream file;
 	file.open(path);
@@ -91,29 +91,32 @@ void Model::ReadModel(std::string path)
 			size_t vpos1 = s1.find_first_of('/');
 			size_t vpos2 = s2.find_first_of('/');
 			size_t vpos3 = s3.find_first_of('/');
-
-			v_idx.x = std::stoi(s1.substr(0, vpos1));
-			v_idx.y = std::stoi(s2.substr(0, vpos2));
-			v_idx.z = std::stoi(s3.substr(0, vpos3));
+			v_idx.x = std::stoi(s1.substr(0, vpos1)) - 1;
+			v_idx.y = std::stoi(s2.substr(0, vpos2)) - 1;
+			v_idx.z = std::stoi(s3.substr(0, vpos3)) - 1;
 			_vertexIndex.push_back(v_idx);
+
+			if (vpos1 == std::string::npos || vpos2 == std::string::npos || vpos3 == std::string::npos) {
+				continue;
+			}
 
 			if (_texcoord.size() > 0) {
 				size_t tpos1 = s1.find_first_of('/', vpos1 + 1);
-				size_t tpos2 = s2.find_first_of('/', vpos1 + 1);
-				size_t tpos3 = s3.find_first_of('/', vpos1 + 1);
-				t_idx.x = std::stoi(s1.substr(vpos1 + 1, tpos1));
-				t_idx.y = std::stoi(s2.substr(vpos2 + 1, tpos2));
-				t_idx.z = std::stoi(s3.substr(vpos3 + 1, tpos3));
+				size_t tpos2 = s2.find_first_of('/', vpos2 + 1);
+				size_t tpos3 = s3.find_first_of('/', vpos3 + 1);
+				t_idx.x = std::stoi(s1.substr(vpos1 + 1, tpos1 - vpos1)) - 1;
+				t_idx.y = std::stoi(s2.substr(vpos2 + 1, tpos2 - vpos2)) - 1;
+				t_idx.z = std::stoi(s3.substr(vpos3 + 1, tpos3 - vpos3)) - 1;
 				_textureIndex.push_back(t_idx);
 			}
 
 			if (_normal.size() > 0) {
-				size_t npos1 = s1.find_last_of('/');
-				size_t npos2 = s2.find_last_of('/');
-				size_t npos3 = s3.find_last_of('/');
-				n_idx.x = std::stoi(s1.substr(npos1));
-				n_idx.y = std::stoi(s2.substr(npos2));
-				n_idx.z = std::stoi(s3.substr(npos3));
+				size_t npos1 = s1.find_last_of('/') + 1;
+				size_t npos2 = s2.find_last_of('/') + 1;
+				size_t npos3 = s3.find_last_of('/') + 1;
+				n_idx.x = std::stoi(s1.substr(npos1)) - 1;
+				n_idx.y = std::stoi(s2.substr(npos2)) - 1;
+				n_idx.z = std::stoi(s3.substr(npos3)) - 1;
 				_normalIndex.push_back(n_idx);
 			}
 		}

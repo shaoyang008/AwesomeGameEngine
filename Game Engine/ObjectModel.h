@@ -9,14 +9,14 @@
 #include <glm/glm.hpp>
 using namespace glm;
 
-class Model
+class ObjectModel
 {
 public:
-	Model();
-	~Model();
+	ObjectModel();
+	~ObjectModel();
 
 	void Draw();
-	void Initialize();
+	void Initialize(std::string);
 	void ReadModel(std::string);
 
 private:
