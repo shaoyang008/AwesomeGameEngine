@@ -4,12 +4,18 @@ const float pi = 3.14159f;
 
 in vec3 position;
 in vec3 normalVec, lightVec, eyeVec;
+in vec2 texCoord;
 
 uniform vec3 diffuse, specular;
 uniform float shininess;
 
 uniform vec3 Ambient;
 uniform vec3 Light;
+
+uniform int isPlayer;
+uniform int useTexture;
+uniform int hasTexture;
+uniform sampler2D TextureMap;
 
 void main()
 {
@@ -31,5 +37,11 @@ void main()
 	float D = (alpha + 2) / (2 * pi) * pow(HN, alpha);
 	if(HN == 0 && alpha == 0) discard;
 	
-	gl_FragColor.xyz = Ambient * Kd + Light * LN * (Kd / pi + F * G * D / 4);
+	if(useTexture == 1)  { 
+		if(hasTexture == 1) {
+			Kd = texture(TextureMap, texCoord).xyz; 
+		}
+	}
+	if(isPlayer == 1) gl_FragColor.xyz = Kd;
+	else { gl_FragColor.xyz = Ambient * Kd + Light * LN * (Kd / pi + F * G * D / 4); }
 }

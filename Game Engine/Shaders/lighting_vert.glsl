@@ -8,6 +8,7 @@ uniform mat4 WorldView, WorldProj, WorldInverse;
 uniform mat4 ModelTr, NormalTr;
 
 out vec3 normalVec, lightVec, eyeVec;
+out vec2 texCoord;
 
 uniform vec3 lightPos;
 
@@ -22,4 +23,5 @@ void main()
 	lightVec = lightPos - worldPos;
 
 	gl_Position = WorldProj * WorldView * ModelTr * vec4(vertex, 1.0);
+	texCoord = texcoord;
 }
