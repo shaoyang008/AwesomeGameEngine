@@ -19,9 +19,6 @@
     <ClCompile Include="Events\OnCollision.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\PauseResume.cpp">
-      <Filter>Events</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\JsonHandle.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -60,6 +57,13 @@
     <ClCompile Include="Components\Camera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Components\Animation.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\ToggleAttack.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -89,9 +93,6 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Events\OnCollision.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Events\PauseResume.h">
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\JsonHandle.h">
@@ -134,6 +135,13 @@
     </ClInclude>
     <ClInclude Include="Components\Camera.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Components\Animation.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\ToggleAttack.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
