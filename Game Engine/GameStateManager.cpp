@@ -15,7 +15,6 @@ Creation date: 10/18/2019
 ---------------------------------------------------------*/
 
 #include "GameStateManager.h"
-#include "Events/PauseResume.h"
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
 _gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),

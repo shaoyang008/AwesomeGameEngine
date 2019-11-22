@@ -17,7 +17,11 @@ Creation date: 10/14/2019
 #include "ResourceManager.h"
 #include "SDL_surface.h"
 
-ResourceManager::ResourceManager() {}
+ResourceManager::ResourceManager() 
+{
+
+}
+
 ResourceManager::~ResourceManager()
 {
 	FreeAll();
@@ -28,8 +32,11 @@ bool ResourceManager::RegisterModel(std::string path)
 	if (_resources[path]) return true;
 	else {
 		ObjectModel * model = new ObjectModel;
-		model->Initialize(path);
-		if (!model) return false;
+		model->ReadModel(path);
+		if (!model) {
+			delete model;
+			return false;
+		}
 		else {
 			_resources[path] = model;
 			return true;

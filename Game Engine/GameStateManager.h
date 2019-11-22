@@ -26,7 +26,6 @@ Creation date: 10/18/2019
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-#include "Events/PauseResume.h"
 #include "Events/DelayMove.h"
 
 enum STATE {

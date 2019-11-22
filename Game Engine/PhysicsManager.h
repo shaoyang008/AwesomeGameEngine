@@ -3,7 +3,7 @@
 #include "FramerateManager.h"
 #include "GameObjectManager.h"
 
-#define GLOBAL_GRAVITY 98.0f
+#define GLOBAL_GRAVITY -98.0f
 
 class PhysicsManager
 {

@@ -4,7 +4,7 @@
 enum class EVENT_TYPE {
 	ON_COLLISION,
 	DELAY_MOVE,
-	PAUSE_RESUME,
+	TOGGLE_ATTACK,
 	count
 };
 

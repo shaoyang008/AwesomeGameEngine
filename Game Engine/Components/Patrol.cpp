@@ -57,7 +57,5 @@ void Patrol::Serialize(json data)
 
 void Patrol::HandleEvent(Event *e)
 {
-	if (e->GetType() == EVENT_TYPE::PAUSE_RESUME) {
-		_active = !_active;
-	}
+
 }
