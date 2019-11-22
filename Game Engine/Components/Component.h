@@ -34,6 +34,7 @@ enum class COMPONENT_TYPE {
 	COLLIDER,
 	RESET_PLAYER,
 	CAMERA,
+	ANIMATION,
 	Count // Used to track number of types
 };
 

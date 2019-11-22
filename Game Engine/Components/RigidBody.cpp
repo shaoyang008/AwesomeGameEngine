@@ -3,8 +3,8 @@
 
 
 RigidBody::RigidBody(): Component(COMPONENT_TYPE::RIGID_BODY), 
-_velX(0.0f), _velY(0.0f), _accX(0.0f), _accY(0.0f), _posX(0.0f), _posY(0.0f), 
-_mass(0.0f), _gravityScale(0.0f), _forceX(0.0f), _forceY(0.0f), _prevPosX(0.0f), _prevPosY(0.0f), _prevPosZ(0.0f)
+_velX(0.0f), _velY(0.0f), _velZ(0.0f), _accX(0.0f), _accY(0.0f), _posX(0.0f), _accZ(0.0f), _posY(0.0f), _posZ(0.0f),
+_forceX(0.0f), _forceY(0.0f), _forceZ(0.0f), _mass(0.0f), _gravityScale(0.0f), _prevPosX(0.0f), _prevPosY(0.0f), _prevPosZ(0.0f)
 {
 }
 
@@ -35,16 +35,11 @@ void RigidBody::Integrate(float gravity, float deltaTime)
 
 	_accX = _forceX / _mass;
 	_accY = _forceY / _mass;
-
-	// consume force
-	_forceX = 0.0f;
-	_forceY = 0.0f;
+	_accZ = _forceZ / _mass + gravity * _gravityScale;
 
 	_velX += _accX * deltaTime;
 	_velY += _accY * deltaTime;
-	
-	// Only affected by gravity
-	_velZ -= gravity * _gravityScale * deltaTime;
+	_velZ += _accZ * deltaTime;
 
 	_posX += _velX * deltaTime;
 	_posY += _velY * deltaTime;
@@ -53,18 +48,26 @@ void RigidBody::Integrate(float gravity, float deltaTime)
 	transform->_translateX = _posX;
 	transform->_translateY = _posY;
 	transform->_translateZ = _posZ;
+
+	// consume force
+	_forceX = 0.0f;
+	_forceY = 0.0f;
+	_forceZ = 0.0f;
 }
 
 void RigidBody::Stop()
 {
 	_accX = 0.0f;
 	_accY = 0.0f;
+	_accZ = 0.0f;
 
 	_velX = 0.0f;
 	_velY = 0.0f;
+	_velZ = 0.0f;
 
 	_forceX = 0.0f;
 	_forceY = 0.0f;
+	_forceZ = 0.0f;
 }
 
 void RigidBody::Update()
@@ -83,14 +86,15 @@ void RigidBody::HandleEvent(Event * e)
 {
 	if (e->GetType() == EVENT_TYPE::ON_COLLISION) {
 		if (dynamic_cast<OnCollision*>(e)->_groundCollision) {
-			// std::cout << _owner->GetTag() << " Hit!!" << std::endl;
 			Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 			transform->_translateZ = _prevPosZ;
-			_velZ = 0;
+			_velZ = 0.0f;
+			_accZ = 0.0f;
+			_forceZ = 0.0f;
 		}
 	}
 	else if (e->GetType() == EVENT_TYPE::DELAY_MOVE) {
 		Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		transform->_translateZ += 50;
+		transform->_translateZ += 15;
 	}
 }

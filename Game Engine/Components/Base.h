@@ -24,3 +24,4 @@ Creation date: 10/19/2019
 #include "ResetPlayer.h"
 #include "Model.h"
 #include "Camera.h"
+#include "Animation.h"

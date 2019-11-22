@@ -5,7 +5,7 @@
 extern GameStateManager *pMgr;
 
 
-Model::Model(): Component(COMPONENT_TYPE::MODEL)
+Model::Model(): Component(COMPONENT_TYPE::MODEL), _useMaterial(false)
 {
 	_diffuse[0] = 0.8;
 	_diffuse[1] = 0.5;
@@ -34,7 +34,8 @@ void Model::Serialize(json data)
 	_specular[2] = data["Specular"][2].get<float>();
 
 	_shininess = data["Shininess"].get<float>();
-	// std::cout << data["Diffuse"] << std::endl;
+
+	_useMaterial = data["UseMaterial"].get<int>();
 }
 
 bool Model::Load(std::string path)
@@ -43,8 +44,8 @@ bool Model::Load(std::string path)
 		std::cout << "Could not load resource: " << path << std::endl;
 		return false;
 	}
-	_model = pMgr->_resourceManager->GetModelByPath(path);
-	return false;
+	_modelRoot = pMgr->_resourceManager->GetModelByPath(path);
+	return true;
 }
 
 void Model::Draw(ShaderProgram * shader)
@@ -78,5 +79,12 @@ void Model::Draw(ShaderProgram * shader)
 
 	loc = glGetUniformLocation(shader->_programId, "shininess");
 	glUniform1f(loc, _shininess);
-	_model->Draw();
+
+	loc = glGetUniformLocation(shader->_programId, "useTexture");
+	glUniform1i(loc, _useMaterial);
+
+	loc = glGetUniformLocation(shader->_programId, "isPlayer");
+	glUniform1i(loc, (_owner->GetTag() == "Player"));
+
+	_modelRoot->DrawChildren(shader->_programId, _useMaterial);
 }

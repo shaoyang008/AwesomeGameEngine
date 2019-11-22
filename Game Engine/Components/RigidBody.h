@@ -19,11 +19,11 @@ public:
 	void Integrate(float, float);
 	void Stop();
 
-	float _forceX, _forceY;
+	float _forceX, _forceY, _forceZ;
 
 private:
 	float _velX, _velY, _velZ;
-	float _accX, _accY;
+	float _accX, _accY, _accZ;
 	float _posX, _posY, _posZ;
 	float _prevPosX, _prevPosY, _prevPosZ;
 	float _mass, _gravityScale;

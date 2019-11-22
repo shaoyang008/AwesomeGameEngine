@@ -16,8 +16,11 @@ public:
 	bool Load(std::string);
 	void Draw(ShaderProgram *);
 
-	ObjectModel *_model;
+	// Dummy root objects for storing and drawing all children
+	ObjectModel *_modelRoot;
+
 	float _diffuse[3], _specular[3];
 	float _shininess;
+	bool  _useMaterial;
 };
 
