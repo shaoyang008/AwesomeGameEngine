@@ -92,6 +92,12 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 				component = new Camera;
 			}
 		}
+		else if (it.key() == "Animation") {
+			component = object->GetComponent(COMPONENT_TYPE::ANIMATION);
+			if (!component) {
+				component = new Animation;
+			}
+		}
 		else {
 			continue;
 		}
