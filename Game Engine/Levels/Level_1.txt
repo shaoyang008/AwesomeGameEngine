@@ -16,19 +16,72 @@
 		"Type": "player",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.5,
-				"ScaleY": 0.5,
-				"ScaleZ": 0.5,
+				"ScaleX": 0.01,
+				"ScaleY": 0.01,
+				"ScaleZ": 0.01,
 				"RotateZ": 180.0,
 				"TranslateZ": 30
 			},
 			"Model": {
-				"Filename": "knight_s.obj",
-				"Diffuse": [
-					0.5,
-					0.8,
-					0.9
-				]
+				"Filename": "Sword_Kirby.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 1,
+				"Scale": 1.0
+			},
+			"Animation": {
+				"Filename": "Sword_Kirby_2.obj"
+			}
+		}	
+	},
+	"Teapot": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateY": 40.0,
+				"TranslateZ": 10.0,
+				"ScaleX": 5,
+				"ScaleY": 5,
+				"ScaleZ": 5
+			},
+			"Model": {
+				"Filename": "teapot2.obj",
+				"Shininess": 120,
+				"UseMaterial": 0
+			},
+			"Collider": {
+				"Height": 5,
+				"Width": 5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree1": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": 0,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
 			},
 			"Collider": {
 				"Height": 1.5,
@@ -41,45 +94,187 @@
 			}
 		}	
 	},
-	"Light": {
+	"Tree2": {
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"TranslateX": 0.0, 
-				"TranslateY": 0.0,
-				"TranslateZ": 20.0,
-				"ScaleX": 0.005,
-				"ScaleY": 0.005,
-				"ScaleZ": 0.005
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": 0,
+				"TranslateZ": 30
 			},
 			"Model": {
-				"Filename": "sphere.obj",
-				"Diffuse": [
-					10,
-					10,
-					10
-				]
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
 			}
 		}	
 	},
-	"Teapot": {
+	"Tree3": {
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"TranslateX": 0.0, 
-				"TranslateY": 20.0,
-				"TranslateZ": 10.0,
-				"ScaleX": 5,
-				"ScaleY": 5,
-				"ScaleZ": 5
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": 15,
+				"TranslateZ": 30
 			},
 			"Model": {
-				"Filename": "teapot2.obj",
-				"Shininess": 120
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
 			},
 			"Collider": {
-				"Height": 5,
-				"Width": 5,
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree4": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": 15,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree5": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": 30,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree6": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": 30,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree7": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": -15,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Tree8": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": -15,
+				"TranslateZ": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
 				"Length": 1.5
 			},
 			"RigidBody": {
@@ -93,7 +288,7 @@
 		"Components": {
 			"Transform": {
 				"TranslateX": 0.0, 
-				"TranslateZ": -1.5,
+				"TranslateZ": -2.0,
 				"ScaleX": 40,
 				"ScaleY": 100,
 				"ScaleZ": 1.0,
@@ -109,7 +304,8 @@
 					0.5,
 					2.0
 				],
-				"Shininess": 1
+				"Shininess": 1,
+				"UseMaterial": 0
 			}
 		}	
 	}
