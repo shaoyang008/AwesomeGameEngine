@@ -37,11 +37,10 @@ void main()
 	float D = (alpha + 2) / (2 * pi) * pow(HN, alpha);
 	if(HN == 0 && alpha == 0) discard;
 	
-	if(useTexture == 1)  { 
-		if(hasTexture == 1) {
-			Kd = texture(TextureMap, texCoord).xyz; 
-		}
+	if(hasTexture == 1) {
+		Kd = texture(TextureMap, texCoord).xyz; 
 	}
+
 	if(isPlayer == 1) gl_FragColor.xyz = Kd;
 	else { gl_FragColor.xyz = Ambient * Kd + Light * LN * (Kd / pi + F * G * D / 4); }
 }
