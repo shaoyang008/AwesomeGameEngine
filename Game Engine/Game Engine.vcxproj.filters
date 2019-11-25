@@ -64,6 +64,9 @@
     <ClCompile Include="Events\ToggleAttack.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Follow.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Events\ToggleAttack.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Follow.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

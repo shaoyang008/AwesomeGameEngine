@@ -76,7 +76,7 @@
       <AdditionalIncludeDirectories>..\glad\include;..\SDL2.0 Lib\include;Includes;..\glfw-3.3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -90,6 +90,7 @@
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Collider.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
+    <ClCompile Include="Components\Follow.cpp" />
     <ClCompile Include="Components\Model.cpp" />
     <ClCompile Include="Components\Patrol.cpp" />
     <ClCompile Include="Components\ResetPlayer.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Components\Collider.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
+    <ClInclude Include="Components\Follow.h" />
     <ClInclude Include="Components\Model.h" />
     <ClInclude Include="Components\Patrol.h" />
     <ClInclude Include="Components\ResetPlayer.h" />
