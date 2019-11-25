@@ -20,8 +20,6 @@ Creation date: 10/19/2019
 
 extern GameStateManager *pMgr;
 
-#define MOVEMENT_SPEED 0.5f
-#define ACCELRATE_FORCE 3000.0f
 #define PI 3.14159f
 
 Controller::Controller(): Component(COMPONENT_TYPE::CONTROLLER)
@@ -39,21 +37,26 @@ void Controller::Update()
 
 void Controller::Serialize(json data)
 {
+	_speed = data["Speed"].get<float>();
+	_accelForce = data["Force"].get<float>();
 }
 
 void Controller::TriggerEvent()
 {
 	Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	RigidBody* body = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
 	if (!transform) return;
 	
 	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_UP)) {
-		transform->_translateX += MOVEMENT_SPEED * sin(transform->_rotateZ * PI / 180.0f);
-		transform->_translateY -= MOVEMENT_SPEED * cos(transform->_rotateZ * PI / 180.0f);
+		body->_vel = _speed;
 	}
 	else if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
-		transform->_translateX -= MOVEMENT_SPEED * sin(transform->_rotateZ * PI / 180.0f);
-		transform->_translateY += MOVEMENT_SPEED * cos(transform->_rotateZ * PI / 180.0f);
+		body->_vel = -1 * _speed;
 	}
+	else if (pMgr->_inputManager->KeyReleased(SDL_SCANCODE_UP) || pMgr->_inputManager->KeyReleased(SDL_SCANCODE_DOWN)) {
+		body->_vel = 0;
+	}
+
 	if (pMgr->_inputManager->KeyPressed(SDL_SCANCODE_LEFT)) {
 		transform->_rotateZ += 5;
 	}
@@ -62,12 +65,10 @@ void Controller::TriggerEvent()
 	}
 
 	if (pMgr->_inputManager->KeyTriggered(SDL_SCANCODE_SPACE)) {
-		// transform->_translateZ += 10.0f;
 		Collider * collider = dynamic_cast<Collider*>(_owner->GetComponent(COMPONENT_TYPE::COLLIDER));
 		collider->_posZ = 0.1;
 
-		RigidBody * body = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
-		body->_forceZ += ACCELRATE_FORCE;
+		body->_forceZ += _accelForce;
 	}
 
 	if (pMgr->_inputManager->KeyTriggered(SDL_SCANCODE_A)) {
@@ -80,7 +81,6 @@ void Controller::TriggerEvent()
 	}
 }
 
-void Controller::HandleEvent(Event *e)
+void Controller::HandleEvent(Event *e) 
 {
-
 }

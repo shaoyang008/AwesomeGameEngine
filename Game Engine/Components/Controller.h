@@ -31,4 +31,6 @@ public:
 	void HandleEvent(Event *e);
 
 	void TriggerEvent();
+
+	float _speed, _accelForce;
 };

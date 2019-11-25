@@ -35,6 +35,7 @@ enum class COMPONENT_TYPE {
 	RESET_PLAYER,
 	CAMERA,
 	ANIMATION,
+	FOLLOW,
 	Count // Used to track number of types
 };
 

@@ -1,10 +1,11 @@
 #include "RigidBody.h"
 #include "../Events/OnCollision.h"
 
+#define PI 3.14159f
 
 RigidBody::RigidBody(): Component(COMPONENT_TYPE::RIGID_BODY), 
-_velX(0.0f), _velY(0.0f), _velZ(0.0f), _accX(0.0f), _accY(0.0f), _posX(0.0f), _accZ(0.0f), _posY(0.0f), _posZ(0.0f),
-_forceX(0.0f), _forceY(0.0f), _forceZ(0.0f), _mass(0.0f), _gravityScale(0.0f), _prevPosX(0.0f), _prevPosY(0.0f), _prevPosZ(0.0f)
+_vel(0.0f), _velZ(0.0f), _acc(0.0f), _accZ(0.0f), _posX(0.0f), _posY(0.0f), _posZ(0.0f),
+_force(0.0f), _forceZ(0.0f), _mass(0.0f), _gravityScale(0.0f), _prevPosX(0.0f), _prevPosY(0.0f), _prevPosZ(0.0f)
 {
 }
 
@@ -33,16 +34,14 @@ void RigidBody::Integrate(float gravity, float deltaTime)
 	_prevPosY = _posY;
 	_prevPosZ = _posZ;
 
-	_accX = _forceX / _mass;
-	_accY = _forceY / _mass;
+	_acc = _force / _mass;
 	_accZ = _forceZ / _mass + gravity * _gravityScale;
 
-	_velX += _accX * deltaTime;
-	_velY += _accY * deltaTime;
+	_vel += _acc * deltaTime;
 	_velZ += _accZ * deltaTime;
 
-	_posX += _velX * deltaTime;
-	_posY += _velY * deltaTime;
+	_posX += _vel * deltaTime * sin(transform->_rotateZ * PI / 180.0f);
+	_posY -= _vel * deltaTime * cos(transform->_rotateZ * PI / 180.0f);
 	_posZ += _velZ * deltaTime;
 
 	transform->_translateX = _posX;
@@ -50,24 +49,15 @@ void RigidBody::Integrate(float gravity, float deltaTime)
 	transform->_translateZ = _posZ;
 
 	// consume force
-	_forceX = 0.0f;
-	_forceY = 0.0f;
+	_force = 0.0f;
 	_forceZ = 0.0f;
 }
 
 void RigidBody::Stop()
 {
-	_accX = 0.0f;
-	_accY = 0.0f;
-	_accZ = 0.0f;
-
-	_velX = 0.0f;
-	_velY = 0.0f;
-	_velZ = 0.0f;
-
-	_forceX = 0.0f;
-	_forceY = 0.0f;
-	_forceZ = 0.0f;
+	_acc = 0.0f;
+	_vel = 0.0f;
+	_force = 0.0f;
 }
 
 void RigidBody::Update()
@@ -87,10 +77,16 @@ void RigidBody::HandleEvent(Event * e)
 	if (e->GetType() == EVENT_TYPE::ON_COLLISION) {
 		if (dynamic_cast<OnCollision*>(e)->_groundCollision) {
 			Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-			transform->_translateZ = _prevPosZ;
+			transform->_translateZ = 0;
 			_velZ = 0.0f;
 			_accZ = 0.0f;
 			_forceZ = 0.0f;
+		}
+		else {
+			Transform* transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			transform->_translateX = _prevPosX;
+			transform->_translateY = _prevPosY;
+			Stop();
 		}
 	}
 	else if (e->GetType() == EVENT_TYPE::DELAY_MOVE) {

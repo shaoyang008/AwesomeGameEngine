@@ -5,14 +5,9 @@
 extern GameStateManager *pMgr;
 
 
-Model::Model(): Component(COMPONENT_TYPE::MODEL), _useMaterial(false)
+Model::Model(): Component(COMPONENT_TYPE::MODEL), _useMaterial(false), _defaultMaterial(new Material)
 {
-	_diffuse[0] = 0.8;
-	_diffuse[1] = 0.5;
-	_diffuse[2] = 0.2;
-	_specular[0] = 0.4;
-	_specular[1] = 0.4;
-	_specular[2] = 0.4;
+
 }
 
 
@@ -22,18 +17,23 @@ Model::~Model()
 
 void Model::Serialize(json data)
 {
-	std::string path = "Resources/" + data["Filename"].get<std::string>();
-	Load(path);
+	std::string model_path = "Resources/" + data["Filename"].get<std::string>();
+	Load(model_path);
 
-	_diffuse[0] = data["Diffuse"][0].get<float>();
-	_diffuse[1] = data["Diffuse"][1].get<float>();
-	_diffuse[2] = data["Diffuse"][2].get<float>();
+	_defaultMaterial->_diffuse.x = data["Diffuse"][0].get<float>();
+	_defaultMaterial->_diffuse.y = data["Diffuse"][1].get<float>();
+	_defaultMaterial->_diffuse.z = data["Diffuse"][2].get<float>();
 
-	_specular[0] = data["Specular"][0].get<float>();
-	_specular[1] = data["Specular"][1].get<float>();
-	_specular[2] = data["Specular"][2].get<float>();
+	_defaultMaterial->_specular.x = data["Specular"][0].get<float>();
+	_defaultMaterial->_specular.y = data["Specular"][1].get<float>();
+	_defaultMaterial->_specular.z = data["Specular"][2].get<float>();
+	
+	_defaultMaterial->_shininess = data["Shininess"].get<float>();
 
-	_shininess = data["Shininess"].get<float>();
+	if (data.find("Texture") != data.end()) {
+		std::string texture_path = "Resources/" + data["Texture"].get<std::string>();
+		_defaultMaterial->LoadMap(texture_path);
+	}
 
 	_useMaterial = data["UseMaterial"].get<int>();
 }
@@ -71,20 +71,13 @@ void Model::Draw(ShaderProgram * shader)
 	loc = glGetUniformLocation(shader->_programId, "NormalTr");
 	glUniformMatrix4fv(loc, 1, GL_TRUE, normal_tr.Pntr());
 
-	loc = glGetUniformLocation(shader->_programId, "diffuse");
-	glUniform3fv(loc, 1, &_diffuse[0]);
-
-	loc = glGetUniformLocation(shader->_programId, "specular");
-	glUniform3fv(loc, 1, &_specular[0]);
-
-	loc = glGetUniformLocation(shader->_programId, "shininess");
-	glUniform1f(loc, _shininess);
-
 	loc = glGetUniformLocation(shader->_programId, "useTexture");
 	glUniform1i(loc, _useMaterial);
 
 	loc = glGetUniformLocation(shader->_programId, "isPlayer");
 	glUniform1i(loc, (_owner->GetTag() == "Player"));
 
+	_defaultMaterial->Use(shader->_programId);
 	_modelRoot->DrawChildren(shader->_programId, _useMaterial);
+	_defaultMaterial->Unuse();
 }

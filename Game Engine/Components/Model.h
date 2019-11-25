@@ -19,8 +19,7 @@ public:
 	// Dummy root objects for storing and drawing all children
 	ObjectModel *_modelRoot;
 
-	float _diffuse[3], _specular[3];
-	float _shininess;
+	Material * _defaultMaterial;
 	bool  _useMaterial;
 };
 
