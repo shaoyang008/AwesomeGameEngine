@@ -1,0 +1,139 @@
+{
+	"Camera": {
+		"Type": "camera",
+		"Components": {
+			"Camera": {
+				"Target": "Player",
+				"Position": [
+					0,
+					-50,
+					20
+				]
+			}
+		}
+	},
+	"Player": {
+		"Type": "player",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.005,
+				"ScaleY": 0.005,
+				"ScaleZ": 0.005,
+				"RotateZ": 180.0,
+				"TranslateZ": 0,
+				"TranslateY": 0
+			},
+			"Model": {
+				"Filename": "Sword_Kirby.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			},
+			"RigidBody": {
+				"Mass": 1,
+				"Scale": 1.0
+			},
+			"Animation": {
+				"Filename": "Sword_Kirby_2.obj"
+			}
+		}	
+	},
+	"Shadow": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.005,
+				"ScaleY": 0.005,
+				"ScaleZ": 0.0001,
+				"RotateZ": 180.0,
+				"TranslateZ": 0.1
+			},
+			"Model": {
+				"Filename": "sphere.obj",
+				"UseMaterial": 0
+			},
+			"Follow": {
+				"Tag": "Player",
+				"DistanceX": 0,
+				"DistanceY": 0
+			}
+		}
+	},
+	"FireCabin": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateY": 40.0,
+				"TranslateZ": 10.0,
+				"ScaleX": 10,
+				"ScaleY": 10,
+				"ScaleZ": 10,
+				"RotateZ": 180
+			},
+			"Model": {
+				"Filename": "barn_fire.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Cabin": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 10.0, 
+				"TranslateY": 40.0,
+				"TranslateZ": 10.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 180
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			},
+			"RigidBody": {
+				"Mass": 10,
+				"Scale": 1.0
+			}
+		}	
+	},
+	"Ground": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateZ": -2.0,
+				"ScaleX": 5,
+				"ScaleY": 30,
+				"ScaleZ": 1.0,
+				"RotateX": 0.0,
+				"RotateY": 0.0,
+				"RotateZ": 0.0
+
+			},
+			"Model": {
+				"Filename": "lawn2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	}
+}

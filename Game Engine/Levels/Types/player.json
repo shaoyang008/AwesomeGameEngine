@@ -11,11 +11,15 @@
 		"RotateZ": 0.0
 
 	},
+	"Controller": {
+		"Speed": 30.0,
+		"Force": 1500.0
+	},
 	"Model": {
 		"Filename": "teapot.obj",
 		"Diffuse": [
 			0.8,
-			0.8,
+			0.2,
 			0.8
 		],
 		"Specular": [
@@ -23,6 +27,7 @@
 			0.6,
 			0.6
 		],
-		"Shininess": 10
+		"Shininess": 30,
+		"UseMaterial": 0
 	}
 }

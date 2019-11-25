@@ -6,8 +6,8 @@
 				"Target": "Player",
 				"Position": [
 					0,
-					-50,
-					30
+					-30,
+					50
 				]
 			}
 		}
@@ -16,11 +16,12 @@
 		"Type": "player",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.01,
-				"ScaleY": 0.01,
-				"ScaleZ": 0.01,
+				"ScaleX": 0.005,
+				"ScaleY": 0.005,
+				"ScaleZ": 0.005,
 				"RotateZ": 180.0,
-				"TranslateZ": 30
+				"TranslateZ": 0,
+				"TranslateY": 0
 			},
 			"Model": {
 				"Filename": "Sword_Kirby.obj",
@@ -40,6 +41,27 @@
 			}
 		}	
 	},
+	"Shadow": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.005,
+				"ScaleY": 0.005,
+				"ScaleZ": 0.0001,
+				"RotateZ": 180.0,
+				"TranslateZ": 0.1
+			},
+			"Model": {
+				"Filename": "sphere.obj",
+				"UseMaterial": 0
+			},
+			"Follow": {
+				"Tag": "Player",
+				"DistanceX": 0,
+				"DistanceY": 0
+			}
+		}
+	},
 	"Teapot": {
 		"Type": "static_object",
 		"Components": {
@@ -58,8 +80,8 @@
 			},
 			"Collider": {
 				"Height": 5,
-				"Width": 5,
-				"Length": 1.5
+				"Width": 8,
+				"Length": 8
 			},
 			"RigidBody": {
 				"Mass": 10,
@@ -289,8 +311,8 @@
 			"Transform": {
 				"TranslateX": 0.0, 
 				"TranslateZ": -2.0,
-				"ScaleX": 40,
-				"ScaleY": 100,
+				"ScaleX": 5,
+				"ScaleY": 30,
 				"ScaleZ": 1.0,
 				"RotateX": 0.0,
 				"RotateY": 0.0,
@@ -298,14 +320,9 @@
 
 			},
 			"Model": {
-				"Filename": "box2.obj",
-				"Diffuse": [
-					0.5,
-					0.5,
-					2.0
-				],
-				"Shininess": 1,
-				"UseMaterial": 0
+				"Filename": "lawn2.obj",
+				"UseMaterial": 1,
+				"Texture": "grass.png"
 			}
 		}	
 	}
