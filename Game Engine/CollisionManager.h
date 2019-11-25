@@ -5,6 +5,12 @@
 #include "Events/OnCollision.h"
 #include <queue>
 
+typedef struct LineSegment
+{
+	float x_start, y_start;
+	float x_end, y_end;
+} LineSegment;
+
 class Collision
 {
 public:
@@ -23,13 +29,21 @@ public:
 	~CollisionManager();
 
 	void CheckCollisions();
-	bool StaticAABBtoAABB(GameObject*, GameObject*);
+	bool StaticAABBtoStaticAABB(GameObject*, GameObject*);
+	bool StaticAABBtoDynamicAABB(GameObject*, GameObject*);
 	bool StaticAABBtoGround(GameObject *);
+
+	// Dummy methods for work in progress
+	// or methods that will be skipped in this project
+	bool NotImplemented(GameObject*, GameObject*) { return false; }
+
+	float LineSegtoLineSeg(LineSegment&, LineSegment&, int);
 
 	void Enqueue(GameObject *, GameObject *);
 	void ResolveCollisions();
 
 private:
 	std::queue<Collision*> _collisions;
+	bool (CollisionManager::*_collisionTests[static_cast<int>(COLLIDER_TYPE::count)][static_cast<int>(COLLIDER_TYPE::count)])(GameObject*, GameObject*);
 };
 

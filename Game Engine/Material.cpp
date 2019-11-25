@@ -4,7 +4,7 @@
 #include <stb_image.h>
 
 
-Material::Material(): _diffuse(vec3(0, 0, 0)), _specular(vec3(1, 1, 1)), _ambient(vec3(0, 0, 0)), _shininess(1.0f)
+Material::Material(): _diffuse(vec3(0, 0, 0)), _specular(vec3(1, 1, 1)), _ambient(vec3(0, 0, 0)), _shininess(1.0f), _hasTexture(false)
 {
 }
 
@@ -38,6 +38,8 @@ void Material::LoadMap(std::string path)
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
+
+	_hasTexture = true;
 }
 
 void Material::Use(GLuint programId)
@@ -53,7 +55,7 @@ void Material::Use(GLuint programId)
 	glUniform1f(loc, _shininess +1);
 
 	loc = glGetUniformLocation(programId, "hasTexture");
-	glUniform1i(loc, (_textureId < 1000000));
+	glUniform1i(loc, _hasTexture);
 
 	glBindTexture(GL_TEXTURE_2D, _textureId);
 }

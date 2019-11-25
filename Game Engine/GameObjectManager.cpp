@@ -46,7 +46,8 @@ void GameObjectManager::Update()
 
 void GameObjectManager::LoadLevel(std::string level)
 {
-	std::string level_path = "./Levels/" + level + ".txt";
+	std::string level_path = "./Levels/" + level + ".json";
+	std::cout << "Loading level from " << level_path << std::endl;
 	json level_data = JsonHandle::ReadFile(level_path);
 
 	for (json::iterator it = level_data.begin(); it != level_data.end(); ++it) {

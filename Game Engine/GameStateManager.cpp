@@ -16,9 +16,11 @@ Creation date: 10/18/2019
 
 #include "GameStateManager.h"
 
+#define DEFAULT_LEVEL 2
+
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
 _gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),
-_renderManager(new RenderManager), _level(1), _state(STATE::LOAD), _gameStates()
+_renderManager(new RenderManager), _level(DEFAULT_LEVEL), _state(STATE::LOAD), _gameStates()
 {
 	_gameStates[STATE::LOAD] = &GameStateManager::Load;
 	_gameStates[STATE::INIT] = &GameStateManager::Init;
@@ -73,11 +75,17 @@ bool GameStateManager::Load()
 
 bool GameStateManager::Init()
 {
+	// Disable all objects if exist
+	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
+		_gameObjectManager->_objects[i]->_active = false;
+	}
+
 	std::string lv = "Level_";
 	lv += ('0' + _level);
 
 	_gameObjectManager->LoadLevel(lv);
 	_gameObjectManager->Initialize();
+	std::cout << "Total objects: " << _gameObjectManager->_objects.size() << std::endl;
 
 	_renderManager->SetCamera("Camera");
 
@@ -101,6 +109,13 @@ bool GameStateManager::Loop()
 
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_M)) {
 		_eventManager->Enque(new DelayMove);
+	}
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_R)) {
+		_state = STATE::INIT;
+		return true;
+	}
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_TAB)) {
+		_renderManager->SwitchMode();
 	}
 
 	// Physics

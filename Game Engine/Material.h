@@ -21,5 +21,6 @@ public:
 	vec3 _diffuse, _specular, _ambient;
 	float _shininess;
 	GLuint _textureId;
+	bool _hasTexture;
 };
 

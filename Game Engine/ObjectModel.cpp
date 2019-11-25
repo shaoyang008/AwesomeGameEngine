@@ -77,7 +77,7 @@ void ObjectModel::ReadModel(std::string path)
 
 	std::string line;
 	ObjectModel * child = 0;
-	int v_offset, v_idx_offset, n_idx_offset, t_idx_offset;
+	int v_offset = 0, v_idx_offset = 0, n_idx_offset = 0, t_idx_offset = 0;
 	std::map<std::string, Material*> materials;
 
 	std::vector<vec3> normal_index, texture_index;
@@ -105,17 +105,17 @@ void ObjectModel::ReadModel(std::string path)
 
 				if (t_idx_offset < texture_index.size()) {
 					for (int i = 0; i < child->_vertexIndex.size(); ++i) {
-						if (_vertexIndex[i].x < child->_texture.size()) child->_texture[child->_vertexIndex[i].x] = _texture[texture_index[i].x];
-						if (_vertexIndex[i].y < child->_texture.size()) child->_texture[child->_vertexIndex[i].y] = _texture[texture_index[i].y];
-						if (_vertexIndex[i].z < child->_texture.size()) child->_texture[child->_vertexIndex[i].z] = _texture[texture_index[i].z];
+						child->_texture[child->_vertexIndex[i].x] = _texture[texture_index[i].x];
+						child->_texture[child->_vertexIndex[i].y] = _texture[texture_index[i].y];
+						child->_texture[child->_vertexIndex[i].z] = _texture[texture_index[i].z];
 					}
 				}
 
 				if (n_idx_offset < normal_index.size()) {
 					for (int i = 0; i < child->_vertexIndex.size(); ++i) {
-						if (_vertexIndex[i].x < child->_normal.size()) child->_normal[child->_vertexIndex[i].x] = _normal[normal_index[i].x];
-						if (_vertexIndex[i].y < child->_normal.size()) child->_normal[child->_vertexIndex[i].y] = _normal[normal_index[i].y];
-						if (_vertexIndex[i].z < child->_normal.size()) child->_normal[child->_vertexIndex[i].z] = _normal[normal_index[i].z];
+						child->_normal[child->_vertexIndex[i].x] = _normal[normal_index[i].x];
+						child->_normal[child->_vertexIndex[i].y] = _normal[normal_index[i].y];
+						child->_normal[child->_vertexIndex[i].z] = _normal[normal_index[i].z];
 					}
 				}
 
@@ -183,9 +183,11 @@ void ObjectModel::ReadModel(std::string path)
 			}
 		}
 		else if (line == "usemtl") {
-			file >> line;
-			std::cout << "Using texture " << line << std::endl;
-			child->_material = materials[line];
+			if (child) {
+				file >> line;
+				std::cout << "Using texture " << line << std::endl;
+				child->_material = materials[line];
+			}
 		}
 		else {
 			std::getline(file, line);
@@ -207,17 +209,17 @@ void ObjectModel::ReadModel(std::string path)
 
 		if (t_idx_offset < texture_index.size()) {
 			for (int i = 0; i < child->_vertexIndex.size(); ++i) {
-				if (_vertexIndex[i].x < child->_texture.size()) child->_texture[child->_vertexIndex[i].x] = _texture[texture_index[i].x];
-				if (_vertexIndex[i].y < child->_texture.size()) child->_texture[child->_vertexIndex[i].y] = _texture[texture_index[i].y];
-				if (_vertexIndex[i].z < child->_texture.size()) child->_texture[child->_vertexIndex[i].z] = _texture[texture_index[i].z];
+				child->_texture[child->_vertexIndex[i].x] = _texture[texture_index[i].x];
+				child->_texture[child->_vertexIndex[i].y] = _texture[texture_index[i].y];
+				child->_texture[child->_vertexIndex[i].z] = _texture[texture_index[i].z];
 			}
 		}
 
 		if (n_idx_offset < normal_index.size()) {
 			for (int i = 0; i < child->_vertexIndex.size(); ++i) {
-				if (_vertexIndex[i].x < child->_normal.size()) child->_normal[child->_vertexIndex[i].x] = _normal[normal_index[i].x];
-				if (_vertexIndex[i].y < child->_normal.size()) child->_normal[child->_vertexIndex[i].y] = _normal[normal_index[i].y];
-				if (_vertexIndex[i].z < child->_normal.size()) child->_normal[child->_vertexIndex[i].z] = _normal[normal_index[i].z];
+				child->_normal[child->_vertexIndex[i].x] = _normal[normal_index[i].x];
+				child->_normal[child->_vertexIndex[i].y] = _normal[normal_index[i].y];
+				child->_normal[child->_vertexIndex[i].z] = _normal[normal_index[i].z];
 			}
 		}
 

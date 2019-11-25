@@ -27,7 +27,7 @@ ObjectFactory::~ObjectFactory()
 GameObject * ObjectFactory::CreateObject(std::string type)
 {
 	GameObject * object = new GameObject(type);
-	SetObject(object, json());
+	SetObject(object, json({}));
 	return object;
 }
 
@@ -98,6 +98,12 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 				component = new Animation;
 			}
 		}
+		else if (it.key() == "Follow") {
+			component = object->GetComponent(COMPONENT_TYPE::FOLLOW);
+			if (!component) {
+				component = new Follow;
+			}
+		}
 		else {
 			continue;
 		}
@@ -109,7 +115,7 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 json ObjectFactory::GetDefaultObjectModel(std::string type)
 {
 	if (_objectModels.find(type) == _objectModels.end()) {
-		std::string file_path = "./Levels/Types/" + type + ".txt";
+		std::string file_path = "./Levels/Types/" + type + ".json";
 		_objectModels[type] = JsonHandle::ReadFile(file_path);
 	}
 	return _objectModels[type];

@@ -4,7 +4,7 @@
 
 extern GameStateManager *pMgr;
 
-RenderManager::RenderManager(): _window(0), _renderer(0), _shader(0), _viewer(0)
+RenderManager::RenderManager(): _window(0), _renderer(0), _shader(0), _viewer(0), _renderMode(0)
 {
 	_lightPos[0] = 0.0;
 	_lightPos[1] = 0.0;
@@ -52,8 +52,8 @@ void RenderManager::Initialize(SDL_Window *window)
 	// Shader program
 	_shader = new ShaderProgram;
 
-	_shader->CompileShader("Shaders/lighting_vert.glsl", GL_VERTEX_SHADER);
-	_shader->CompileShader("Shaders/lighting_frag.glsl", GL_FRAGMENT_SHADER);
+	_shader->CompileShader("Shaders/lighting.vert", GL_VERTEX_SHADER);
+	_shader->CompileShader("Shaders/lighting.frag", GL_FRAGMENT_SHADER);
 
 	glBindAttribLocation(_shader->_programId, 0, "vertex");
 	glBindAttribLocation(_shader->_programId, 1, "texcoord");
@@ -61,6 +61,10 @@ void RenderManager::Initialize(SDL_Window *window)
 	_shader->LinkShader();
 
 	glEnable(GL_DEPTH_TEST);
+
+	// Wire frame mode
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	Collider::InitializeUnitBox();
 }
 
 void RenderManager::Draw()
@@ -81,7 +85,7 @@ void RenderManager::Draw()
 	Camera * camera = dynamic_cast<Camera*>(_viewer->GetComponent(COMPONENT_TYPE::CAMERA));
 	Matrix4 WorldProj, WorldView, WorldInverse;
 	WorldProj = Perspective(camera->_ry * _width / _height, camera->_ry, camera->_front, camera->_back);
-	WorldView = LookAt(camera->_position + camera->_targetPosition, camera->_targetPosition, vec3(0, 0, 1));
+	WorldView = LookAt(camera->_position + camera->_targetPosition, camera->_targetPosition, vec3(0, 1, 0));
 	WorldView.Inverse(WorldInverse);
 
 	loc = glGetUniformLocation(_shader->_programId, "lightPos");
@@ -94,10 +98,17 @@ void RenderManager::Draw()
 	loc = glGetUniformLocation(_shader->_programId, "WorldInverse");
 	glUniformMatrix4fv(loc, 1, GL_TRUE, WorldInverse.Pntr());
 
-	// m->Draw();
-	for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
-		Model * m = dynamic_cast<Model*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::MODEL));
-		if(m) m->Draw(_shader);
+	if (_renderMode == 0 || _renderMode == 2) {
+		for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+			Model * m = dynamic_cast<Model*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::MODEL));
+			if (m) m->Draw(_shader);
+		}
+	}
+	if (_renderMode == 1 || _renderMode == 2) {
+		for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+			Collider * c = dynamic_cast<Collider*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::COLLIDER));
+			if (c) c->Draw(_shader);
+		}
 	}
 
 	glUseProgram(0);
@@ -115,4 +126,15 @@ bool RenderManager::SetCamera(std::string camera_tag)
 	}
 	_viewer = new_camera;
 	return true;
+}
+
+void RenderManager::SwitchMode()
+{
+	/*
+	0: default mode, render only models
+	1: debug mode, render only colliders
+	2: debug mode, render both
+	*/
+	_renderMode = (_renderMode + 1) % 3;
+	std::cout << "Current mode: " << _renderMode << std::endl;
 }

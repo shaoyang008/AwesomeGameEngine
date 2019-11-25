@@ -21,6 +21,7 @@ public:
 		fprintf(stderr, "Error: %s\n", description);
 	}
 	*/
+	void SwitchMode();
 
 private:
 	SDL_Window *_window;
@@ -32,5 +33,7 @@ private:
 	int _width, _height;
 
 	GameObject * _viewer;
+
+	int _renderMode;
 };
 
