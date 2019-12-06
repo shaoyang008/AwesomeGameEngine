@@ -31,7 +31,14 @@ Transform::~Transform()
 
 void Transform::Update() 
 {
+	// Do a wrap check on angle
+	if (_rotateX > 180.0)  _rotateX -= 360.0;
+	if (_rotateY > 180.0)  _rotateY -= 360.0;
+	if (_rotateZ > 180.0)  _rotateZ -= 360.0;
 
+	if (_rotateX < -180.0) _rotateX += 360.0;
+	if (_rotateY < -180.0) _rotateY += 360.0;
+	if (_rotateZ < -180.0) _rotateZ += 360.0;
 }
 
 void Transform::Serialize(json data)

@@ -20,6 +20,8 @@ Creation date: 10/19/2019
 #include <json.hpp>
 #include "../Events/Event.h"
 
+#define PI 3.14159f
+
 using json = nlohmann::json;
 
 class GameObject;
@@ -29,14 +31,21 @@ enum class COMPONENT_TYPE {
 	TRANSFORM,
 	MODEL,
 	CONTROLLER,
-	PATROL,
 	RIGID_BODY,
 	COLLIDER,
 	RESET_PLAYER,
 	CAMERA,
-	ANIMATION,
+	LIGHT,
+	NORMAL_ATK,
+	SPECIAL_ATK,
 	FOLLOW,
-	Count // Used to track number of types
+	ENEMY_AI,
+	BOSS_AI,
+	HEALTH_BAR,
+	PROJECTILE,
+	PORTAL,
+	SLIDE_SHOW,
+	count // Used to track number of types
 };
 
 class Component

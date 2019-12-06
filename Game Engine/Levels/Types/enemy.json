@@ -1,0 +1,49 @@
+{
+	"Transform": {
+		"TranslateX": 0.0, 
+		"TranslateY": 0.0,
+		"TranslateZ": 0.0,
+		"ScaleX": 0.5,
+		"ScaleY": 0.5,
+		"ScaleZ": 0.5,
+		"RotateX": 0,
+		"RotateY": 0,
+		"RotateZ": 0
+	},
+	"Model": {
+		"Filename": "knight_s.obj",
+		"UseMaterial": 0,
+		"Diffuse": [
+			0.4,
+			0.5,
+			0.9
+		],
+		"Specular": [
+			0.6,
+			0.6,
+			0.6
+		],
+		"Shininess": 30
+	},
+	"Collider": {
+		"Type": "StaticSphere",
+		"Radius": 6
+	},
+	"RigidBody": {
+		"Mass": 10,
+		"Scale": 1.0
+	},
+	"EnemyAI": {
+		"Size": 3,
+		"Speed": [
+			-60,
+			240,
+			-60
+		],
+		"Endpoint": [
+			-30,
+			60,
+			0
+		]	
+	}
+}

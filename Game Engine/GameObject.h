@@ -42,9 +42,22 @@ public:
 	void SetType(std::string type) { _type = type; }
 
 	std::vector<Component*> _components;
-	bool _active;
+	
+	void Activate() { _active = true; }
+	void Deactivate() { _active = false; }
+	bool IsActive() { return _active; }
+
+	/*
+	TODO: unique objects will be inherited throughout the
+	whole game, not reset while switching through levels
+	*/
+	void SetUnique() { _unique = true; }
+	bool IsUnique() { return _unique; }
 
 private:
 	std::string _tag;
 	std::string _type;
+
+	bool _active;
+	bool _unique;
 };

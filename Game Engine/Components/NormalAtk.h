@@ -4,11 +4,11 @@
 
 #include "../ObjectModel.h"
 
-class Animation : public Component
+class NormalAtk : public Component
 {
 public:
-	Animation();
-	~Animation();
+	NormalAtk();
+	~NormalAtk();
 
 	void Initialize();
 	void Update();
@@ -17,9 +17,11 @@ public:
 	void HandleEvent(Event*);
 
 	bool Load(std::string);
+	
+	bool _isToggled;
+	int _atkFrames;
 
 	ObjectModel * _original;
 	ObjectModel * _animation;
-	// std::vector<ObjectModel*> _models;
 };
 

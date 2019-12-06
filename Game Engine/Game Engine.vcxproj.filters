@@ -44,9 +44,6 @@
     <ClCompile Include="Components\Controller.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Patrol.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Components\ResetPlayer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -58,14 +55,56 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Components\Animation.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Events\ToggleAttack.cpp">
       <Filter>Events</Filter>
     </ClCompile>
     <ClCompile Include="Components\Follow.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\EnemyAI.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Shape.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Vector2D.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\HealthBar.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\PlayerHit.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\NotmalAtk.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BossAI.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\GameOver.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Projectile.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Light.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EnemyHit.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Portal.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpecialAtk.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SlideShow.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\SlideControl.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +168,6 @@
     <ClInclude Include="Components\Controller.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Patrol.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="Utilities\Matrix4.h">
       <Filter>Utilities</Filter>
@@ -140,14 +176,56 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Components\Animation.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Events\ToggleAttack.h">
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Components\Follow.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\EnemyAI.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Shape.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Vector2D.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\HealthBar.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\PlayerHit.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NormalAtk.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\BossAI.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\GameOver.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Projectile.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Light.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EnemyHit.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Portal.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpecialAtk.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SlideShow.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\SlideControl.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

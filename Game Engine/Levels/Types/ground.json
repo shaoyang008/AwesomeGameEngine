@@ -1,0 +1,28 @@
+{
+	"Transform": {
+		"TranslateX": 0.0, 
+		"TranslateY": 0.0,
+		"TranslateZ": -0.5,
+		"ScaleX": 5,
+		"ScaleY": 30,
+		"ScaleZ": 1.0,
+		"RotateX": 0.0,
+		"RotateY": 0.0,
+		"RotateZ": 0.0
+	},
+	"Model": {
+		"Filename": "lawn2.obj",
+		"Diffuse": [
+			0.8,
+			0.8,
+			0.8
+		],
+		"Specular": [
+			0.6,
+			0.6,
+			0.6
+		],
+		"Shininess": 10,
+		"UseMaterial": 1
+	}
+}

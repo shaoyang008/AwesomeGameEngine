@@ -41,11 +41,14 @@ public:
 	~GameStateManager();
 
 	void SetWindow(SDL_Window *);
+	void LoadSettings();
 
 	bool Load();
 	bool Init();
 	bool Loop();
-	void RunGame();
+	bool RunGame();
+
+	void ProcceedLevel();
 
 	// Add managers here to do different tasks
 	FramerateManager	*_framerateManager;
@@ -63,4 +66,5 @@ private:
 	int _level;
 	int _state;
 	bool (GameStateManager::*_gameStates[STATE::count])(void);
+	bool _settingsLoaded;
 };

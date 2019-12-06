@@ -17,7 +17,8 @@ Creation date: 10/19/2019
 #pragma once
 #include "Component.h"
 #include "../GameObject.h"
-#include "../ObjectModel.h"
+#include "../Material.h"
+#include "../ShaderProgram.h"
 
 class Sprite : public Component
 {
@@ -28,7 +29,15 @@ public:
 	void Update();
 	void Serialize(json data);
 
-	ObjectModel *_model;
+	void UseSprite(ShaderProgram *);
+	void Unuse();
+
+	void SetTexture(Material *);
+
+	float _posX, _posY;
+	float _scaleX, _scaleY;
+
 private:
+	Material * _texture;
 };
 

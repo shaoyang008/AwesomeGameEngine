@@ -3,7 +3,9 @@
 #include "Components/Base.h"
 #include "Events/Event.h"
 #include "Events/OnCollision.h"
+#include "Utilities/Vector2D.h"
 #include <queue>
+#include <utility> 
 
 typedef struct LineSegment
 {
@@ -11,16 +13,7 @@ typedef struct LineSegment
 	float x_end, y_end;
 } LineSegment;
 
-class Collision
-{
-public:
-	Collision() {}
-	Collision(GameObject *go1, GameObject *go2) : _go1(go1), _go2(go2) {}
-	~Collision() {}
-
-	GameObject* _go1;
-	GameObject* _go2;
-};
+typedef std::pair<GameObject*, GameObject*> Collision;
 
 class CollisionManager
 {
@@ -31,11 +24,14 @@ public:
 	void CheckCollisions();
 	bool StaticAABBtoStaticAABB(GameObject*, GameObject*);
 	bool StaticAABBtoDynamicAABB(GameObject*, GameObject*);
-	bool StaticAABBtoGround(GameObject *);
+	bool ObjecttoGround(GameObject *);
+	bool StaticSpheretoStaticPoint(GameObject*, GameObject*);
+	bool StaticSpheretoDynamicPoint(GameObject*, GameObject*);
+	bool DynamicSpheretoDynamicPoint(GameObject*, GameObject*);
 
 	// Dummy methods for work in progress
 	// or methods that will be skipped in this project
-	bool NotImplemented(GameObject*, GameObject*) { return false; }
+	bool CollisionNotImplemented(GameObject*, GameObject*) { return false; }
 
 	float LineSegtoLineSeg(LineSegment&, LineSegment&, int);
 
@@ -43,7 +39,7 @@ public:
 	void ResolveCollisions();
 
 private:
-	std::queue<Collision*> _collisions;
-	bool (CollisionManager::*_collisionTests[static_cast<int>(COLLIDER_TYPE::count)][static_cast<int>(COLLIDER_TYPE::count)])(GameObject*, GameObject*);
+	std::queue<Collision> _collisions;
+	bool (CollisionManager::*_collisionTests[Collider::TYPE::count][Collider::TYPE::count])(GameObject*, GameObject*);
 };
 

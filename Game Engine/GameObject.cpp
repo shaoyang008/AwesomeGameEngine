@@ -16,12 +16,12 @@ Creation date: 10/19/2019
 
 #include "GameObject.h"
 
-GameObject::GameObject(): _tag(""), _active(true), _type("")
+GameObject::GameObject() : _tag(""), _active(true), _type(""), _unique(false)
 {
 
 }
 
-GameObject::GameObject(std::string type): _tag(""),  _active(true), _type(type)
+GameObject::GameObject(std::string type): _tag(""),  _active(true), _type(type), _unique(false)
 {
 
 }
@@ -33,7 +33,7 @@ GameObject::~GameObject()
 
 void GameObject::Update() {
 	for (int i = 0; i < _components.size(); ++i) {
-		if (_components[i]->_active) _components[i]->Update();
+		_components[i]->Update();
 	}
 }
 
@@ -63,6 +63,7 @@ void GameObject::ClearComponents() {
 	for (int i = 0; i < _components.size(); ++i) {
 		delete _components[i];
 	}
+	_components.clear();
 }
 
 void GameObject::ReceiveEvent(Event * e) {

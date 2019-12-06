@@ -1,14 +1,14 @@
 #include "Collider.h"
 
-ObjectModel * Collider::UnitBox = new ObjectModel;
-
-Collider::Collider(): Component(COMPONENT_TYPE::COLLIDER)
+Collider::Collider(): Component(COMPONENT_TYPE::COLLIDER), _type(TYPE::STATIC_AABB),
+_posX(0.0f), _posY(0.0f), _posZ(0.0f)
 {
 }
 
  
 Collider::~Collider()
 {
+	delete _shape;
 }
 
 void Collider::Update()
@@ -21,9 +21,29 @@ void Collider::Update()
 
 void Collider::Serialize(json data)
 {
-	_height = data["Height"].get<float>();
-	_width  = data["Width"].get<float>();
-	_length = data["Length"].get<float>();
+	std::string shape = data["Type"].get<std::string>();
+
+	if (shape == "StaticAABB") {
+		_type = TYPE::STATIC_AABB;
+		_shape = new Box(data["Width"].get<float>(), data["Length"].get<float>(), data["Height"].get<float>());
+	}
+	else if (shape == "DynamicAABB") {
+		_type = TYPE::DYNAMIC_AABB;
+		_shape = new Box(data["Width"].get<float>(), data["Length"].get<float>(), data["Height"].get<float>());
+	}
+	else if (shape == "StaticSphere") {
+		_type = TYPE::STATIC_SPHERE;
+		_shape = new Sphere(data["Radius"].get<float>());
+	}
+	else if (shape == "DynamicSphere") {
+		_type = TYPE::DYNAMIC_SPHERE;
+		_shape = new Sphere(data["Radius"].get<float>());
+	}
+}
+
+void Collider::Initialize()
+{
+
 }
 
 void Collider::Draw(ShaderProgram * shader)
@@ -32,7 +52,7 @@ void Collider::Draw(ShaderProgram * shader)
 
 	Matrix4 translate, scale;
 	if (transform) {
-		scale = Scale(_width, _length, 2 * _height);
+		scale = _shape->GetScale();
 		translate = Translate(transform->_translateX, transform->_translateY, 0);
 	}
 	Matrix4 model_tr = translate * scale;
@@ -52,11 +72,7 @@ void Collider::Draw(ShaderProgram * shader)
 	loc = glGetUniformLocation(shader->_programId, "isPlayer");
 	glUniform1i(loc, 0);
 
-	UnitBox->DrawChildren(shader->_programId, true);
+	// UnitBox->DrawChildren(shader->_programId, true);
+	_shape->GetShape()->DrawChildren(shader->_programId, true);
 }
 
-void Collider::InitializeUnitBox()
-{
-	UnitBox->ReadModel("Resources/box2.obj");
-	std::cout << "Unit box initialized " << UnitBox->_children.size() << std::endl;
-}

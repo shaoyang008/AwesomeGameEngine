@@ -1,0 +1,77 @@
+{
+	"GameObjects": {
+		"Viewer": {
+			"Type": "scene_viewer",
+			"Components": {
+				"Camera": {
+					"Target": "Player",
+					"Position": [
+						0,
+						-50,
+						20
+					]
+				}
+			},
+			"Unique": 1
+		},
+		"Player": {
+			"Type": "player",
+			"Components": {
+				"Transform": {
+					"RotateZ": 180.0
+				}
+			},
+			"Unique": 1
+		},
+		"Shadow": {
+			"Type": "static_object",
+			"Components": {
+				"Transform": {
+					"ScaleX": 1.5,
+					"ScaleY": 1.5,
+					"ScaleZ": 0.01,
+					"TranslateZ": 0.15
+				},
+				"Model": {
+					"Filename": "sphere.obj",
+					"UseMaterial": 0
+				},
+				"Follow": {
+					"Tag": "Player",
+					"DistanceX": 0,
+					"DistanceY": 0
+				}
+			},
+			"Unique": 1
+		},
+		"GUI": {
+			"Type": "image",
+			"Components": {
+				"Sprite": {
+					"PositionX": -800.0,
+					"PositionY": -500.0,
+					"ScaleX": 3.0,
+					"ScaleY": 3.0,
+					"Filename": "instructions.png"
+				}
+			},
+			"Unique": 1
+		},
+		"Story": {
+			"Type": "image",
+			"Components": {
+				"SlideShow": {
+					"Size": 3,
+					"Slides": [
+						"GUI/Scroll.png",
+						"grass.png",
+						"GUI/inhale.png"
+					]
+				}
+			},
+			"Unique": 1
+		}
+	},
+	"Subscription": {
+	}
+}

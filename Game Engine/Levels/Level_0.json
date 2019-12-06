@@ -1,0 +1,557 @@
+{
+	"Player": {
+		"Type": "player",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0,
+				"TranslateY": 0.0
+			}
+		}	
+	},
+	"Teapot": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateY": 140,
+				"ScaleX": 4.0,
+				"ScaleY": 4.0,
+				"ScaleZ": 4.0
+			},
+			"Portal": {
+				"Random": 0
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 2,
+				"Width":  2,
+				"Length": 2
+			}
+		}
+	},
+	"FireCabin": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 0.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 10,
+				"ScaleY": 10,
+				"ScaleZ": 10,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn_fire.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 12,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin1": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 0.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin2": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 20.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin3": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 40.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin4": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 60.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin5": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 80.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin6": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 100.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin7": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 120.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin8": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": 15.0, 
+				"TranslateY": 140.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 90
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin9": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 20.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin10": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 40.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin11": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 60.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin12": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 80.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin13": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 100.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin14": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 120.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Cabin15": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"TranslateX": -15.0, 
+				"TranslateY": 140.0,
+				"TranslateZ": 0.0,
+				"ScaleX": 20,
+				"ScaleY": 20,
+				"ScaleZ": 20,
+				"RotateZ": 270
+			},
+			"Model": {
+				"Filename": "barn2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 5,
+				"Width": 8,
+				"Length": 8
+			}
+		}	
+	},
+	"Tree1": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 0,
+				"TranslateY": -25,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree2": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": -25,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree3": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 10,
+				"TranslateY": -25,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree4": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": -25,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree5": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -10,
+				"TranslateY": -25,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree6": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -10,
+				"TranslateY": -15,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Tree7": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 10,
+				"TranslateY": -15,
+				"TranslateZ": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}
+	},
+	"Ground": {
+		"Type": "ground",
+		"Components": {
+			"Transform": {
+				"ScaleX": 5,
+				"ScaleY": 20,
+				"TranslateY": 60
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Width": 20,
+				"Length": 160,
+				"Height": 0.5
+			}
+		}
+	}
+}

@@ -2,7 +2,7 @@
 
 
 
-ToggleAttack::ToggleAttack(bool toggle): Event(EVENT_TYPE::TOGGLE_ATTACK), _toggle(toggle)
+ToggleAttack::ToggleAttack(int sp): Event(EVENT_TYPE::TOGGLE_ATTACK), _atkType(sp)
 {
 }
 

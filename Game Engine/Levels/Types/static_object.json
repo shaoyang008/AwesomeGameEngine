@@ -9,10 +9,9 @@
 		"RotateX": 0.0,
 		"RotateY": 0.0,
 		"RotateZ": 0.0
-
 	},
 	"Model": {
-		"Filename": "teapot.obj",
+		"Filename": "teapot2.obj",
 		"Diffuse": [
 			0.8,
 			0.8,

@@ -180,6 +180,14 @@ Matrix4 Perspective(const float rx, const float ry, const float front, const flo
 	return P;
 }
 
+Matrix4 Orthographic(const float rx, const float ry)
+{
+	Matrix4 P;
+	P[0][0] = 1.0 / rx;
+	P[1][1] = 1.0 / ry;
+	return P;
+}
+
 Matrix4 LookAt(const vec3 Eye, const vec3 Center, const vec3 Up)
 {
 	vec3 u = normalize(Center - Eye);

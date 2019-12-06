@@ -16,11 +16,11 @@ Creation date: 10/18/2019
 
 #include "GameStateManager.h"
 
-#define DEFAULT_LEVEL 2
+#define DEFAULT_LEVEL 1
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
 _gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),
-_renderManager(new RenderManager), _level(DEFAULT_LEVEL), _state(STATE::LOAD), _gameStates()
+_renderManager(new RenderManager), _level(DEFAULT_LEVEL), _state(STATE::LOAD), _gameStates(), _settingsLoaded(false)
 {
 	_gameStates[STATE::LOAD] = &GameStateManager::Load;
 	_gameStates[STATE::INIT] = &GameStateManager::Init;
@@ -48,6 +48,26 @@ void GameStateManager::SetWindow(SDL_Window * window) {
 	_renderManager->Initialize(_window);
 }
 
+void GameStateManager::LoadSettings()
+{
+	json settings_data = JsonHandle::ReadFile("Levels/Settings.json");
+	_gameObjectManager->LoadLevel(settings_data["GameObjects"]);
+	/*
+	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
+		_gameObjectManager->_objects[i]->SetUnique();
+	}
+	*/
+
+	_renderManager->SetCamera("Viewer");
+
+	// Subscribe events
+	_eventManager->ClearSubscribe();
+	_eventManager->SubscribeEvent(EVENT_TYPE::PLAYER_HIT, _gameObjectManager->_tagObjects.FindValueByKey("Player"));
+	_eventManager->SubscribeEvent(EVENT_TYPE::SLIDE_CONTROL, _gameObjectManager->_tagObjects.FindValueByKey("Story"));
+
+	_settingsLoaded = true;
+}
+
 bool GameStateManager::Load()
 {
 	_window = SDL_CreateWindow("SDL2 window",		// window title
@@ -55,7 +75,7 @@ bool GameStateManager::Load()
 		SDL_WINDOWPOS_UNDEFINED,					// initial y position
 		800,										// width, in pixels
 		600,										// height, in pixels
-		SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+		SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
 	// Check that the window was successfully made
 	if (NULL == _window)
@@ -66,7 +86,6 @@ bool GameStateManager::Load()
 	}
 
 	// Setup Manager
-	// SetWindow(window);
 	_renderManager->Initialize(_window);
 
 	_state = STATE::INIT;
@@ -75,21 +94,27 @@ bool GameStateManager::Load()
 
 bool GameStateManager::Init()
 {
+	// Load basic settings, including unique objects
+	if(!_settingsLoaded) LoadSettings();
+
 	// Disable all objects if exist
 	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
-		_gameObjectManager->_objects[i]->_active = false;
+		if (!_gameObjectManager->_objects[i]->IsUnique()) {
+			_gameObjectManager->_objects[i]->Deactivate();
+		}
 	}
+	_gameObjectManager->DeactivateObjects();
 
-	std::string lv = "Level_";
+	// Load level settings
+	std::string lv = "Levels/Level_";
 	lv += ('0' + _level);
 
-	_gameObjectManager->LoadLevel(lv);
+	_gameObjectManager->LoadLevel(JsonHandle::ReadFile(lv + ".json"));
 	_gameObjectManager->Initialize();
 	std::cout << "Total objects: " << _gameObjectManager->_objects.size() << std::endl;
 
-	_renderManager->SetCamera("Camera");
-
 	_state = STATE::LOOP;
+	std::cout << "Initialize level " << _level << " successed" << std::endl;
 	return true;
 }
 
@@ -112,10 +137,18 @@ bool GameStateManager::Loop()
 	}
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_R)) {
 		_state = STATE::INIT;
+		_settingsLoaded = false;
+		return true;
+	}
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_T)) {
+		ProcceedLevel();
 		return true;
 	}
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_TAB)) {
 		_renderManager->SwitchMode();
+	}
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_Q)) {
+		return false;
 	}
 
 	// Physics
@@ -131,15 +164,41 @@ bool GameStateManager::Loop()
 	// Update all game objects
 	_gameObjectManager->Update();
 
+	// Clear objects that sould be inactive
+	_gameObjectManager->DeactivateObjects();
+
 	// Draw everything
 	_renderManager->Draw();
 
 	// update frame end time
 	_framerateManager->FrameEnd();
+
+	// Check SDL event
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0) {
+		//User requests quit
+		if (e.type == SDL_QUIT)
+		{
+			return false;
+		}
+		if (e.type == SDL_WINDOWEVENT) {
+			if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
+				std::cout << "Window resized to " << e.window.data1 << " x " << e.window.data2 << std::endl;
+				_renderManager->ResizeWindow();
+			}
+		}
+	}
+
 	return true;
 }
 
-void GameStateManager::RunGame()
+bool GameStateManager::RunGame()
 {
-	(this->*(_gameStates[_state]))();
+	return (this->*(_gameStates[_state]))();
+}
+
+void GameStateManager::ProcceedLevel()
+{
+	_state = STATE::INIT;
+	_level = (_level + 1) % 4;
 }

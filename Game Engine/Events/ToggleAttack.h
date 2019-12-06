@@ -4,9 +4,14 @@
 class ToggleAttack : public Event
 {
 public:
-	ToggleAttack(bool);
+	ToggleAttack(int);
 	~ToggleAttack();
 
-	bool _toggle;
+	/*
+	0: normal atk
+	1: sp atk on
+	2: sp atk off
+	*/
+	int _atkType;
 };
 

@@ -33,6 +33,16 @@ GameObject * ObjectFactory::CreateObject(std::string type)
 
 void ObjectFactory::SetObject(GameObject* object, json level_data)
 {
+	/*
+	json data;
+	if (!object->IsUnique()) {
+		data = GetDefaultObjectModel(object->GetType());
+		data.merge_patch(level_data);
+	}
+	else {
+		data = level_data;
+	}
+	*/
 	json data = GetDefaultObjectModel(object->GetType());
 	data.merge_patch(level_data);
 
@@ -54,12 +64,6 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 			component = object->GetComponent(COMPONENT_TYPE::CONTROLLER);
 			if (!component) {
 				component = new Controller;
-			}
-		}
-		else if (it.key() == "Patrol") {
-			component = object->GetComponent(COMPONENT_TYPE::PATROL);
-			if (!component) {
-				component = new Patrol;
 			}
 		}
 		else if (it.key() == "RigidBody") {
@@ -92,10 +96,22 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 				component = new Camera;
 			}
 		}
-		else if (it.key() == "Animation") {
-			component = object->GetComponent(COMPONENT_TYPE::ANIMATION);
+		else if (it.key() == "Light") {
+			component = object->GetComponent(COMPONENT_TYPE::LIGHT);
 			if (!component) {
-				component = new Animation;
+				component = new Light;
+			}
+		}
+		else if (it.key() == "NormalAtk") {
+			component = object->GetComponent(COMPONENT_TYPE::NORMAL_ATK);
+			if (!component) {
+				component = new NormalAtk;
+			}
+		}
+		else if (it.key() == "SpecialAtk") {
+			component = object->GetComponent(COMPONENT_TYPE::SPECIAL_ATK);
+			if (!component) {
+				component = new SpecialAtk;
 			}
 		}
 		else if (it.key() == "Follow") {
@@ -103,6 +119,42 @@ void ObjectFactory::SetObject(GameObject* object, json level_data)
 			if (!component) {
 				component = new Follow;
 			}
+		}
+		else if (it.key() == "EnemyAI") {
+			component = object->GetComponent(COMPONENT_TYPE::ENEMY_AI);
+			if (!component) {
+				component = new EnemyAI;
+			}
+		}
+		else if (it.key() == "BossAI") {
+			component = object->GetComponent(COMPONENT_TYPE::BOSS_AI);
+			if (!component) {
+				component = new BossAI;
+			}
+		}
+		else if (it.key() == "HealthBar") {
+			component = object->GetComponent(COMPONENT_TYPE::HEALTH_BAR);
+			if (!component) {
+				component = new HealthBar;
+			}
+		}
+		else if (it.key() == "Projectile") {
+			component = object->GetComponent(COMPONENT_TYPE::PROJECTILE);
+			if (!component) {
+				component = new Projectile;
+			}
+		}
+		else if (it.key() == "Portal") {
+			component = object->GetComponent(COMPONENT_TYPE::PORTAL);
+			if (!component) {
+				component = new Portal;
+			}
+		}
+		else if (it.key() == "SlideShow") {
+		component = object->GetComponent(COMPONENT_TYPE::SLIDE_SHOW);
+		if (!component) {
+			component = new SlideShow;
+		}
 		}
 		else {
 			continue;

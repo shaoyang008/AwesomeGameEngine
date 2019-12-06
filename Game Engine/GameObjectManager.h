@@ -30,13 +30,17 @@ public:
 
 	void Initialize();
 	void Update();
-	void LoadLevel(std::string);
+	void LoadLevel(json);
+
+	void DeactivateObjects();
 
 	GameObject * GetObject(std::string);
 	
 	std::vector<GameObject*> _objects;
+	std::unordered_map<std::string, GameObject*> _uniqueObjects;
 	BinaryTree<std::string, GameObject*> _tagObjects;
 
 private:
 	ObjectFactory *_factory;
+	std::vector<GameObject*> _inactiveObjects;
 };

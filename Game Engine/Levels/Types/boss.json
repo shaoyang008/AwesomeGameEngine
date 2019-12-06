@@ -1,0 +1,43 @@
+{
+	"Transform": {
+		"TranslateX": 0.0, 
+		"TranslateY": 0.0,
+		"TranslateZ": 0.0,
+		"ScaleX": 40,
+		"ScaleY": 40,
+		"ScaleZ": 10,
+		"RotateX": 0.0,
+		"RotateY": 0.0,
+		"RotateZ": 0.0
+	},
+	"Model": {
+		"Filename": "Scary2.obj",
+		"UseMaterial": 1,
+		"Diffuse": [
+			0.8,
+			0.8,
+			0.8
+		],
+		"Specular": [
+			0.6,
+			0.6,
+			0.6
+		],
+		"Shininess": 10
+	},
+	"Collider": {
+		"Type": "DynamicSphere",
+		"Radius": 15
+	},
+	"BossAI": {
+	},
+	"RigidBody": {
+		"Mass": 10.0,
+		"Scale": 1.0
+	},
+	"HealthBar": {
+		"Health": 40,
+		"PositionX": -800,
+		"PositionY": 550
+	}
+}

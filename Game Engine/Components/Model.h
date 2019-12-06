@@ -15,6 +15,7 @@ public:
 
 	bool Load(std::string);
 	void Draw(ShaderProgram *);
+	void HandleEvent(Event * e);
 
 	// Dummy root objects for storing and drawing all children
 	ObjectModel *_modelRoot;

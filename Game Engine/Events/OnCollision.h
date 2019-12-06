@@ -1,13 +1,15 @@
 #pragma once
 #include "Event.h"
+#include "../GameObject.h"
 
 class OnCollision : public Event
 {
 public:
-	OnCollision();
-	OnCollision(bool ground_collision);
+	OnCollision(GameObject *);
+	// OnCollision(bool ground_collision);
 	~OnCollision();
 
-	bool _groundCollision;
+	// bool _groundCollision;
+	GameObject * _target;
 };
 

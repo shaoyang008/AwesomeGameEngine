@@ -51,3 +51,10 @@ void EventManager::SubscribeEvent(EVENT_TYPE type, GameObject * object)
 {
 	_subscribers[type].push_back(object);
 }
+
+void EventManager::ClearSubscribe()
+{
+	for (std::unordered_map<EVENT_TYPE, std::vector<GameObject*>>::iterator it = _subscribers.begin(); it != _subscribers.end(); it++) {
+		it->second.clear();
+	}
+}

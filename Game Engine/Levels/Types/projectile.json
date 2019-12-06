@@ -1,0 +1,38 @@
+{
+	"Transform": {
+		"ScaleX": 1,
+		"ScaleY": 1,
+		"ScaleZ": 1,
+		"TranslateX": 0.0,
+		"TranslateY": 0.0,
+		"TranslateZ": 0.0,
+		"RotateX": 0,
+		"RotateY": 0,
+		"RotateZ": 0
+	},
+	"Model": {
+		"Filename": "crystal.obj",
+		"UseMaterial": 0,
+		"Diffuse": [
+			0.4,
+			0.5,
+			0.9
+		],
+		"Specular": [
+			0.6,
+			0.6,
+			0.6
+		],
+		"Shininess": 30
+	},
+	"Collider": {
+		"Type": "DynamicSphere",
+		"Radius": 3
+	},
+	"RigidBody": {
+		"Mass": 10,
+		"Scale": 0.0
+	},
+	"Projectile": {
+	}
+}

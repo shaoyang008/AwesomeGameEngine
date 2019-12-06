@@ -56,16 +56,7 @@ int main(int argc, char* args[])
 	// Game loop
 	while(true == appIsRunning)
 	{
-
-		pMgr->RunGame();
-		SDL_Event e;
-		while (SDL_PollEvent(&e) != 0) {
-			//User requests quit
-			if (e.type == SDL_QUIT)
-			{
-				appIsRunning = false;
-			}
-		}
+		appIsRunning = pMgr->RunGame();
 	}
 	
 	// Destroy game manager

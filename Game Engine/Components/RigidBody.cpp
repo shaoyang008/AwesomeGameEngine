@@ -1,8 +1,6 @@
 #include "RigidBody.h"
 #include "../Events/OnCollision.h"
 
-#define PI 3.14159f
-
 RigidBody::RigidBody(): Component(COMPONENT_TYPE::RIGID_BODY), 
 _vel(0.0f), _velZ(0.0f), _acc(0.0f), _accZ(0.0f), _posX(0.0f), _posY(0.0f), _posZ(0.0f),
 _force(0.0f), _forceZ(0.0f), _mass(0.0f), _gravityScale(0.0f), _prevPosX(0.0f), _prevPosY(0.0f), _prevPosZ(0.0f)
@@ -75,7 +73,8 @@ void RigidBody::Serialize(json data)
 void RigidBody::HandleEvent(Event * e)
 {
 	if (e->GetType() == EVENT_TYPE::ON_COLLISION) {
-		if (dynamic_cast<OnCollision*>(e)->_groundCollision) {
+		OnCollision * on_c = dynamic_cast<OnCollision*>(e);
+		if (on_c->_target == 0) {
 			Transform * transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 			transform->_translateZ = 0;
 			_velZ = 0.0f;
@@ -83,10 +82,16 @@ void RigidBody::HandleEvent(Event * e)
 			_forceZ = 0.0f;
 		}
 		else {
-			Transform* transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-			transform->_translateX = _prevPosX;
-			transform->_translateY = _prevPosY;
-			Stop();
+			if (_owner->GetType() == "player") {
+				if (on_c->_target->GetType() == "static_object" ||
+					on_c->_target->GetType() == "ground"
+					) {
+					Transform* transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					transform->_translateX = _prevPosX;
+					transform->_translateY = _prevPosY;
+					Stop();
+				}
+			}
 		}
 	}
 	else if (e->GetType() == EVENT_TYPE::DELAY_MOVE) {

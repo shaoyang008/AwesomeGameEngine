@@ -13,6 +13,7 @@ public:
 	void Enque(Event*);
 	void ResolveEvents();
 	void SubscribeEvent(EVENT_TYPE, GameObject*);
+	void ClearSubscribe();
 
 private:
 	std::queue<Event*> _eventQueues[2];

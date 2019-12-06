@@ -4,33 +4,34 @@
 #include "../ObjectModel.h"
 #include "../ShaderProgram.h"
 #include "../Utilities/Matrix4.h"
+#include "../Utilities/Shape.h"
 
-enum class COLLIDER_TYPE {
-	STATIC_AABB,
-	DYNAMIC_AABB,
-	STATIC_CIRCLE,
-	DYNAMIC_CIRCLE,
-	count
-};
 
 class Collider : public Component
 {
 public:
+	enum TYPE {
+		STATIC_AABB,
+		DYNAMIC_AABB,
+		STATIC_SPHERE,
+		DYNAMIC_SPHERE,
+		count
+	};
+
 	Collider();
 	~Collider();
 
 	void Update();
 	void Serialize(json data);
+	void Initialize();
 
 	void Draw(ShaderProgram*);
 
-	// Box colliders
 	float _posX, _posY, _posZ;
-	float _width, _length, _height;
+	Shape * _shape;
 
-	static void InitializeUnitBox();
+	int GetType() { return _type; }
 
 private:
-	static ObjectModel * UnitBox;
+	int _type;
 };
-

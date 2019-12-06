@@ -11,11 +11,13 @@ uniform float shininess;
 
 uniform vec3 Ambient;
 uniform vec3 Light;
+uniform float Angle;
 
 uniform int isPlayer;
-uniform int useTexture;
 uniform int hasTexture;
 uniform sampler2D TextureMap;
+
+uniform int renderMode;
 
 void main()
 {
@@ -29,6 +31,8 @@ void main()
 	vec3 H = normalize(L+V);
 
 	float LN = max(dot(L,N),0.0);
+	if(LN < cos(Angle)) LN = 0;
+
 	float HN = max(dot(H,N),0.0);
 	float LH = max(dot(L,H),0.0);
 	

@@ -20,6 +20,7 @@ public:
 				pCurr = pCurr->_leftChild;
 			}
 			else {
+				pCurr->_value = value;
 				return;
 			}
 		}
@@ -56,6 +57,16 @@ public:
 			}
 		}
 		return 0;
+	}
+	
+	void Clear(BinaryNode<T1, T2> *pHead) {
+		if (pHead == 0) return;
+		else {
+			Clear(pHead->_leftChild);
+			Clear(pHead->_rightChild);
+		}
+		delete pHead;
+		pHead = 0;
 	}
 
 	BinaryNode<T1, T2> * _head;

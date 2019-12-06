@@ -1,14 +1,27 @@
 {
-	"Camera": {
-		"Type": "camera",
+	"Viewer": {
+		"Type": "scene_viewer",
 		"Components": {
 			"Camera": {
 				"Target": "Player",
 				"Position": [
 					0,
-					-30,
-					50
+					-50,
+					20
 				]
+			},
+			"Light": {
+				"Ambient": [
+					0.2,
+					0.2,
+					0.2
+				],
+				"Light": [
+					1.5,
+					1.5,
+					1.5
+				],
+				"Angle": 30
 			}
 		}
 	},
@@ -16,28 +29,8 @@
 		"Type": "player",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.005,
-				"ScaleY": 0.005,
-				"ScaleZ": 0.005,
-				"RotateZ": 180.0,
-				"TranslateZ": 0,
-				"TranslateY": 0
-			},
-			"Model": {
-				"Filename": "Sword_Kirby.obj",
-				"UseMaterial": 1
-			},
-			"Collider": {
-				"Height": 1.5,
-				"Width": 1.5,
-				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 1,
-				"Scale": 1.0
-			},
-			"Animation": {
-				"Filename": "Sword_Kirby_2.obj"
+				"TranslateX": 0.0,
+				"TranslateY": 0.0
 			}
 		}	
 	},
@@ -45,11 +38,10 @@
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.005,
-				"ScaleY": 0.005,
-				"ScaleZ": 0.0001,
-				"RotateZ": 180.0,
-				"TranslateZ": 0.1
+				"ScaleX": 1.5,
+				"ScaleY": 1.5,
+				"ScaleZ": 0.01,
+				"TranslateZ": 0.15
 			},
 			"Model": {
 				"Filename": "sphere.obj",
@@ -66,28 +58,25 @@
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"TranslateX": 0.0, 
-				"TranslateY": 40.0,
-				"TranslateZ": 10.0,
-				"ScaleX": 5,
-				"ScaleY": 5,
-				"ScaleZ": 5
+				"TranslateY": 140,
+				"ScaleX": 4.0,
+				"ScaleY": 4.0,
+				"ScaleZ": 4.0
 			},
-			"Model": {
-				"Filename": "teapot2.obj",
-				"Shininess": 120,
-				"UseMaterial": 0
+			"Portal": {
+				"Random": 1,
+				"RangeX": -90,
+				"RangeY": -90,
+				"ModuloX": 180,
+				"ModuloY": 180
 			},
 			"Collider": {
-				"Height": 5,
-				"Width": 8,
-				"Length": 8
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
+				"Type": "StaticAABB",
+				"Height": 2,
+				"Width":  2,
+				"Length": 2
 			}
-		}	
+		}
 	},
 	"Tree1": {
 		"Type": "static_object",
@@ -96,23 +85,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
 				"TranslateX": 5,
-				"TranslateY": 0,
-				"TranslateZ": 30
+				"TranslateY": 0
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -123,23 +107,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": -5,
-				"TranslateY": 0,
-				"TranslateZ": 30
+				"TranslateX": 35,
+				"TranslateY": 80
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -150,23 +129,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": 5,
-				"TranslateY": 15,
-				"TranslateZ": 30
+				"TranslateX": 65,
+				"TranslateY": 30
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -177,23 +151,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": -5,
-				"TranslateY": 15,
-				"TranslateZ": 30
+				"TranslateX": 0,
+				"TranslateY": 40
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -204,23 +173,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": 5,
-				"TranslateY": 30,
-				"TranslateZ": 30
+				"TranslateX": 50,
+				"TranslateY": -40
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -231,23 +195,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": -5,
-				"TranslateY": 30,
-				"TranslateZ": 30
+				"TranslateX": 5,
+				"TranslateY": 0
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -258,23 +217,18 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": 5,
-				"TranslateY": -15,
-				"TranslateZ": 30
+				"TranslateX": 25,
+				"TranslateY": -80
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
 			}
 		}	
 	},
@@ -285,44 +239,387 @@
 				"ScaleX": 0.03,
 				"ScaleY": 0.03,
 				"ScaleZ": 0.03,
-				"RotateZ": 180.0,
-				"TranslateX": -5,
-				"TranslateY": -15,
-				"TranslateZ": 30
+				"TranslateX": 95,
+				"TranslateY": -90
 			},
 			"Model": {
 				"Filename": "Tree2.obj",
 				"UseMaterial": 1
 			},
 			"Collider": {
+				"Type": "StaticAABB",
 				"Height": 1.5,
 				"Width": 1.5,
 				"Length": 1.5
+			}
+		}	
+	},
+	"Tree9": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": 95,
+				"TranslateY": 90
 			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree10": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": 80,
+				"TranslateY": -5
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree11": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -30,
+				"TranslateY": 80
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree12": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -60,
+				"TranslateY": 80
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree13": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -40,
+				"TranslateY": 20
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree14": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -90,
+				"TranslateY": 10
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree15": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -90,
+				"TranslateY": 90
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree16": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -70,
+				"TranslateY": 50
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree17": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -80,
+				"TranslateY": -95
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree18": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -60,
+				"TranslateY": -65
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree19": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -30,
+				"TranslateY": -85
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Tree20": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"TranslateX": -20,
+				"TranslateY": -30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			},
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 1.5,
+				"Width": 1.5,
+				"Length": 1.5
+			}
+		}	
+	},
+	"Enemy1": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateY": 40.0
+			}
+		}	
+	},
+	"Enemy2": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 40.0, 
+				"TranslateY": 40.0
+			}
+		}	
+	},
+	"Enemy3": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 80.0, 
+				"TranslateY": 40.0
+			}
+		}	
+	},
+	"Enemy4": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 0.0, 
+				"TranslateY": -40.0
+			}
+		}	
+	},
+	"Enemy5": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 90.0, 
+				"TranslateY": -40.0
+			}
+		}	
+	},
+	"Enemy6": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": -80.0, 
+				"TranslateY": -80.0
+			}
+		}	
+	},
+	"Enemy7": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 10.0, 
+				"TranslateY": 60.0
+			}
+		}	
+	},
+	"Enemy8": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 20.0, 
+				"TranslateY": -100.0
+			}
+		}	
+	},
+	"Enemy9": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": 10.0, 
+				"TranslateY": 140.0
+			}
+		}	
+	},
+	"Enemy10": {
+		"Type": "enemy",
+		"Components": {
+			"Transform": {
+				"TranslateX": -80.0, 
+				"TranslateY": 8.0
 			}
 		}	
 	},
 	"Ground": {
-		"Type": "static_object",
+		"Type": "ground",
 		"Components": {
 			"Transform": {
-				"TranslateX": 0.0, 
-				"TranslateZ": -2.0,
-				"ScaleX": 5,
-				"ScaleY": 30,
-				"ScaleZ": 1.0,
-				"RotateX": 0.0,
-				"RotateY": 0.0,
-				"RotateZ": 0.0
-
+				"ScaleX": 20,
+				"ScaleY": 20
 			},
-			"Model": {
-				"Filename": "lawn2.obj",
-				"UseMaterial": 1,
-				"Texture": "grass.png"
+			"Collider": {
+				"Type": "StaticAABB",
+				"Height": 0.5,
+				"Width": 200,
+				"Length": 200
 			}
 		}	
 	}

@@ -29,7 +29,7 @@ ResourceManager::~ResourceManager()
 
 bool ResourceManager::RegisterModel(std::string path)
 {
-	if (_resources[path]) return true;
+	if (_models[path]) return true;
 	else {
 		ObjectModel * model = new ObjectModel;
 		model->ReadModel(path);
@@ -38,7 +38,7 @@ bool ResourceManager::RegisterModel(std::string path)
 			return false;
 		}
 		else {
-			_resources[path] = model;
+			_models[path] = model;
 			return true;
 		}
 	}
@@ -46,13 +46,13 @@ bool ResourceManager::RegisterModel(std::string path)
 
 ObjectModel * ResourceManager::GetModelByPath(std::string path)
 {
-	return _resources[path];
+	return _models[path];
 }
 
 void ResourceManager::FreeAll()
 {
 	std::unordered_map<std::string, ObjectModel*>::iterator it;
-	for (it = _resources.begin(); it != _resources.end(); ++it) {
+	for (it = _models.begin(); it != _models.end(); ++it) {
 		delete it->second;
 	}
 }

@@ -1,20 +1,11 @@
 #include "RenderManager.h"
 #include "GameStateManager.h"
-#include "Components/Model.h"
 
 extern GameStateManager *pMgr;
 
 RenderManager::RenderManager(): _window(0), _renderer(0), _shader(0), _viewer(0), _renderMode(0)
 {
-	_lightPos[0] = 0.0;
-	_lightPos[1] = 0.0;
-	_lightPos[2] = 20.0;
-	_light[0] = 3.0;
-	_light[1] = 3.0;
-	_light[2] = 3.0;
-	_ambient[0] = 0.2;
-	_ambient[1] = 0.2;
-	_ambient[2] = 0.2;
+
 }
 
 
@@ -60,11 +51,20 @@ void RenderManager::Initialize(SDL_Window *window)
 	glBindAttribLocation(_shader->_programId, 2, "normal");
 	_shader->LinkShader();
 
+	// 2D shader program
+	_shader2d = new ShaderProgram;
+	_shader2d->CompileShader("Shaders/sprite.vert", GL_VERTEX_SHADER);
+	_shader2d->CompileShader("Shaders/sprite.frag", GL_FRAGMENT_SHADER);
+
+	glBindAttribLocation(_shader2d->_programId, 0, "vertex");
+	_shader2d->LinkShader();
+
+	Init2D();
+
 	glEnable(GL_DEPTH_TEST);
 
 	// Wire frame mode
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	Collider::InitializeUnitBox();
 }
 
 void RenderManager::Draw()
@@ -74,22 +74,24 @@ void RenderManager::Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(_shader->_programId);
+	glDisable(GL_BLEND);
 
 	// Pass environment light to shader
 	GLuint loc;
 	loc = glGetUniformLocation(_shader->_programId, "Light");
-	glUniform3fv(loc, 1, &(_light[0]));
+	glUniform3fv(loc, 1, &(_light->_light[0]));
 	loc = glGetUniformLocation(_shader->_programId, "Ambient");
-	glUniform3fv(loc, 1, &(_ambient[0]));
+	glUniform3fv(loc, 1, &(_light->_ambient[0]));
+	loc = glGetUniformLocation(_shader->_programId, "Angle");
+	glUniform1f(loc, _light->_angle * PI / 180.0f);
 
-	Camera * camera = dynamic_cast<Camera*>(_viewer->GetComponent(COMPONENT_TYPE::CAMERA));
 	Matrix4 WorldProj, WorldView, WorldInverse;
-	WorldProj = Perspective(camera->_ry * _width / _height, camera->_ry, camera->_front, camera->_back);
-	WorldView = LookAt(camera->_position + camera->_targetPosition, camera->_targetPosition, vec3(0, 1, 0));
+	WorldProj = Perspective(_camera->_ry * _width / _height, _camera->_ry, _camera->_front, _camera->_back);
+	WorldView = LookAt(_camera->_position + _camera->_targetPosition, _camera->_targetPosition, vec3(0, 1, 0));
 	WorldView.Inverse(WorldInverse);
 
 	loc = glGetUniformLocation(_shader->_programId, "lightPos");
-	glUniform3fv(loc, 1, &(_lightPos[0]));
+	glUniform3fv(loc, 1, &(_light->_lightPos[0]));
 
 	loc = glGetUniformLocation(_shader->_programId, "WorldProj");
 	glUniformMatrix4fv(loc, 1, GL_TRUE, WorldProj.Pntr());
@@ -98,33 +100,87 @@ void RenderManager::Draw()
 	loc = glGetUniformLocation(_shader->_programId, "WorldInverse");
 	glUniformMatrix4fv(loc, 1, GL_TRUE, WorldInverse.Pntr());
 
+	loc = glGetUniformLocation(_shader->_programId, "renderMode");
+	glUniform1i(loc, _renderMode);
+
 	if (_renderMode == 0 || _renderMode == 2) {
 		for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+			loc = glGetUniformLocation(_shader->_programId, "ortho");
+			glUniform1i(loc, (pMgr->_gameObjectManager->_objects[i]->GetTag() == "GUI"));
+
 			Model * m = dynamic_cast<Model*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::MODEL));
 			if (m) m->Draw(_shader);
 		}
 	}
 	if (_renderMode == 1 || _renderMode == 2) {
-		for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
-			Collider * c = dynamic_cast<Collider*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::COLLIDER));
-			if (c) c->Draw(_shader);
-		}
+		DrawDebug();
 	}
 
 	glUseProgram(0);
+
+
+	// 2D drawing
+	if (_renderMode == 0) {
+		Draw2D();
+	}
 
 	// Swap buffers
 	SDL_GL_SwapWindow(_window);
 }
 
-bool RenderManager::SetCamera(std::string camera_tag)
+void RenderManager::Draw2D()
 {
-	GameObject * new_camera = pMgr->_gameObjectManager->_tagObjects.FindValueByKey(camera_tag);
-	if (!new_camera) {
+	// 2D drawing
+	GLuint loc;
+	glUseProgram(_shader2d->_programId);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	Matrix4 WorldOrtho;
+	WorldOrtho = Orthographic(_width, _height);
+	loc = glGetUniformLocation(_shader2d->_programId, "WorldOrtho");
+	glUniformMatrix4fv(loc, 1, GL_TRUE, WorldOrtho.Pntr());
+
+	for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+		Sprite * sprite = dynamic_cast<Sprite*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::SPRITE));
+		if (sprite) {
+			sprite->UseSprite(_shader2d);
+
+			glBindVertexArray(this->quadVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindVertexArray(0);
+
+			sprite->Unuse();
+		}
+	}
+	glUseProgram(0);
+}
+
+void RenderManager::DrawDebug()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	for (int i = 0; i < pMgr->_gameObjectManager->_objects.size(); ++i) {
+		Collider * c = dynamic_cast<Collider*>(pMgr->_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::COLLIDER));
+		if (c) c->Draw(_shader);
+	}
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void RenderManager::ResizeWindow()
+{
+	SDL_GetWindowSize(_window, &_width, &_height);
+}
+
+bool RenderManager::SetCamera(std::string viewer_tag)
+{
+	GameObject * new_viewer = pMgr->_gameObjectManager->_tagObjects.FindValueByKey(viewer_tag);
+	if (!new_viewer) {
 		std::cout << "Camera not set" << std::endl;
 		return false;
 	}
-	_viewer = new_camera;
+	_viewer = new_viewer;
+	_camera = dynamic_cast<Camera*>(_viewer->GetComponent(COMPONENT_TYPE::CAMERA));
+	_light = dynamic_cast<Light*>(_viewer->GetComponent(COMPONENT_TYPE::LIGHT));
 	return true;
 }
 
@@ -137,4 +193,33 @@ void RenderManager::SwitchMode()
 	*/
 	_renderMode = (_renderMode + 1) % 3;
 	std::cout << "Current mode: " << _renderMode << std::endl;
+}
+
+void RenderManager::Init2D()
+{
+	// Configure VAO/VBO
+	GLuint VBO;
+	GLfloat vertices[] = {
+		// Pos      // Tex
+		0.0f, 100.0f, 0.0f, 1.0f,
+		100.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 100.0f, 0.0f, 1.0f,
+		100.0f, 100.0f, 1.0f, 1.0f,
+		100.0f, 0.0f, 1.0f, 0.0f
+	};
+
+	glGenVertexArrays(1, &this->quadVAO);
+	glBindVertexArray(this->quadVAO);
+
+	glGenBuffers(1, &VBO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices[0], GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);;
 }

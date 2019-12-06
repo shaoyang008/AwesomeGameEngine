@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "../GameStateManager.h"
 #include "Transform.h"
+#include "../Events/GameOver.h"
 
 extern GameStateManager *pMgr;
 
@@ -60,7 +61,7 @@ void Model::Draw(ShaderProgram * shader)
 		rotateZ = Rotate(2, transform->_rotateZ);
 		translate = Translate(transform->_translateX, transform->_translateY, transform->_translateZ);
 	}
-	Matrix4 model_tr = translate * rotateY * rotateX * rotateZ * scale;
+	Matrix4 model_tr = translate * rotateZ * rotateY * rotateX * scale;
 	Matrix4 normal_tr;
 	model_tr.Inverse(normal_tr);
 
@@ -80,4 +81,16 @@ void Model::Draw(ShaderProgram * shader)
 	_defaultMaterial->Use(shader->_programId);
 	_modelRoot->DrawChildren(shader->_programId, _useMaterial);
 	_defaultMaterial->Unuse();
+}
+
+void Model::HandleEvent(Event * e)
+{
+	if (e->GetType() == EVENT_TYPE::GAME_OVER) {
+		GameOver * go = dynamic_cast<GameOver*>(e);
+		if (_owner->GetTag() == "Player") {
+			if (!go->_victory) {
+				_useMaterial = false;
+			}
+		}
+	}
 }

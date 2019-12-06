@@ -3,24 +3,29 @@
 		"TranslateX": 0.0, 
 		"TranslateY": 0.0,
 		"TranslateZ": 0.0,
-		"ScaleX": 1.0,
-		"ScaleY": 1.0,
-		"ScaleZ": 1.0,
+		"ScaleX": 0.005,
+		"ScaleY": 0.005,
+		"ScaleZ": 0.005,
 		"RotateX": 0.0,
 		"RotateY": 0.0,
-		"RotateZ": 0.0
+		"RotateZ": 180.0
 
 	},
 	"Controller": {
 		"Speed": 30.0,
 		"Force": 1500.0
 	},
+	"HealthBar": {
+		"Health": 20,
+		"PositionX": -800,
+		"PositionY": -600
+	},
 	"Model": {
-		"Filename": "teapot.obj",
+		"Filename": "Sword_Kirby.obj",
 		"Diffuse": [
-			0.8,
-			0.2,
-			0.8
+			0.4,
+			0.5,
+			0.9
 		],
 		"Specular": [
 			0.6,
@@ -28,6 +33,22 @@
 			0.6
 		],
 		"Shininess": 30,
-		"UseMaterial": 0
+		"UseMaterial": 1
+	},
+	"Collider": {
+		"Type": "DynamicAABB",
+		"Height": 1.5,
+		"Width": 1.5,
+		"Length": 1.5
+	},
+	"RigidBody": {
+		"Mass": 1,
+		"Scale": 1.0
+	},
+	"NormalAtk": {
+		"Filename": "Sword_Kirby_2.obj"
+	},
+	"SpecialAtk": {
+		"Filename": "Inhale_Kirby.obj"
 	}
 }

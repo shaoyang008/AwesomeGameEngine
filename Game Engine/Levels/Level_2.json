@@ -1,6 +1,6 @@
 {
-	"Camera": {
-		"Type": "camera",
+	"Viewer": {
+		"Type": "scene_viewer",
 		"Components": {
 			"Camera": {
 				"Target": "Player",
@@ -9,6 +9,18 @@
 					-50,
 					20
 				]
+			},
+			"Light": {
+				"Ambient": [
+					0.3,
+					0.3,
+					0.3
+				],
+				"Light": [
+					1.5,
+					1.5,
+					1.5
+				]
 			}
 		}
 	},
@@ -16,28 +28,8 @@
 		"Type": "player",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.005,
-				"ScaleY": 0.005,
-				"ScaleZ": 0.005,
-				"RotateZ": 180.0,
-				"TranslateZ": 0,
-				"TranslateY": 0
-			},
-			"Model": {
-				"Filename": "Sword_Kirby.obj",
-				"UseMaterial": 1
-			},
-			"Collider": {
-				"Height": 1.5,
-				"Width": 1.5,
-				"Length": 1.5
-			},
-			"RigidBody": {
-				"Mass": 1,
-				"Scale": 1.0
-			},
-			"Animation": {
-				"Filename": "Sword_Kirby_2.obj"
+				"TranslateX": 0.0,
+				"TranslateY": 0.0
 			}
 		}	
 	},
@@ -45,11 +37,10 @@
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"ScaleX": 0.005,
-				"ScaleY": 0.005,
-				"ScaleZ": 0.0001,
-				"RotateZ": 180.0,
-				"TranslateZ": 0.1
+				"ScaleX": 1.5,
+				"ScaleY": 1.5,
+				"ScaleZ": 0.01,
+				"TranslateZ": 0.15
 			},
 			"Model": {
 				"Filename": "sphere.obj",
@@ -62,78 +53,590 @@
 			}
 		}
 	},
-	"FireCabin": {
-		"Type": "static_object",
+	"Boss": {
+		"Type": "boss",
 		"Components": {
 			"Transform": {
 				"TranslateX": 0.0, 
-				"TranslateY": 40.0,
-				"TranslateZ": 10.0,
-				"ScaleX": 10,
-				"ScaleY": 10,
-				"ScaleZ": 10,
-				"RotateZ": 180
-			},
-			"Model": {
-				"Filename": "barn_fire.obj",
-				"UseMaterial": 1
-			},
-			"Collider": {
-				"Height": 5,
-				"Width": 8,
-				"Length": 8
-			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
+				"TranslateY": 45.0,
+				"TranslateZ": 10.0
 			}
 		}	
 	},
-	"Cabin": {
+	"Tree1": {
 		"Type": "static_object",
 		"Components": {
 			"Transform": {
-				"TranslateX": 10.0, 
-				"TranslateY": 40.0,
-				"TranslateZ": 10.0,
-				"ScaleX": 20,
-				"ScaleY": 20,
-				"ScaleZ": 20,
-				"RotateZ": 180
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 20,
+				"TranslateY": 40
 			},
 			"Model": {
-				"Filename": "barn2.obj",
+				"Filename": "Tree2.obj",
 				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree2": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 15,
+				"TranslateY": 40
 			},
-			"Collider": {
-				"Height": 5,
-				"Width": 8,
-				"Length": 8
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree3": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 10,
+				"TranslateY": 40
 			},
-			"RigidBody": {
-				"Mass": 10,
-				"Scale": 1.0
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree4": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -10,
+				"TranslateY": 40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree5": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -15,
+				"TranslateY": 40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree6": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -20,
+				"TranslateY": 40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree11": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": 40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree12": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree13": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": 20
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree14": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": 10
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree15": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree16": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": -10
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree17": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": -20
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree18": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": -30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree19": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 25,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree20": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 20,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree21": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 15,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree22": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 10,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree23": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 5,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree24": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": 0,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree25": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -5,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree26": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -10,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree27": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -15,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree28": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -20,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree29": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": -40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree30": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": -30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree31": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": -20
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree32": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": -10
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree33": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": 0
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree34": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": 10
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree35": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": 20
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree36": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": 30
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
+			}
+		}	
+	},
+	"Tree37": {
+		"Type": "static_object",
+		"Components": {
+			"Transform": {
+				"ScaleX": 0.03,
+				"ScaleY": 0.03,
+				"ScaleZ": 0.03,
+				"RotateZ": 180.0,
+				"TranslateX": -25,
+				"TranslateY": 40
+			},
+			"Model": {
+				"Filename": "Tree2.obj",
+				"UseMaterial": 1
 			}
 		}	
 	},
 	"Ground": {
-		"Type": "static_object",
+		"Type": "ground",
 		"Components": {
 			"Transform": {
-				"TranslateX": 0.0, 
-				"TranslateZ": -2.0,
-				"ScaleX": 5,
-				"ScaleY": 30,
-				"ScaleZ": 1.0,
-				"RotateX": 0.0,
-				"RotateY": 0.0,
-				"RotateZ": 0.0
-
+				"ScaleX": 8,
+				"ScaleY": 10
 			},
-			"Model": {
-				"Filename": "lawn2.obj",
-				"UseMaterial": 1
+			"Collider": {
+				"Type": "StaticAABB",
+				"Width": 50,
+				"Length": 80,
+				"Height": 0.5
 			}
-		}	
+		}
 	}
 }

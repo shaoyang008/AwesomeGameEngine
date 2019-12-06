@@ -44,26 +44,43 @@ void GameObjectManager::Update()
 	}
 }
 
-void GameObjectManager::LoadLevel(std::string level)
+void GameObjectManager::LoadLevel(json level_data)
 {
-	std::string level_path = "./Levels/" + level + ".json";
-	std::cout << "Loading level from " << level_path << std::endl;
-	json level_data = JsonHandle::ReadFile(level_path);
-
 	for (json::iterator it = level_data.begin(); it != level_data.end(); ++it) {
-		GameObject *new_object = GetObject(it.value()["Type"].get<std::string>());
-		_factory->SetObject(new_object, it.value()["Components"]);
+		GameObject * new_object = _tagObjects.FindValueByKey(it.key());
+		if (!(new_object && new_object->IsUnique())) {
+			new_object = GetObject(it.value()["Type"].get<std::string>());
 
-		new_object->SetTag(it.key());
-		_tagObjects.InsertNode(it.key(), new_object);
+			// Unique objects should only be set once
+			if (it.value().find("Unique") != it.value().end()) {
+				new_object->SetUnique();
+			}
+
+			new_object->SetTag(it.key());
+		}
+		_factory->SetObject(new_object, it.value()["Components"]);
+	}
+
+	for (int i = 0; i < _objects.size(); ++i) {
+		_tagObjects.InsertNode(_objects[i]->GetTag(), _objects[i]);
+	}
+}
+
+void GameObjectManager::DeactivateObjects()
+{
+	for (int i = 0; i < _objects.size(); ++i) {
+		if (!_objects[i]->IsActive()) {
+			_objects[i]->ClearComponents();
+		}
 	}
 }
 
 GameObject * GameObjectManager::GetObject(std::string type)
 {
 	for (int i = 0; i < _objects.size(); ++i) {
-		if (!_objects[i]->_active && _objects[i]->GetType() == type) {
-			_objects[i]->_active = true;
+		if (!_objects[i]->IsActive() && _objects[i]->GetType() == type) {
+			_factory->SetObject(_objects[i], json({}));
+			_objects[i]->Activate();
 			return _objects[i];
 		}
 	}
@@ -71,3 +88,4 @@ GameObject * GameObjectManager::GetObject(std::string type)
 	_objects.push_back(object);
 	return object;
 }
+

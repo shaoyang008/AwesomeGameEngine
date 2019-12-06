@@ -26,8 +26,9 @@ public:
 
 	bool RegisterModel(std::string);
 	ObjectModel * GetModelByPath(std::string);
+
 	void FreeAll();
 
 private:
-	std::unordered_map<std::string, ObjectModel*> _resources;
+	std::unordered_map<std::string, ObjectModel*> _models;
 };
