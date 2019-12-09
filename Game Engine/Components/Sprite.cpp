@@ -36,7 +36,7 @@ void Sprite::Update()
 void Sprite::Serialize(json data)
 {
 	if (data.find("Filename") != data.end()) {
-		std::string texture_path = "Resources/" + data["Filename"].get<std::string>();
+		std::string texture_path = "Resources/Images/" + data["Filename"].get<std::string>();
 		_texture = new Material;
 		_texture->LoadMap(texture_path);
 	}

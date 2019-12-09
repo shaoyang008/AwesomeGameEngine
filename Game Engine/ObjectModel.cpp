@@ -85,11 +85,9 @@ void ObjectModel::ReadModel(std::string path)
 	while (file >> line) {
 		if (line == "mtllib") {
 			file >> line;
-			std::cout << "load mtl " << line << std::endl;
 			ReadMtl(line, materials);
 		}
 		else if (line == "o") {
-			std::cout << "One new object part" << std::endl;
 			if (child) {
 				// clear up previous child when new object begins
 				// set all child's value and push back
@@ -185,7 +183,6 @@ void ObjectModel::ReadModel(std::string path)
 		else if (line == "usemtl") {
 			if (child) {
 				file >> line;
-				std::cout << "Using texture " << line << std::endl;
 				child->_material = materials[line];
 			}
 		}
@@ -227,8 +224,6 @@ void ObjectModel::ReadModel(std::string path)
 		_children.push_back(child);
 	}
 
-	std::cout << "----" << _children.size() << "----" << std::endl;
-
 	_vertex.clear();
 	_vertexIndex.clear();
 	_texture.clear();
@@ -239,7 +234,7 @@ void ObjectModel::ReadModel(std::string path)
 void ObjectModel::ReadMtl(std::string path, std::map<std::string, Material*>& materials)
 {
 	std::ifstream file;
-	file.open("./Resources/" + path);
+	file.open("./Resources/Models/" + path);
 
 	std::string line, tag;
 	while (file >> line) {
@@ -269,8 +264,7 @@ void ObjectModel::ReadMtl(std::string path, std::map<std::string, Material*>& ma
 		}
 		else if (line == "map_Kd") {
 			file >> line;
-			materials[tag]->LoadMap("./Resources/" + line);
+			materials[tag]->LoadMap("./Resources/Models/" + line);
 		}
 	}
-	std::cout << "Total materials: " << materials.size() << std::endl;
 }

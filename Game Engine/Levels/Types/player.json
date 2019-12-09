@@ -13,7 +13,7 @@
 	},
 	"Controller": {
 		"Speed": 30.0,
-		"Force": 1500.0
+		"Force": 1000.0
 	},
 	"HealthBar": {
 		"Health": 20,

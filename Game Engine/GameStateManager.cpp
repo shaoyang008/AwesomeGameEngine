@@ -16,9 +16,10 @@ Creation date: 10/18/2019
 
 #include "GameStateManager.h"
 
-#define DEFAULT_LEVEL 1
+#define DEFAULT_LEVEL 0
+#define STABLE_FRAMERATE 30
 
-GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(60)), _resourceManager(new ResourceManager),
+GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(STABLE_FRAMERATE)), _resourceManager(new ResourceManager),
 _gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),
 _renderManager(new RenderManager), _level(DEFAULT_LEVEL), _state(STATE::LOAD), _gameStates(), _settingsLoaded(false)
 {
@@ -52,12 +53,7 @@ void GameStateManager::LoadSettings()
 {
 	json settings_data = JsonHandle::ReadFile("Levels/Settings.json");
 	_gameObjectManager->LoadLevel(settings_data["GameObjects"]);
-	/*
-	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
-		_gameObjectManager->_objects[i]->SetUnique();
-	}
-	*/
-
+	
 	_renderManager->SetCamera("Viewer");
 
 	// Subscribe events
@@ -115,6 +111,12 @@ bool GameStateManager::Init()
 
 	_state = STATE::LOOP;
 	std::cout << "Initialize level " << _level << " successed" << std::endl;
+
+	if (_level == 0) {
+		Event * game_start = new GameStart;
+		_eventManager->Enque(game_start);
+	}
+
 	return true;
 }
 
@@ -132,8 +134,8 @@ bool GameStateManager::Loop()
 		}
 	}
 
-	if (_inputManager->KeyTriggered(SDL_SCANCODE_M)) {
-		_eventManager->Enque(new DelayMove);
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_RETURN)) {
+		_eventManager->Enque(new SlideControl(SlideControl::TYPE::CLOSE));
 	}
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_R)) {
 		_state = STATE::INIT;

@@ -1,5 +1,6 @@
 #include "SlideShow.h"
 #include "../Events/SlideControl.h"
+#include "../Events/GameOver.h"
 
 
 SlideShow::SlideShow(): Component(COMPONENT_TYPE::SLIDE_SHOW), _currentSlide(0), _size(0), _ownerSprite(0)
@@ -19,10 +20,11 @@ void SlideShow::Serialize(json data)
 {
 	_size = data["Size"].get<int>();
 
-	for (int i = 0; i < _size; ++i) {
+	for (int i = _slides.size(); i < _size; ++i) {
 		_slides.push_back(new Material);
 
-		std::string path = "Resources/" + data["Slides"][i].get<std::string>();
+		std::string path = "Resources/Images/" + data["Slides"][i].get<std::string>();
+		std::cout << path << std::endl;
 		_slides[i]->LoadMap(path);
 	}
 }
@@ -37,9 +39,9 @@ void SlideShow::Initialize()
 
 	_ownerSprite->SetTexture(0);
 	_ownerSprite->_posX = -300;
-	_ownerSprite->_posY = -300;
+	_ownerSprite->_posY = -400;
 	_ownerSprite->_scaleX = 6;
-	_ownerSprite->_scaleY = 6;
+	_ownerSprite->_scaleY = 8;
 }
 
 void SlideShow::HandleEvent(Event * e)
@@ -59,6 +61,17 @@ void SlideShow::HandleEvent(Event * e)
 				break;
 			default:
 				break;
+		}
+	}
+	else if (e->GetType() == EVENT_TYPE::GAME_START) {
+		_ownerSprite->SetTexture(_slides[0]);
+	}
+	else if (e->GetType() == EVENT_TYPE::GAME_OVER) {
+		if (dynamic_cast<GameOver*>(e)->_victory) {
+			_ownerSprite->SetTexture(_slides[_size - 1]);
+		}
+		else {
+			_ownerSprite->SetTexture(_slides[_size - 2]);
 		}
 	}
 }

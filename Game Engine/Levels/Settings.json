@@ -63,9 +63,9 @@
 				"SlideShow": {
 					"Size": 3,
 					"Slides": [
-						"GUI/Scroll.png",
-						"grass.png",
-						"GUI/inhale.png"
+						"Scroll1.png",
+						"Scroll2.png",
+						"Scroll3.png"
 					]
 				}
 			},

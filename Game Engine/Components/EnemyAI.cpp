@@ -92,9 +92,9 @@ void EnemyAI::Update()
 	}
 	else if (_state >= 4) {
 		Transform* transform = dynamic_cast<Transform*>(_owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		transform->_scaleX *= 0.9f;
-		transform->_scaleY *= 0.9f;
-		transform->_scaleZ *= 0.9f;
+		transform->_scaleX *= 0.8f;
+		transform->_scaleY *= 0.8f;
+		transform->_scaleZ *= 0.8f;
 
 		RigidBody * body = dynamic_cast<RigidBody*>(_owner->GetComponent(COMPONENT_TYPE::RIGID_BODY));
 		body->_vel = 10;

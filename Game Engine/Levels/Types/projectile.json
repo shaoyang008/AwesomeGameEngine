@@ -27,7 +27,7 @@
 	},
 	"Collider": {
 		"Type": "DynamicSphere",
-		"Radius": 3
+		"Radius": 2
 	},
 	"RigidBody": {
 		"Mass": 10,

@@ -8,6 +8,7 @@ enum class EVENT_TYPE {
 	PLAYER_HIT,
 	ENEMY_HIT,
 	GAME_OVER,
+	GAME_START,
 	SLIDE_CONTROL,
 	count
 };

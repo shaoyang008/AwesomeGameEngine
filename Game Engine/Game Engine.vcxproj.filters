@@ -106,6 +106,9 @@
     <ClCompile Include="Events\SlideControl.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="Events\GameStart.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FramerateManager.h" />
@@ -225,6 +228,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Events\SlideControl.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\GameStart.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>

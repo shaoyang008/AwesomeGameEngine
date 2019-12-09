@@ -2,7 +2,7 @@
 
 
 
-SlideControl::SlideControl(): Event(EVENT_TYPE::SLIDE_CONTROL)
+SlideControl::SlideControl(TYPE control): Event(EVENT_TYPE::SLIDE_CONTROL), _control(control)
 {
 }
 

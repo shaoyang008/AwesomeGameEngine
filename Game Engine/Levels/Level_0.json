@@ -545,12 +545,6 @@
 				"ScaleX": 5,
 				"ScaleY": 20,
 				"TranslateY": 60
-			},
-			"Collider": {
-				"Type": "StaticAABB",
-				"Width": 20,
-				"Length": 160,
-				"Height": 0.5
 			}
 		}
 	}

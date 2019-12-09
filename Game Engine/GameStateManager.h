@@ -27,6 +27,8 @@ Creation date: 10/18/2019
 #include "CollisionManager.h"
 #include "EventManager.h"
 #include "Events/DelayMove.h"
+#include "Events/GameStart.h"
+#include "Events/SlideControl.h"
 
 enum STATE {
 	LOAD,

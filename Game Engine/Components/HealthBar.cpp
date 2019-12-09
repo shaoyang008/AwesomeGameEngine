@@ -41,7 +41,7 @@ void HealthBar::Initialize()
 	for (int i = 0; i < _hearts.size(); ++i) {
 		Sprite * sprite = dynamic_cast<Sprite*>(_hearts[i]->GetComponent(COMPONENT_TYPE::SPRITE));
 		Material * heart_img = new Material;
-		heart_img->LoadMap("Resources/heart.png");
+		heart_img->LoadMap("Resources/Images/heart.png");
 		sprite->SetTexture(heart_img);
 
 		sprite->_posX = _posX + (i % 20) * 50;

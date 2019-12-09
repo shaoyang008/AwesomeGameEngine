@@ -18,7 +18,7 @@ Model::~Model()
 
 void Model::Serialize(json data)
 {
-	std::string model_path = "Resources/" + data["Filename"].get<std::string>();
+	std::string model_path = "Resources/Models/" + data["Filename"].get<std::string>();
 	Load(model_path);
 
 	_defaultMaterial->_diffuse.x = data["Diffuse"][0].get<float>();
@@ -32,7 +32,7 @@ void Model::Serialize(json data)
 	_defaultMaterial->_shininess = data["Shininess"].get<float>();
 
 	if (data.find("Texture") != data.end()) {
-		std::string texture_path = "Resources/" + data["Texture"].get<std::string>();
+		std::string texture_path = "Resources/Models/" + data["Texture"].get<std::string>();
 		_defaultMaterial->LoadMap(texture_path);
 	}
 

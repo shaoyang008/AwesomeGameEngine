@@ -68,10 +68,10 @@ bool CollisionManager::StaticAABBtoStaticAABB(GameObject * g1, GameObject * g2)
 	Collider * c2 = dynamic_cast<Collider*>(g2->GetComponent(COMPONENT_TYPE::COLLIDER));
 
 	return (!(
-		(c1->_posX - c1->_shape->GetRange(0) / 2 > c2->_posX + c2->_shape->GetRange(0) / 2) ||
-		(c1->_posX + c1->_shape->GetRange(0) / 2 < c2->_posX - c2->_shape->GetRange(0) / 2) ||
-		(c1->_posY - c1->_shape->GetRange(1) / 2 > c2->_posY + c2->_shape->GetRange(1) / 2) ||
-		(c1->_posY + c1->_shape->GetRange(1) / 2 < c2->_posY - c2->_shape->GetRange(1) / 2)
+		(c1->_posX - c1->_shape->GetRange(0) > c2->_posX + c2->_shape->GetRange(0)) ||
+		(c1->_posX + c1->_shape->GetRange(0) < c2->_posX - c2->_shape->GetRange(0)) ||
+		(c1->_posY - c1->_shape->GetRange(1) > c2->_posY + c2->_shape->GetRange(1)) ||
+		(c1->_posY + c1->_shape->GetRange(1) < c2->_posY - c2->_shape->GetRange(1))
 	));
 }
 
@@ -88,31 +88,31 @@ bool CollisionManager::StaticAABBtoDynamicAABB(GameObject * go_dynamic, GameObje
 
 	// Calculate four points of previous frame
 	LineSegment line_segments[4];
-	line_segments[0].x_start = body->_prevPosX - c1->_shape->GetRange(0) / 2; line_segments[0].y_start = body->_prevPosY - c1->_shape->GetRange(1) / 2;
-	line_segments[1].x_start = body->_prevPosX + c1->_shape->GetRange(0) / 2; line_segments[1].y_start = body->_prevPosY - c1->_shape->GetRange(1) / 2;
-	line_segments[2].x_start = body->_prevPosX - c1->_shape->GetRange(0) / 2; line_segments[2].y_start = body->_prevPosY + c1->_shape->GetRange(1) / 2;
-	line_segments[3].x_start = body->_prevPosX + c1->_shape->GetRange(0) / 2; line_segments[3].y_start = body->_prevPosY + c1->_shape->GetRange(1) / 2;
+	line_segments[0].x_start = body->_prevPosX - c1->_shape->GetRange(0); line_segments[0].y_start = body->_prevPosY - c1->_shape->GetRange(1);
+	line_segments[1].x_start = body->_prevPosX + c1->_shape->GetRange(0); line_segments[1].y_start = body->_prevPosY - c1->_shape->GetRange(1);
+	line_segments[2].x_start = body->_prevPosX - c1->_shape->GetRange(0); line_segments[2].y_start = body->_prevPosY + c1->_shape->GetRange(1);
+	line_segments[3].x_start = body->_prevPosX + c1->_shape->GetRange(0); line_segments[3].y_start = body->_prevPosY + c1->_shape->GetRange(1);
 
 	// Calculate four points of current frame
-	line_segments[0].x_end = body->_posX - c1->_shape->GetRange(0) / 2; line_segments[0].y_end = body->_posY - c1->_shape->GetRange(1) / 2;
-	line_segments[1].x_end = body->_posX + c1->_shape->GetRange(0) / 2; line_segments[1].y_end = body->_posY - c1->_shape->GetRange(1) / 2;
-	line_segments[2].x_end = body->_posX - c1->_shape->GetRange(0) / 2; line_segments[2].y_end = body->_posY + c1->_shape->GetRange(1) / 2;
-	line_segments[3].x_end = body->_posX + c1->_shape->GetRange(0) / 2; line_segments[3].y_end = body->_posY + c1->_shape->GetRange(1) / 2;
+	line_segments[0].x_end = body->_posX - c1->_shape->GetRange(0); line_segments[0].y_end = body->_posY - c1->_shape->GetRange(1);
+	line_segments[1].x_end = body->_posX + c1->_shape->GetRange(0); line_segments[1].y_end = body->_posY - c1->_shape->GetRange(1);
+	line_segments[2].x_end = body->_posX - c1->_shape->GetRange(0); line_segments[2].y_end = body->_posY + c1->_shape->GetRange(1);
+	line_segments[3].x_end = body->_posX + c1->_shape->GetRange(0); line_segments[3].y_end = body->_posY + c1->_shape->GetRange(1);
 
 	// Calculate four bounds of static object
 	LineSegment bounds[4];
 	// left bound
-	bounds[0].x_start = c2->_posX - c2->_shape->GetRange(0) / 2; bounds[0].y_start = c2->_posY - c2->_shape->GetRange(1) / 2;
-	bounds[0].x_end = c2->_posX - c2->_shape->GetRange(0) / 2;   bounds[0].y_end = c2->_posY + c2->_shape->GetRange(1) / 2;
+	bounds[0].x_start = c2->_posX - c2->_shape->GetRange(0); bounds[0].y_start = c2->_posY - c2->_shape->GetRange(1);
+	bounds[0].x_end = c2->_posX - c2->_shape->GetRange(0);   bounds[0].y_end = c2->_posY + c2->_shape->GetRange(1);
 	// right bound
-	bounds[1].x_start = c2->_posX + c2->_shape->GetRange(0) / 2; bounds[1].y_start = c2->_posY - c2->_shape->GetRange(1) / 2;
-	bounds[1].x_end = c2->_posX + c2->_shape->GetRange(0) / 2;   bounds[1].y_end = c2->_posY + c2->_shape->GetRange(1) / 2;
+	bounds[1].x_start = c2->_posX + c2->_shape->GetRange(0); bounds[1].y_start = c2->_posY - c2->_shape->GetRange(1);
+	bounds[1].x_end = c2->_posX + c2->_shape->GetRange(0);   bounds[1].y_end = c2->_posY + c2->_shape->GetRange(1);
 	// lower bound
-	bounds[2].x_start = c2->_posX - c2->_shape->GetRange(0) / 2; bounds[2].y_start = c2->_posY - c2->_shape->GetRange(1) / 2;
-	bounds[2].x_end = c2->_posX + c2->_shape->GetRange(0) / 2;   bounds[2].y_end = c2->_posY - c2->_shape->GetRange(1) / 2;
+	bounds[2].x_start = c2->_posX - c2->_shape->GetRange(0); bounds[2].y_start = c2->_posY - c2->_shape->GetRange(1);
+	bounds[2].x_end = c2->_posX + c2->_shape->GetRange(0);   bounds[2].y_end = c2->_posY - c2->_shape->GetRange(1);
 	// upper bound
-	bounds[3].x_start = c2->_posX - c2->_shape->GetRange(0) / 2; bounds[3].y_start = c2->_posY + c2->_shape->GetRange(1) / 2;
-	bounds[3].x_end = c2->_posX + c2->_shape->GetRange(0) / 2;   bounds[3].y_end = c2->_posY + c2->_shape->GetRange(1) / 2;
+	bounds[3].x_start = c2->_posX - c2->_shape->GetRange(0); bounds[3].y_start = c2->_posY + c2->_shape->GetRange(1);
+	bounds[3].x_end = c2->_posX + c2->_shape->GetRange(0);   bounds[3].y_end = c2->_posY + c2->_shape->GetRange(1);
 
 	float t_min = 1.0f;
 	for (int i = 0; i < 4; ++i) {
@@ -221,26 +221,6 @@ bool CollisionManager::DynamicSpheretoDynamicPoint(GameObject * go_sphere, GameO
 	}
 
 	return true;
-	/*
-	LineSegment line1, line2;
-	line1.x_start = body1->_prevPosX; line1.x_end = body1->_posX;
-	line1.y_start = body1->_prevPosY; line1.y_end = body1->_posY;
-	line2.x_start = body2->_prevPosX; line2.x_end = body2->_posX;
-	line2.y_start = body2->_prevPosY; line2.y_end = body2->_posY;
-
-	float cross_time = LineSegtoLineSeg(line1, line2, 2);
-	if (cross_time < 0.0f || cross_time > 1.0f) return false;
-
-	float range = c1->_shape->GetRange(0) + c2->_shape->GetRange(0);
-	float sphere_intersect_x = line1.x_start + cross_time * (line1.x_end - line1.x_start);
-	float sphere_intersect_y = line1.y_start + cross_time * (line1.y_end - line1.y_start);
-	float point_intersect_x =  line2.x_start + cross_time * (line2.x_end - line2.x_start);
-	float point_intersect_y =  line2.y_start + cross_time * (line2.y_end - line2.y_start);
-
-	float dist = (sphere_intersect_x - point_intersect_x) * (sphere_intersect_x - point_intersect_x) + (sphere_intersect_y - point_intersect_y) * (sphere_intersect_y - point_intersect_y);
-	return (dist <= (range * range));
-	*/
-
 }
 
 // 0 means bound is parallel to x axis

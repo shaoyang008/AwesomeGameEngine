@@ -3,7 +3,7 @@
 #include "../Events/PlayerHit.h"
 
 #define FLY_SPEED 30.0f
-#define LIFETIME 1000.0f
+#define LIFETIME 200.0f
 
 extern GameStateManager * pMgr;
 
@@ -20,7 +20,9 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	++_lifetime;
-	if (_lifetime > LIFETIME) _owner->Deactivate();
+	if (_lifetime > LIFETIME) {
+		_owner->Deactivate();
+	}
 }
 
 void Projectile::Serialize(json data)

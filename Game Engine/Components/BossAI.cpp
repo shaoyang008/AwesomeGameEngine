@@ -5,7 +5,7 @@
 #include "../Events/GameOver.h"
 
 #define MAX_ROTATE_SPEED 80
-#define ATTACK_INTERVAL 120
+#define ATTACK_INTERVAL 60
 
 extern GameStateManager * pMgr;
 

@@ -38,7 +38,7 @@ void NormalAtk::Update()
 
 void NormalAtk::Serialize(json data)
 {
-	std::string path = "Resources/" + data["Filename"].get<std::string>();
+	std::string path = "Resources/Models/" + data["Filename"].get<std::string>();
 	Load(path);
 }
 

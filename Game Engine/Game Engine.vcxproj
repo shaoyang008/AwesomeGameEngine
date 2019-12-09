@@ -108,6 +108,7 @@
     <ClCompile Include="Events\DelayMove.cpp" />
     <ClCompile Include="Events\EnemyHit.cpp" />
     <ClCompile Include="Events\GameOver.cpp" />
+    <ClCompile Include="Events\GameStart.cpp" />
     <ClCompile Include="Events\OnCollision.cpp" />
     <ClCompile Include="Events\PlayerHit.cpp" />
     <ClCompile Include="Events\SlideControl.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Events\EnemyHit.h" />
     <ClInclude Include="Events\Event.h" />
     <ClInclude Include="Events\GameOver.h" />
+    <ClInclude Include="Events\GameStart.h" />
     <ClInclude Include="Events\OnCollision.h" />
     <ClInclude Include="Events\PlayerHit.h" />
     <ClInclude Include="Events\SlideControl.h" />

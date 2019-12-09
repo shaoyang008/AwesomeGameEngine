@@ -53,14 +53,14 @@ float Box::GetRange(int axis)
 		default:
 			break;
 	}
-	return res;
+	return res / 2;
 }
 
 ObjectModel * Box::GetShape()
 {
 	if (UnitBox == 0) {
 		UnitBox = new ObjectModel;
-		UnitBox->ReadModel("Resources/box2.obj");
+		UnitBox->ReadModel("Resources/Models/box2.obj");
 	}
 	return UnitBox;
 }
@@ -95,7 +95,7 @@ ObjectModel * Sphere::GetShape()
 	if (UnitSphere == 0) {
 		std::cout << "Called!!" << std::endl;
 		UnitSphere = new ObjectModel;
-		UnitSphere->ReadModel("Resources/sphere2.obj");
+		UnitSphere->ReadModel("Resources/Models/sphere2.obj");
 	}
 	return UnitSphere;
 }

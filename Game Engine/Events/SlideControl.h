@@ -4,13 +4,13 @@
 class SlideControl : public Event
 {
 public:
-	enum {
+	enum TYPE {
 		NEXT,
 		SHOW,
 		CLOSE
 	};
 
-	SlideControl();
+	SlideControl(TYPE);
 	~SlideControl();
 
 	int _control;
