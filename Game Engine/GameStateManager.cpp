@@ -179,6 +179,11 @@ bool GameStateManager::Loop()
 	else if (_inputManager->KeyReleased(SDL_SCANCODE_TAB)) {
 		_eventManager->Enque(new SlideControl(SlideControl::TYPE::CLOSE));
 	}
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_G)) {
+		GameObject * player = _gameObjectManager->_tagObjects.FindValueByKey("Player");
+		HealthBar * hp = dynamic_cast<HealthBar*>(player->GetComponent(COMPONENT_TYPE::HEALTH_BAR));
+		hp->_health = -1;
+	}
 
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_R)) {
 		_state = STATE::INIT;

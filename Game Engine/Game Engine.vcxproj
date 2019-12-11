@@ -76,7 +76,7 @@
       <AdditionalIncludeDirectories>..\glad\include;..\SDL2.0 Lib\include;Includes;..\glfw-3.3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>

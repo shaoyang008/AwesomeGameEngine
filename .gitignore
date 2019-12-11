@@ -35,5 +35,4 @@
 **/Release
 
 # Exceptions
-## Resources
-!**/Resources/*.obj
+**/Resources
