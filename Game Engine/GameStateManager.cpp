@@ -127,6 +127,41 @@ bool GameStateManager::Loop()
 
 	// Input
 	_inputManager->UpdateStates();
+
+	// Check SDL event
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0) {
+		//User requests quit
+		switch (e.type) {
+		case SDL_QUIT:
+			return false;
+
+		case SDL_WINDOWEVENT:
+			if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
+				std::cout << "Window resized to " << e.window.data1 << " x " << e.window.data2 << std::endl;
+				_renderManager->ResizeWindow();
+			}
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (e.button.button == SDL_BUTTON_LEFT) {
+				_inputManager->_mouseLeft = true;
+			}
+			else if (e.button.button == SDL_BUTTON_RIGHT) {
+				_inputManager->_mouseRight = true;
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (e.button.button == SDL_BUTTON_LEFT) {
+				_inputManager->_mouseLeft = false;
+			}
+			else if (e.button.button == SDL_BUTTON_RIGHT) {
+				_inputManager->_mouseRight = false;
+			}
+			break;
+		}
+	}
+
+	// Player commands
 	for (int i = 0; i < _gameObjectManager->_objects.size(); ++i) {
 		Controller * controller = dynamic_cast<Controller*>(_gameObjectManager->_objects[i]->GetComponent(COMPONENT_TYPE::CONTROLLER));
 		if (controller) {
@@ -134,9 +169,17 @@ bool GameStateManager::Loop()
 		}
 	}
 
+	// Cheat commands
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_RETURN)) {
 		_eventManager->Enque(new SlideControl(SlideControl::TYPE::CLOSE));
 	}
+	if (_inputManager->KeyPressed(SDL_SCANCODE_TAB)) {
+		_eventManager->Enque(new SlideControl(SlideControl::TYPE::SHOW));
+	}
+	else if (_inputManager->KeyReleased(SDL_SCANCODE_TAB)) {
+		_eventManager->Enque(new SlideControl(SlideControl::TYPE::CLOSE));
+	}
+
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_R)) {
 		_state = STATE::INIT;
 		_settingsLoaded = false;
@@ -146,11 +189,18 @@ bool GameStateManager::Loop()
 		ProcceedLevel();
 		return true;
 	}
-	if (_inputManager->KeyTriggered(SDL_SCANCODE_TAB)) {
-		_renderManager->SwitchMode();
-	}
 	if (_inputManager->KeyTriggered(SDL_SCANCODE_Q)) {
 		return false;
+	}
+
+	if (_inputManager->KeyTriggered(SDL_SCANCODE_0)) {
+		_renderManager->SwitchMode(0);
+	}
+	else if (_inputManager->KeyTriggered(SDL_SCANCODE_1)) {
+		_renderManager->SwitchMode(1);
+	}
+	else if(_inputManager->KeyTriggered(SDL_SCANCODE_2)) {
+		_renderManager->SwitchMode(2);
 	}
 
 	// Physics
@@ -174,22 +224,6 @@ bool GameStateManager::Loop()
 
 	// update frame end time
 	_framerateManager->FrameEnd();
-
-	// Check SDL event
-	SDL_Event e;
-	while (SDL_PollEvent(&e) != 0) {
-		//User requests quit
-		if (e.type == SDL_QUIT)
-		{
-			return false;
-		}
-		if (e.type == SDL_WINDOWEVENT) {
-			if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
-				std::cout << "Window resized to " << e.window.data1 << " x " << e.window.data2 << std::endl;
-				_renderManager->ResizeWindow();
-			}
-		}
-	}
 
 	return true;
 }

@@ -31,6 +31,14 @@ public:
 	bool KeyTriggered(int);
 	bool KeyReleased(int);
 
+	bool _mouseLeft, _mouseRight;
+	bool _prevMouseLeft, _prevMouseRight;
+	
+	bool LeftMouseTriggered();
+	bool LeftMouseReleased();
+	bool RightMouseTriggered();
+	bool RightMouseReleased();
+
 private:
 	char _currentKeyboardStates[MAX_STATE_LENGTH];
 	char _previousKeyboardStates[MAX_STATE_LENGTH]; // compare to detect trigger and release

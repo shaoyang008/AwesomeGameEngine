@@ -184,14 +184,14 @@ bool RenderManager::SetCamera(std::string viewer_tag)
 	return true;
 }
 
-void RenderManager::SwitchMode()
+void RenderManager::SwitchMode(int mode)
 {
 	/*
 	0: default mode, render only models
 	1: debug mode, render only colliders
 	2: debug mode, render both
 	*/
-	_renderMode = (_renderMode + 1) % 3;
+	_renderMode = mode % 3;
 	std::cout << "Current mode: " << _renderMode << std::endl;
 }
 

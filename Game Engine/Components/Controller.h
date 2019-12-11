@@ -34,4 +34,5 @@ public:
 	void TriggerEvent();
 
 	float _speed, _accelForce;
+	int _mode;
 };

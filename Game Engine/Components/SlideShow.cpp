@@ -51,6 +51,7 @@ void SlideShow::HandleEvent(Event * e)
 		switch (sc->_control) {
 			case SlideControl::NEXT:
 				++_currentSlide;
+				break;
 			case SlideControl::SHOW:
 				if (_currentSlide < _size) {
 					_ownerSprite->SetTexture(_slides[_currentSlide]);
@@ -65,6 +66,7 @@ void SlideShow::HandleEvent(Event * e)
 	}
 	else if (e->GetType() == EVENT_TYPE::GAME_START) {
 		_ownerSprite->SetTexture(_slides[0]);
+		_currentSlide = 1;
 	}
 	else if (e->GetType() == EVENT_TYPE::GAME_OVER) {
 		if (dynamic_cast<GameOver*>(e)->_victory) {

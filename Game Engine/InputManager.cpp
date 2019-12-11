@@ -17,7 +17,7 @@ Creation date: 10/14/2019
 #include "InputManager.h"
 #include "SDL_keyboard.h"
 
-InputManager::InputManager() { }
+InputManager::InputManager(): _mouseLeft(false), _mouseRight(false) { }
 
 InputManager::~InputManager() { }
 
@@ -30,6 +30,9 @@ void InputManager::UpdateStates()
 	
 	std::memcpy(_previousKeyboardStates, _currentKeyboardStates, MAX_STATE_LENGTH * sizeof(Uint8));
 	std::memcpy(_currentKeyboardStates, new_keyboard_states, fetchedNum * sizeof(Uint8));
+
+	_prevMouseLeft = _mouseLeft;
+	_prevMouseRight = _mouseRight;
 }
 
 bool InputManager::KeyPressed(int input_key) // get key scan from sdl
@@ -48,4 +51,24 @@ bool InputManager::KeyReleased(int input_key)
 	if (!_previousKeyboardStates) return false;
 	// check previous down and current up
 	else return (!_currentKeyboardStates[input_key] && _previousKeyboardStates[input_key]);
+}
+
+bool InputManager::LeftMouseTriggered()
+{
+	return (!_prevMouseLeft && _mouseLeft);
+}
+
+bool InputManager::LeftMouseReleased()
+{
+	return (_prevMouseLeft && !_mouseLeft);
+}
+
+bool InputManager::RightMouseTriggered()
+{
+	return (!_prevMouseRight && _mouseRight);
+}
+
+bool InputManager::RightMouseReleased()
+{
+	return (_prevMouseRight && !_mouseRight);
 }

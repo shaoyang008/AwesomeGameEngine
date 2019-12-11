@@ -61,11 +61,12 @@
 			"Type": "image",
 			"Components": {
 				"SlideShow": {
-					"Size": 3,
+					"Size": 4,
 					"Slides": [
-						"Scroll1.png",
-						"Scroll2.png",
-						"Scroll3.png"
+						"Scroll-start.png",
+						"Scroll-instructions.png",
+						"Scroll-lose.png",
+						"Scroll-win.png"
 					]
 				}
 			},

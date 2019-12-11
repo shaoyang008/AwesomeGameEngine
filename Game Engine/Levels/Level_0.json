@@ -5,6 +5,9 @@
 			"Transform": {
 				"TranslateX": 0.0,
 				"TranslateY": 0.0
+			},
+			"Controller": {
+				"ControlMode": "Keyboard"
 			}
 		}	
 	},

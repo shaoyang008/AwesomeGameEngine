@@ -25,7 +25,7 @@ public:
 		fprintf(stderr, "Error: %s\n", description);
 	}
 	*/
-	void SwitchMode();
+	void SwitchMode(int mode);
 
 	// 2D drawing
 	void Init2D();

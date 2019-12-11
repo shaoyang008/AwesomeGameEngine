@@ -13,10 +13,11 @@
 	},
 	"Controller": {
 		"Speed": 30.0,
-		"Force": 1000.0
+		"Force": 1000.0,
+		"ControlMode": "Keyboard"
 	},
 	"HealthBar": {
-		"Health": 20,
+		"Health": 10,
 		"PositionX": -800,
 		"PositionY": -600
 	},
