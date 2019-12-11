@@ -34,4 +34,5 @@ void FramerateManager::FrameEnd()
 		_tickEnd = clock();
 		_frameTime = _tickEnd - _tickStart;
 	}
+	std::cout << "Frame Rate: " << 1000.0f / _frameTime << std::endl;
 }

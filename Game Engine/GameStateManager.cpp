@@ -17,7 +17,7 @@ Creation date: 10/18/2019
 #include "GameStateManager.h"
 
 #define DEFAULT_LEVEL 0
-#define STABLE_FRAMERATE 30
+#define STABLE_FRAMERATE 60
 
 GameStateManager::GameStateManager(): _inputManager(new InputManager), _framerateManager(new FramerateManager(STABLE_FRAMERATE)), _resourceManager(new ResourceManager),
 _gameObjectManager(new GameObjectManager), _physicsManager(new PhysicsManager), _collisionManager(new CollisionManager), _eventManager(new EventManager),

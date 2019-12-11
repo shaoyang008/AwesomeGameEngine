@@ -36,7 +36,7 @@
 		"Scale": 1.0
 	},
 	"HealthBar": {
-		"Health": 40,
+		"Health": 20,
 		"PositionX": -800,
 		"PositionY": 550
 	}

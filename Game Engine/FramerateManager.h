@@ -16,6 +16,8 @@ Creation date: 10/14/2019
 
 #pragma once
 
+#include <iostream>
+
 class FramerateManager {
 public:
 	FramerateManager(int);
